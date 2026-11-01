@@ -10,6 +10,7 @@ from pathlib import Path
 from src.config import DOCS_DIR, FIGURES_DIR, OUTPUT_DIR
 
 RAPORTTI_MD = OUTPUT_DIR / "RAPORTTI.md"
+RAPORTTI_EN_MD = OUTPUT_DIR / "RAPORTTI_en.md"
 
 
 def _inline(text: str) -> str:
@@ -164,51 +165,61 @@ def _taulu(rivit: list[str]) -> str:
     return "".join(html_osat)
 
 
-SIVU = """<!DOCTYPE html>
+def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
+    from src.site import LIPUT, _valikko
+
+    return f"""<!DOCTYPE html>
 <html lang="fi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tuomitut kansalaisuuden mukaan, EU-27, 2008–2024</title>
+  <title data-i18n="raportti_title">Tuomitut kansalaisuuden mukaan, EU-27, 2008–2024</title>
   <link rel="stylesheet" href="tyyli.css">
 </head>
 <body class="raportti">
   <header>
     <div class="wrap">
-      <p class="kicker">Esirekisteröity raportti</p>
-      <h1>Tuomitut kansalaisuuden mukaan, EU-27</h1>
-      <p class="lead">K1: asteet NAT vs FOR, 2008–2024. Ei täyttöä, ei syy-yhteyttä.</p>
-      <p class="navi">
-        <a href="RAPORTTI.md">Markdown</a>
-        · <a href="maat/fi.html">TUTKIVA: maat</a>
-        · <a href="vertailu.html">TUTKIVA: EU-vertailu</a>
-        · <a href="https://github.com/stripedstrings/eurostat-tuomitut">GitHub</a>
-      </p>
+      <div class="yla">
+        <p class="kicker"><a href="index.html" data-i18n="raportti_kicker"></a></p>
+        {LIPUT}
+      </div>
+      <h1 data-i18n="raportti_h1">Tuomitut kansalaisuuden mukaan, EU-27</h1>
+      <p class="lead" data-i18n="raportti_lead"></p>
+      <div class="valitsin">{_valikko("RAPORTTI", True)}</div>
     </div>
   </header>
   <main class="wrap">
-{sisalto}
-    <p class="alaviite">
-      Lähde: Eurostat crim_just_ctz, migr_pop5ctz, haettu 2026-11-01.
-      Ei ikä- ja sukupuolivakioitu (SIR = NaN).
-      Kansalaisuus ei kuvaa maahanmuuttotaustaa tai pakolaisuutta.
-      Laskentayksikkö vaihtelee maittain; maiden välinen vertailu on rajallinen.
-      Katkos viivassa = data puuttuu.
-    </p>
+    <div class="kieli-fi">
+{sisalto_fi}
+    </div>
+    <div class="kieli-en" hidden>
+{sisalto_en}
+    </div>
+    <p class="alaviite" data-i18n="raportti_alaviite"></p>
   </main>
+  <script src="sivu.js"></script>
 </body>
 </html>
 """
 
 
-def korjaa_suomi_linkit() -> None:
-    """Suomi ei ole enää etusivu; etusivu on raportti."""
+def korjaa_valikot() -> None:
+    """Suomi ei ole etusivu; valikkoon Raportti."""
+    opt_maat = (
+        '<option value="../index.html" data-fi="Raportti" data-en="Report">Raportti</option>\n'
+    )
+    opt_juuri = (
+        '<option value="index.html" data-fi="Raportti" data-en="Report">Raportti</option>\n'
+    )
+    alku = '<select id="maa" onchange="location.href=this.value">\n'
     for p in (DOCS_DIR / "maat").glob("*.html"):
         t = p.read_text(encoding="utf-8")
         t = t.replace(
             '<option value="../index.html" data-fi="Suomi" data-en="Finland"',
             '<option value="fi.html" data-fi="Suomi" data-en="Finland"',
         )
+        if 'data-fi="Raportti"' not in t:
+            t = t.replace(alku, alku + opt_maat, 1)
         p.write_text(t, encoding="utf-8")
     vert = DOCS_DIR / "vertailu.html"
     if vert.exists():
@@ -217,6 +228,8 @@ def korjaa_suomi_linkit() -> None:
             '<option value="index.html" data-fi="Suomi" data-en="Finland"',
             '<option value="maat/fi.html" data-fi="Suomi" data-en="Finland"',
         )
+        if 'data-fi="Raportti"' not in t:
+            t = t.replace(alku, alku + opt_juuri, 1)
         vert.write_text(t, encoding="utf-8")
 
 
@@ -227,12 +240,14 @@ def kirjoita() -> None:
     for png in FIGURES_DIR.glob("*.png"):
         shutil.copy2(png, kohde / png.name)
     shutil.copy2(RAPORTTI_MD, DOCS_DIR / "RAPORTTI.md")
+    shutil.copy2(RAPORTTI_EN_MD, DOCS_DIR / "RAPORTTI_en.md")
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
-    sisalto = md_html(RAPORTTI_MD.read_text(encoding="utf-8"))
+    sisalto_fi = md_html(RAPORTTI_MD.read_text(encoding="utf-8"))
+    sisalto_en = md_html(RAPORTTI_EN_MD.read_text(encoding="utf-8"))
     (DOCS_DIR / "index.html").write_text(
-        SIVU.replace("{sisalto}", sisalto), encoding="utf-8"
+        _sivu_html(sisalto_fi, sisalto_en), encoding="utf-8"
     )
-    korjaa_suomi_linkit()
+    korjaa_valikot()
 
 
 if __name__ == "__main__":

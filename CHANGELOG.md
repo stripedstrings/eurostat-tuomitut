@@ -17,6 +17,9 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Perustelu: etusivu ei saa näyttää tutkivaa visualisointia rekisteröidyn
   raportin sijaan.
 
+- 2026-11-01. Raportin etusivulle palautettu maavalikko ja FI/EN-liput.
+  Maasivut ovat edelleen merkitty tutkiviksi. Kaaviot pysyvät suomenkielisinä.
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI

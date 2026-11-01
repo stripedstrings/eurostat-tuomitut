@@ -137,6 +137,11 @@ def rakenna_json(df: pd.DataFrame, avg: pd.DataFrame, eu: pd.DataFrame) -> dict:
 
 def _valikko(geo: str | None, juuri: bool) -> str:
     osat = ['<label for="maa" data-i18n="maa"></label>', '<select id="maa" onchange="location.href=this.value">']
+    rap = "index.html" if juuri else "../index.html"
+    sel_r = " selected" if geo == "RAPORTTI" else ""
+    osat.append(
+        f'<option value="{rap}" data-fi="Raportti" data-en="Report"{sel_r}>Raportti</option>'
+    )
     for g in ["FI"] + sorted((x for x in EU27 if x != "FI"), key=lambda x: MAAN_NIMET[x]):
         href = f"maat/{g.lower()}.html" if juuri else f"{g.lower()}.html"
         sel = " selected" if g == geo else ""
@@ -349,6 +354,11 @@ const I18N = {
     kicker: "Tuomitut ja epäillyt EU-maissa",
     lead: "Oman maan kansalaiset ja ulkomaan kansalaiset, 2008–2024.",
     maa: "Maa",
+    raportti_kicker: "Esirekisteröity raportti",
+    raportti_h1: "Tuomitut kansalaisuuden mukaan, EU-27",
+    raportti_lead: "K1: asteet NAT vs FOR, 2008–2024. Ei täyttöä, ei syy-yhteyttä.",
+    raportti_title: "Tuomitut kansalaisuuden mukaan, EU-27, 2008–2024",
+    raportti_alaviite: "Lähde: Eurostat crim_just_ctz, migr_pop5ctz, haettu 2026-11-01. Ei ikä- ja sukupuolivakioitu (SIR = NaN). Kansalaisuus ei kuvaa maahanmuuttotaustaa tai pakolaisuutta. Laskentayksikkö vaihtelee maittain; maiden välinen vertailu on rajallinen. Katkos viivassa = data puuttuu.",
     lahteet_otsikko: "Lähteet",
     lahteet_ingressi: "Luvut perustuvat Euroopan unionin tilastoviraston (Eurostat) julkisiin tilastoaineistoihin. Aineistot ovat EU:n virallisia, avoimesti saatavia tilastoja.",
     lahde_crim: "Suspects and offenders by citizenship. Eurostat, virallinen EU-tilasto. DOI: 10.2908/crim_just_ctz.",
@@ -407,6 +417,11 @@ const I18N = {
     kicker: "Convicted and suspected persons in EU countries",
     lead: "National citizens and foreign citizens, 2008–2024.",
     maa: "Country",
+    raportti_kicker: "Preregistered report",
+    raportti_h1: "Convicted persons by citizenship, EU-27",
+    raportti_lead: "K1: rates NAT vs FOR, 2008–2024. No filling, no causal claims.",
+    raportti_title: "Convicted persons by citizenship, EU-27, 2008–2024",
+    raportti_alaviite: "Source: Eurostat crim_just_ctz, migr_pop5ctz, retrieved 2026-11-01. Not age- and sex-standardised (SIR = NaN). Citizenship is not migrant background or refugee status. The counting unit varies by country; cross-country comparison is limited. A break in a line = missing data.",
     lahteet_otsikko: "Sources",
     lahteet_ingressi: "The figures are based on public statistical datasets of Eurostat, the statistical office of the European Union. These are official EU statistics and are publicly available.",
     lahde_crim: "Suspects and offenders by citizenship. Eurostat, official EU statistic. DOI: 10.2908/crim_just_ctz.",
@@ -483,6 +498,13 @@ function kaytKieli() {
     const v = I18N[lang][el.getAttribute("data-i18n")];
     if (v !== undefined) el.textContent = v;
   });
+  const otsikko = document.querySelector("title[data-i18n]");
+  if (otsikko) {
+    const v = I18N[lang][otsikko.getAttribute("data-i18n")];
+    if (v) document.title = v;
+  }
+  document.querySelectorAll(".kieli-fi").forEach(el => { el.hidden = lang !== "fi"; });
+  document.querySelectorAll(".kieli-en").forEach(el => { el.hidden = lang !== "en"; });
   document.querySelectorAll("#maa option").forEach(opt => {
     const label = lang === "en" ? opt.getAttribute("data-en") : opt.getAttribute("data-fi");
     if (label) opt.textContent = label;
