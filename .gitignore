@@ -10,4 +10,7 @@ __pycache__/
 cache/
 data/raw/*.csv
 !data/raw/MANIFEST.csv
+media/data/raw/*
+!media/data/raw/.gitkeep
+!media/data/raw/MANIFEST.csv
 .http_cache.sqlite

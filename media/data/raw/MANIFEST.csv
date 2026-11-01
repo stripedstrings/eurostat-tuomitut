@@ -1,0 +1,11 @@
+tiedosto,lahde,url,hakupaiva,kuvaus,huomiot
+wayback_cdx_yle_sample.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=yle.fi/&output=json&limit=3,2026-11-01,CDX-nayte yle.fi,HTTP 200
+wayback_cdx_iltalehti_sample.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=www.iltalehti.fi/&output=json&limit=3,2026-11-01,CDX-nayte IL,HTTP 200
+wayback_cdx_iltalehti_2023w1.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=www.iltalehti.fi/&from=20230101&to=20230107&limit=15,2026-11-01,CDX IL 2023-01-01..07 limit 15,HTTP 200
+wayback_cdx_yle_uutiset_2023w1.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=yle.fi/uutiset&from=20230101&to=20230107&limit=15,2026-11-01,CDX yle.fi/uutiset 2023-01 limit 15,HTTP 200
+yle_teletext_nokey.txt,Yle API,https://external.api.yle.fi/v1/teletext/pages/100.json,2026-11-01,ilman avaimia,HTTP 403
+yle_dev_docs.html,Yle,https://developer.yle.fi/en/api/index.html,2026-11-01,virallinen API-sivu,HTTP 200
+gdelt_doc_yle_sample.json,GDELT,https://api.gdeltproject.org/api/v2/doc/doc,2026-11-01,DOC 2.0 nayte,HTTP 429
+yle_rss_majorheadlines.xml,Yle RSS,https://feeds.yle.fi/uutiset/v1/majorHeadlines/YLE_UUTISET.rss,2026-11-01,paauutiset,HTTP 200; 12 item
+iltalehti_rss.xml,Iltalehti RSS,https://www.iltalehti.fi/rss.xml,2026-11-01,tuoreimmat 20,HTTP 200; href etusivulta
+mediacloud_search.html,Media Cloud,https://search.mediacloud.org/,2026-11-01,search-sovellus,HTTP 200; ei API-JSON

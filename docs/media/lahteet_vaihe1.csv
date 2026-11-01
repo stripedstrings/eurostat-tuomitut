@@ -1,0 +1,17 @@
+lahde,url,haettu,http,koko_tavua,huomiot
+wayback_cdx,https://web.archive.org/cdx/search/cdx?url=iltalehti.fi/&output=json&limit=5,2026-11-01,503,0,ensimmainen yritys
+wayback_cdx,https://web.archive.org/cdx/search/cdx?url=yle.fi/&output=json&limit=3,2026-11-01,200,423,json sarakkeet urlkey timestamp original mimetype statuscode digest length
+wayback_cdx,https://web.archive.org/cdx/search/cdx?url=www.iltalehti.fi/&output=json&fl=original,timestamp,statuscode,mimetype&limit=3,2026-11-01,200,255,
+wayback_cdx,https://web.archive.org/cdx/search/cdx?url=www.iltalehti.fi/&from=20230101&to=20230107&output=json&limit=15,2026-11-01,200,1944,15 rivia alkaen 20230101001214
+wayback_cdx,https://web.archive.org/cdx/search/cdx?url=yle.fi/uutiset&from=20230101&to=20230107&output=json&limit=15,2026-11-01,200,1938,15 rivia alkaen 20230101005046
+yle_api,https://external.api.yle.fi/v1/teletext/pages/100.json,2026-11-01,403,25,Invalid app_id or app_key
+yle_api,https://external.api.yle.fi/v1/teletext/pages/100.json?app_id=x&app_key=x,2026-11-01,200,81878,vain teksti-TV; ei artikkeli-API
+yle_docs,https://developer.yle.fi/en/api/index.html,2026-11-01,200,16219,no public API for article data
+gdelt_doc,https://api.gdeltproject.org/api/v2/doc/doc?query=domain:yle.fi&mode=ArtList&format=json&maxrecords=3&timespan=1week,2026-11-01,429,444,rate limit; ei JSON-artikkeleita
+gdelt_doc,https://api.gdeltproject.org/api/v2/doc/doc?query=yle.fi&mode=ArtList&format=json&maxrecords=1,2026-11-01,429,444,uusinta 6 s valilla
+mediacloud_v2,https://api.mediacloud.org/api/v2/media/single/1,2026-11-01,,0,DNS: ei A/AAAA
+mediacloud_search,https://search.mediacloud.org/,2026-11-01,200,2703,SPA; earliestAvailableDate 2008-01-01 sivulla; ei JSON-hakua
+mediacloud_docs,https://www.mediacloud.org/documentation/search-api-guide,2026-11-01,200,39221,
+yle_rss,https://feeds-eks-prod.eks-c1.yle.fi/uutiset/v1/recent.rss?publisherIds=YLE_UUTISET,2026-11-01,,0,DNS ei resolvoitunut
+yle_rss,https://feeds.yle.fi/uutiset/v1/majorHeadlines/YLE_UUTISET.rss,2026-11-01,200,8536,12 item
+iltalehti_rss,https://www.iltalehti.fi/rss.xml,2026-11-01,200,29354,href /rss.xml etusivulla; 20 item

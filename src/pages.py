@@ -299,6 +299,9 @@ def kirjoita_aihesivut() -> None:
         if src.exists():
             kohde = DOCS_DIR / "media" / nimi if nimi.startswith("MEDIA") else DOCS_DIR / nimi
             shutil.copy2(src, kohde)
+    vaihe1 = ROOT / "media" / "output" / "tables" / "lahteet_vaihe1.csv"
+    if vaihe1.exists():
+        shutil.copy2(vaihe1, DOCS_DIR / "media" / vaihe1.name)
 
     lahteet = """
     <div class="kieli-fi">
@@ -355,7 +358,7 @@ def kirjoita_aihesivut() -> None:
     media = """
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Haku on vaiheen 1 jälkeen.</p>
+      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 1 (lähteet) testattu 2026-11-01; koko haku on vaihe 2.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -363,22 +366,22 @@ def kirjoita_aihesivut() -> None:
         <li><a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a></li>
         <li><a href="MEDIA_METHODS.md">MEDIA_METHODS.md</a></li>
       </ul>
-      <h2>Lähde-ehdokkaat</h2>
-      <p>Saatavuutta ei ole testattu. Tila: ei testattu (vaihe 1). Ei kattavuusväitteitä.</p>
+      <h2>Lähteet (vaihe 1, 2026-11-01)</h2>
+      <p>Pieni näyte. Ei koko-arkistoa. Tiedot: <a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a>.</p>
       <div class="taulu-wrap"><table>
         <thead><tr><th>Ehdokas</th><th>Käyttö</th><th>Tila</th></tr></thead>
         <tbody>
-          <tr><td>Wayback Machine CDX</td><td>etusivu-/kansiarkisto</td><td>ei testattu (vaihe 1)</td></tr>
-          <tr><td>Yle API</td><td>julkisen palvelun otsikot</td><td>ei testattu (vaihe 1)</td></tr>
-          <tr><td>GDELT</td><td>kansainvälinen uutisvirta</td><td>ei testattu (vaihe 1)</td></tr>
-          <tr><td>Media Cloud</td><td>mediavertailu</td><td>ei testattu (vaihe 1)</td></tr>
-          <tr><td>RSS</td><td>tuoreet otsikot</td><td>ei testattu (vaihe 1)</td></tr>
+          <tr><td>Wayback Machine CDX</td><td>etusivuindeksi</td><td>saatavilla (HTTP 200; yksi 503)</td></tr>
+          <tr><td>Yle API</td><td>artikkelit</td><td>ei julkista artikkeli-API:a; teksti-TV</td></tr>
+          <tr><td>GDELT DOC 2.0</td><td>uutisvirta</td><td>HTTP 429; ei JSON-otosta</td></tr>
+          <tr><td>Media Cloud</td><td>mediavertailu</td><td>api.mediacloud.org ei DNS; ei JSON-hakua</td></tr>
+          <tr><td>RSS (Yle, IL)</td><td>tuoreet otsikot</td><td>saatavilla; ei historiaa</td></tr>
         </tbody>
       </table></div>
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Fetch starts after phase 1.</p>
+      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phase 1 (sources) tested 2026-11-01; bulk fetch is phase 2.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -386,16 +389,16 @@ def kirjoita_aihesivut() -> None:
         <li><a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a></li>
         <li><a href="MEDIA_METHODS.md">MEDIA_METHODS.md</a></li>
       </ul>
-      <h2>Candidate sources</h2>
-      <p>Availability has not been tested. Status: not tested (phase 1). No coverage claims.</p>
+      <h2>Sources (phase 1, 2026-11-01)</h2>
+      <p>Small sample. No full archive. Details: <a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a>.</p>
       <div class="taulu-wrap"><table>
         <thead><tr><th>Candidate</th><th>Use</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>Wayback Machine CDX</td><td>front-page archive</td><td>not tested (phase 1)</td></tr>
-          <tr><td>Yle API</td><td>public-service headlines</td><td>not tested (phase 1)</td></tr>
-          <tr><td>GDELT</td><td>international news stream</td><td>not tested (phase 1)</td></tr>
-          <tr><td>Media Cloud</td><td>outlet comparison</td><td>not tested (phase 1)</td></tr>
-          <tr><td>RSS</td><td>recent headlines</td><td>not tested (phase 1)</td></tr>
+          <tr><td>Wayback Machine CDX</td><td>front-page index</td><td>available (HTTP 200; one 503)</td></tr>
+          <tr><td>Yle API</td><td>articles</td><td>no public article API; teletext only</td></tr>
+          <tr><td>GDELT DOC 2.0</td><td>news stream</td><td>HTTP 429; no JSON sample</td></tr>
+          <tr><td>Media Cloud</td><td>outlet comparison</td><td>api.mediacloud.org no DNS; no JSON search</td></tr>
+          <tr><td>RSS (Yle, IL)</td><td>recent headlines</td><td>available; not a historical archive</td></tr>
         </tbody>
       </table></div>
     </div>

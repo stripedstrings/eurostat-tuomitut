@@ -24,6 +24,10 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   datan hakua. Sivustolle välilehdet Maahanmuutto ja Media. Media-lähteitä
   ei ole testattu (vaihe 1). K1:tä ei yhdistetä mediaan.
 
+- 2026-11-01 (vaihe 1). Lähteet testattu pienellä näytteellä.
+  `MEDIA_DATA_SOURCES.md`. Ei koko-arkistoa. GDELT 429; Media Cloud API
+  ei DNS:ää; Yle-artikkeli-API ei julkinen.
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI
