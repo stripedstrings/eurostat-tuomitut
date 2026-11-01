@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import json
 import math
-import shutil
 from html import escape
 
 import pandas as pd
 
-from src.config import DOCS_DIR, EU27, MAAN_NIMET, MAAN_NIMET_EN, OUTPUT_DIR, YEARS_ABS
+from src.config import DOCS_DIR, EU27, MAAN_NIMET, MAAN_NIMET_EN, YEARS_ABS
 
 CDN = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
 
@@ -71,7 +70,7 @@ def _sarja(df: pd.DataFrame, col: str) -> list:
 
 
 def rakenna_json(df: pd.DataFrame, avg: pd.DataFrame, eu: pd.DataFrame) -> dict:
-    maat = [{"geo": "FI", "nimi": "Suomi", "nimi_en": "Finland", "tiedosto": "index.html"}]
+    maat = [{"geo": "FI", "nimi": "Suomi", "nimi_en": "Finland", "tiedosto": "maat/fi.html"}]
     muut = sorted((g for g in EU27 if g != "FI"), key=lambda g: MAAN_NIMET[g])
     for g in muut:
         maat.append(
@@ -139,10 +138,7 @@ def rakenna_json(df: pd.DataFrame, avg: pd.DataFrame, eu: pd.DataFrame) -> dict:
 def _valikko(geo: str | None, juuri: bool) -> str:
     osat = ['<label for="maa" data-i18n="maa"></label>', '<select id="maa" onchange="location.href=this.value">']
     for g in ["FI"] + sorted((x for x in EU27 if x != "FI"), key=lambda x: MAAN_NIMET[x]):
-        if g == "FI":
-            href = "index.html" if juuri else "../index.html"
-        else:
-            href = f"maat/{g.lower()}.html" if juuri else f"{g.lower()}.html"
+        href = f"maat/{g.lower()}.html" if juuri else f"{g.lower()}.html"
         sel = " selected" if g == geo else ""
         osat.append(
             f'<option value="{href}" data-fi="{escape(MAAN_NIMET[g])}" '
@@ -339,6 +335,12 @@ figure img { width:100%; height:auto; border:1px solid var(--line); border-radiu
 figcaption { color:var(--muted); font-size:0.9rem; margin:0.4rem 0 1.4rem; }
 .avain p { margin:0.35rem 0; }
 code { font-size:0.9em; }
+.tutkiva-nauha { margin:0; padding:0.45rem 1.2rem; background:#5c2e0a; color:#fff; font-size:0.9rem; text-align:center; }
+.tutkiva-nauha a { color:#f4d2b0; }
+.raportti header .navi { margin:0.6rem 0 0; }
+.raportti header .navi a { margin-right:0.2rem; }
+.raportti h3 { font-size:1.05rem; margin:1.2rem 0 0.4rem; }
+.raportti hr { border:0; border-top:1px solid var(--line); margin:1.6rem 0; }
 """
 
 SIVU_JS = r"""
@@ -504,6 +506,22 @@ document.querySelectorAll(".lippu").forEach(b => {
 });
 kaytKieli();
 
+function tutkivaNauha() {
+  if (document.body.classList.contains("raportti")) return;
+  let p = document.querySelector(".tutkiva-nauha");
+  if (!p) {
+    p = document.createElement("p");
+    p.className = "tutkiva-nauha";
+    document.body.insertBefore(p, document.body.firstChild);
+  }
+  const juuri = !location.pathname.includes("/maat/");
+  const href = juuri ? "index.html" : "../index.html";
+  p.innerHTML = kieli() === "en"
+    ? `EXPLORATORY (not preregistered). <a href="${href}">Registered report</a>`
+    : `TUTKIVA (ei esirekisteröity). <a href="${href}">Esirekisteröity raportti</a>`;
+}
+tutkivaNauha();
+
 function viiva(id, labels, a, b, otsikkoA, otsikkoB) {
   const el = document.getElementById(id);
   if (!el || typeof Chart === "undefined") return;
@@ -613,21 +631,10 @@ def kirjoita_sivusto(df: pd.DataFrame, avg: pd.DataFrame, eu: pd.DataFrame) -> N
     (DOCS_DIR / "data.json").write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
     (DOCS_DIR / "tyyli.css").write_text(TYYLI, encoding="utf-8")
     (DOCS_DIR / "sivu.js").write_text(SIVU_JS, encoding="utf-8")
-    (DOCS_DIR / "index.html").write_text(_sivu("FI", juuri=True), encoding="utf-8")
     (DOCS_DIR / "vertailu.html").write_text(_vertailu(), encoding="utf-8")
     for geo in EU27:
         (DOCS_DIR / "maat" / f"{geo.lower()}.html").write_text(_sivu(geo, juuri=False), encoding="utf-8")
-    for nimi in (
-        "01_eu_per_100000.png",
-        "02_suhdeluku_maittain.png",
-        "03_pienoiskaaviot_maittain.png",
-        "04_absoluuttiset_maarat.png",
-        "01_eu_per_100000_en.png",
-        "02_suhdeluku_maittain_en.png",
-        "03_pienoiskaaviot_maittain_en.png",
-        "04_absoluuttiset_maarat_en.png",
-    ):
-        src = OUTPUT_DIR / nimi
-        if src.exists():
-            shutil.copy2(src, DOCS_DIR / nimi)
+    from src.pages import kirjoita as kirjoita_raportti
+
+    kirjoita_raportti()
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")

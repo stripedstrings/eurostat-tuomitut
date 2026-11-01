@@ -213,7 +213,7 @@ Ensimmäiset oleskeluluvat, EU-27, 2024, osuus TOTAL:sta (vain kolmansien maiden
 2. Forest 2020–2024 käyttää yhteenlaskettuja kelpoisia vuosia, ei vuosittaisten RR:ien keskiarvoa (Poisson-CI lukumäärille).
 3. SIR, S2, S4 ja S7 on jätetty NaN/rajoitteeksi, koska dimensiot eivät salli laskentaa. Tämä noudattaa protokollaa (ei arvausta), ei ole menetelmän vaihto tuloksen perusteella.
 
-Tutkiva GitHub Pages -sivusto: merkitty tutkivaksi, ei tämän raportin tulososio.
+Tutkiva GitHub Pages -visualisointi: merkitty tutkivaksi (`maat/`, `vertailu.html`), ei tämän raportin tulososio. Etusivu on tämä raportti.
 
 ---
 

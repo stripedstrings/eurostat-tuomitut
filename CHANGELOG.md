@@ -11,6 +11,12 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   `PREREGISTRATION.md`:tä; uudet analyysit (Poisson-CI, SIR, S1–S7)
   kirjataan erikseen.
 
+- 2026-11-01. GitHub Pages -etusivu (`docs/index.html`) on esirekisteröity
+  raportti (`output/RAPORTTI.md` ja `output/figures/01`–`09`). Tutkiva
+  visualisointi on merkitty TUTKIVA-nauhaalla; Suomi on `docs/maat/fi.html`.
+  Perustelu: etusivu ei saa näyttää tutkivaa visualisointia rekisteröidyn
+  raportin sijaan.
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI

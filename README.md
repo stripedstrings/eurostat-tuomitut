@@ -1,7 +1,7 @@
 # EU-maiden tuomitut kansalaisuuden mukaan 2008–2024
 
-Esirekisteröity raportti: [`output/RAPORTTI.md`](output/RAPORTTI.md).  
-Tutkiva visualisointi (ei esirekisteröity): [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/).
+Esirekisteröity raportti: [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/) ([`output/RAPORTTI.md`](output/RAPORTTI.md)).  
+Tutkiva visualisointi (ei esirekisteröity): [maasivut](https://stripedstrings.github.io/eurostat-tuomitut/maat/fi.html).
 Ks. `CHANGELOG.md`.
 
 Avoin, toistettava ja dataan perustuva tarkastelu siitä, eroavatko oman maan

@@ -161,6 +161,22 @@ document.querySelectorAll(".lippu").forEach(b => {
 });
 kaytKieli();
 
+function tutkivaNauha() {
+  if (document.body.classList.contains("raportti")) return;
+  let p = document.querySelector(".tutkiva-nauha");
+  if (!p) {
+    p = document.createElement("p");
+    p.className = "tutkiva-nauha";
+    document.body.insertBefore(p, document.body.firstChild);
+  }
+  const juuri = !/\/maat\//.test(location.pathname);
+  const href = juuri ? "index.html" : "../index.html";
+  p.innerHTML = kieli() === "en"
+    ? `EXPLORATORY (not preregistered). <a href="${href}">Registered report</a>`
+    : `TUTKIVA (ei esirekisteröity). <a href="${href}">Esirekisteröity raportti</a>`;
+}
+tutkivaNauha();
+
 function viiva(id, labels, a, b, otsikkoA, otsikkoB) {
   const el = document.getElementById(id);
   if (!el || typeof Chart === "undefined") return;
