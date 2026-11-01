@@ -64,6 +64,10 @@ def main(refresh: bool = False) -> None:
     kaavio_suhdeluku(avg_tuom, OUTPUT_DIR / "02_suhdeluku_maittain.png")
     kaavio_pienoiskaaviot(df, OUTPUT_DIR / "03_pienoiskaaviot_maittain.png")
     kaavio_absoluuttiset(eu, OUTPUT_DIR / "04_absoluuttiset_maarat.png")
+    kaavio_eu_per_100k(eu, OUTPUT_DIR / "01_eu_per_100000_en.png", kieli="en")
+    kaavio_suhdeluku(avg_tuom, OUTPUT_DIR / "02_suhdeluku_maittain_en.png", kieli="en")
+    kaavio_pienoiskaaviot(df, OUTPUT_DIR / "03_pienoiskaaviot_maittain_en.png", kieli="en")
+    kaavio_absoluuttiset(eu, OUTPUT_DIR / "04_absoluuttiset_maarat_en.png", kieli="en")
 
     kirjoita_sivusto(df, avg, eu)
     print(f"Valmis. Tiedostot: {OUTPUT_DIR} ja docs/")

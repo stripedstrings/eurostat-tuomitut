@@ -1,19 +1,25 @@
 
-:root { --text:#1b1f24; --muted:#4b5563; --line:#d8dee6; --bg:#f4f1ea; --card:#fff; --nat:#2c5aa0; --for:#c45c26; }
+:root { --text:#1b1f24; --muted:#4b5563; --line:#d8dee6; --bg:#f4f1ea; --card:#fff; }
 * { box-sizing: border-box; }
 body { margin:0; font-family:"Segoe UI", Georgia, serif; color:var(--text); background:var(--bg); line-height:1.55; }
 .wrap { max-width:920px; margin:0 auto; padding:0 1.2rem; }
-header { background:#1b1f24; color:#f4f1ea; padding:1.4rem 0 1.2rem; }
-header h1 { margin:0.2rem 0 0.3rem; font-size:1.85rem; }
+header { background:#1b1f24; color:#f4f1ea; padding:1.2rem 0 1.1rem; }
+.yla { display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+header h1 { margin:0.35rem 0 0.3rem; font-size:1.85rem; }
 header a { color:#f4d2b0; }
 .kicker { margin:0; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; }
 .lead { margin:0 0 0.8rem; color:#d8dee6; }
+.kielet { display:flex; gap:0.4rem; }
+.lippu { background:transparent; border:1px solid transparent; padding:3px; cursor:pointer; line-height:0; border-radius:3px; }
+.lippu svg { width:30px; height:18px; display:block; box-shadow:0 0 0 1px rgba(255,255,255,0.25); }
+.lippu[aria-pressed="true"] { border-color:#f4d2b0; }
 .valitsin { display:flex; gap:0.6rem; align-items:center; }
 .valitsin label { font-size:0.9rem; }
 .valitsin select { font-size:1rem; padding:0.35rem 0.5rem; }
 main { padding:1.4rem 0 3.5rem; }
 h2 { font-size:1.25rem; margin:1.8rem 0 0.5rem; }
 .kortti { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; margin:1rem 0; }
+.kortti h2 { margin-top:0; }
 canvas { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0.6rem; margin:0.6rem 0 1.2rem; max-height:380px; }
 .taulu-wrap { overflow-x:auto; }
 table { border-collapse:collapse; width:100%; font-size:0.88rem; background:var(--card); }

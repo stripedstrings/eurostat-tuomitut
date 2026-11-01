@@ -24,6 +24,8 @@ Tulosteet syntyvät kansioon `output/`. API-vastaukset tallennetaan kansioon `ca
 
 ## Datalähteet
 
+Aineistot ovat Eurostatin (EU:n tilastovirasto) julkisia virallisia tilastoja.
+
 Molemmat haetaan muodossa `format=SDMX-CSV`:
 
 | Koodi | Sisältö | Rajaus tässä projektissa |

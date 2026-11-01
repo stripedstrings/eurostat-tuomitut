@@ -3,117 +3,148 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Puola — tuomitut ja epäillyt kansalaisuuden mukaan</title>
+  <title>Puola — Poland</title>
   <link rel="stylesheet" href="../tyyli.css">
 </head>
 <body>
   <header>
     <div class="wrap">
-      <p class="kicker"><a href="../index.html">Tuomitut ja epäillyt EU-maissa</a></p>
-      <h1>Puola</h1>
-      <p class="lead">Oman maan kansalaiset ja ulkomaan kansalaiset, Eurostat 2008–2024.</p>
-      <div class="valitsin"><label for="maa">Maa</label>
+      <div class="yla">
+        <p class="kicker"><a href="../index.html" data-i18n="kicker"></a></p>
+        
+<nav class="kielet">
+  <button type="button" class="lippu" data-lang="fi" title="Suomi" aria-label="Suomi">
+    <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="18" height="11" fill="#fff"/><rect y="4" width="18" height="3" fill="#002f6c"/><rect x="5" width="3" height="11" fill="#002f6c"/></svg>
+  </button>
+  <button type="button" class="lippu" data-lang="en" title="English" aria-label="English">
+    <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="10"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="6"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+  </button>
+</nav>
+
+      </div>
+      <h1 id="otsikko-maa" data-fi="Puola" data-en="Poland">Puola</h1>
+      <p class="lead" data-i18n="lead"></p>
+      <div class="valitsin"><label for="maa" data-i18n="maa"></label>
 <select id="maa" onchange="location.href=this.value">
-<option value="../index.html">Suomi</option>
-<option value="nl.html">Alankomaat</option>
-<option value="be.html">Belgia</option>
-<option value="bg.html">Bulgaria</option>
-<option value="es.html">Espanja</option>
-<option value="ie.html">Irlanti</option>
-<option value="it.html">Italia</option>
-<option value="at.html">Itävalta</option>
-<option value="el.html">Kreikka</option>
-<option value="hr.html">Kroatia</option>
-<option value="cy.html">Kypros</option>
-<option value="lv.html">Latvia</option>
-<option value="lt.html">Liettua</option>
-<option value="lu.html">Luxemburg</option>
-<option value="mt.html">Malta</option>
-<option value="pt.html">Portugali</option>
-<option value="pl.html" selected>Puola</option>
-<option value="fr.html">Ranska</option>
-<option value="ro.html">Romania</option>
-<option value="se.html">Ruotsi</option>
-<option value="de.html">Saksa</option>
-<option value="sk.html">Slovakia</option>
-<option value="si.html">Slovenia</option>
-<option value="dk.html">Tanska</option>
-<option value="cz.html">Tšekki</option>
-<option value="hu.html">Unkari</option>
-<option value="ee.html">Viro</option>
-<option value="../vertailu.html">EU-vertailu</option>
+<option value="../index.html" data-fi="Suomi" data-en="Finland">Suomi</option>
+<option value="nl.html" data-fi="Alankomaat" data-en="Netherlands">Alankomaat</option>
+<option value="be.html" data-fi="Belgia" data-en="Belgium">Belgia</option>
+<option value="bg.html" data-fi="Bulgaria" data-en="Bulgaria">Bulgaria</option>
+<option value="es.html" data-fi="Espanja" data-en="Spain">Espanja</option>
+<option value="ie.html" data-fi="Irlanti" data-en="Ireland">Irlanti</option>
+<option value="it.html" data-fi="Italia" data-en="Italy">Italia</option>
+<option value="at.html" data-fi="Itävalta" data-en="Austria">Itävalta</option>
+<option value="el.html" data-fi="Kreikka" data-en="Greece">Kreikka</option>
+<option value="hr.html" data-fi="Kroatia" data-en="Croatia">Kroatia</option>
+<option value="cy.html" data-fi="Kypros" data-en="Cyprus">Kypros</option>
+<option value="lv.html" data-fi="Latvia" data-en="Latvia">Latvia</option>
+<option value="lt.html" data-fi="Liettua" data-en="Lithuania">Liettua</option>
+<option value="lu.html" data-fi="Luxemburg" data-en="Luxembourg">Luxemburg</option>
+<option value="mt.html" data-fi="Malta" data-en="Malta">Malta</option>
+<option value="pt.html" data-fi="Portugali" data-en="Portugal">Portugali</option>
+<option value="pl.html" data-fi="Puola" data-en="Poland" selected>Puola</option>
+<option value="fr.html" data-fi="Ranska" data-en="France">Ranska</option>
+<option value="ro.html" data-fi="Romania" data-en="Romania">Romania</option>
+<option value="se.html" data-fi="Ruotsi" data-en="Sweden">Ruotsi</option>
+<option value="de.html" data-fi="Saksa" data-en="Germany">Saksa</option>
+<option value="sk.html" data-fi="Slovakia" data-en="Slovakia">Slovakia</option>
+<option value="si.html" data-fi="Slovenia" data-en="Slovenia">Slovenia</option>
+<option value="dk.html" data-fi="Tanska" data-en="Denmark">Tanska</option>
+<option value="cz.html" data-fi="Tšekki" data-en="Czechia">Tšekki</option>
+<option value="hu.html" data-fi="Unkari" data-en="Hungary">Unkari</option>
+<option value="ee.html" data-fi="Viro" data-en="Estonia">Viro</option>
+<option value="../vertailu.html" data-fi="EU-vertailu" data-en="EU comparison">EU-vertailu</option>
 </select></div>
     </div>
   </header>
   <main class="wrap">
+    
+<section class="kortti">
+  <h2 data-i18n="lahteet_otsikko"></h2>
+  <p data-i18n="lahteet_ingressi"></p>
+  <ul>
+    <li>
+      <a class="link-crim" href="https://doi.org/10.2908/crim_just_ctz">crim_just_ctz</a>
+      — <span data-i18n="lahde_crim"></span>
+      (<a href="https://ec.europa.eu/eurostat/databrowser/view/crim_just_ctz/default/table?lang=en">Eurostat Data Browser</a>)
+    </li>
+    <li>
+      <a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop5ctz/default/table?lang=en">migr_pop5ctz</a>
+      — <span data-i18n="lahde_pop"></span>
+    </li>
+    <li>
+      <a href="https://ec.europa.eu/eurostat/cache/metadata/en/crim_sims.htm">crim_sims</a>
+      — <span data-i18n="lahde_meta"></span>
+    </li>
+  </ul>
+  <p data-i18n="lahteet_huom"></p>
+</section>
+
     <section class="kortti">
-      <h2>Ketä nämä ryhmät ovat?</h2>
-      <p>Eurostatin oikeustilasto <code>crim_just_ctz</code> ei erittele yksittäisiä kansalaisuuksia
-      (esimerkiksi virolaisia, irakilaisia tai ruotsalaisia). Se tuntee vain kolme luokkaa:</p>
+      <h2 data-i18n="luokat_otsikko"></h2>
+      <p data-i18n="luokat_p1"></p>
       <ul>
-        <li><strong>NAT — oman maan kansalaiset.</strong> Sen maan kansalaiset, joka ilmoittaa tilaston (tällä sivulla: Puola).</li>
-        <li><strong>FOR — ulkomaan kansalaiset.</strong> Kaikki muut kansalaisuudet <em>yhdessä</em>, yksi summa. Mukana voi olla EU-kansalaisia, EU:n ulkopuolisia, turisteja, kausityöntekijöitä ja muita ei-asukkaita. Datasta ei näe, mitä passeja joukossa on.</li>
-        <li><strong>TOTAL — yhteensä.</strong> Jos TOTAL on suurempi kuin NAT + FOR, erotus on tuntematon kansalaisuus. Sitä ei laiteta kumpaankaan ryhmään.</li>
+        <li><strong>NAT.</strong> <span data-i18n="luokat_nat"></span> <span id="luokka-maa" data-fi="Puola" data-en="Poland">Puola</span>.</li>
+        <li><strong>FOR.</strong> <span data-i18n="luokat_for"></span></li>
+        <li><strong>TOTAL.</strong> <span data-i18n="luokat_total"></span></li>
       </ul>
-      <p>Nämä eivät ole etnisiä tai syntymämaaluokkia. Väestönimittäjä on vakituinen väestö 1.&nbsp;tammikuuta
-      (<code>migr_pop5ctz</code>, NAT ja FOR). Kansalaisuudettomat (STLS) on jätetty pois molemmista ryhmistä.</p>
+      <p data-i18n="luokat_p2"></p>
     </section>
 
     <section class="kortti avain" id="avainluvut"></section>
 
     <section>
-      <h2>Tuomitsemisaste, 100&nbsp;000 asukasta kohden</h2>
-      <p>Aste = tuomitut / saman kansalaisuusryhmän väestö × 100&nbsp;000. Vuosi 2008 näkyy vain lukumäärinä, koska väestöä ei ole. Katkos viivassa on puuttuva tieto, ei nolla.</p>
+      <h2 data-i18n="aste_otsikko"></h2>
+      <p data-i18n="aste_p"></p>
       <canvas id="kaavio-tuomitut-aste"></canvas>
     </section>
 
     <section class="kortti">
-      <h2>Mitä suhdeluku tarkoittaa?</h2>
-      <p>Suhde <strong>ulkomaat / oma maa</strong> = ulkomaan kansalaisten tuomitsemisaste jaettuna oman maan kansalaisten tuomitsemisasteella <em>samana vuonna</em>.</p>
+      <h2 data-i18n="suhde_otsikko"></h2>
+      <p data-i18n="suhde_p1"></p>
       <ul>
-        <li><strong>Suhde 1</strong> tarkoittaa, että molemmissa ryhmissä tilastoitiin yhtä monta tuomiota 100&nbsp;000 asukasta kohden.</li>
-        <li><strong>Suhde 2,3</strong> tarkoittaa, että ulkomaan kansalaisten aste oli 2,3-kertainen oman maan kansalaisiin nähden. Se ei tarkoita, että “ulkomaalaiset tekevät 2,3 kertaa enemmän rikoksia”, vaan että <em>kirjatut tuomiot suhteessa asukaslukuun</em> erosivat näin.</li>
+        <li data-i18n="suhde_li1"></li>
+        <li data-i18n="suhde_li2"></li>
       </ul>
       <p id="suhde-esimerkki"></p>
-      <p><strong>2020–2024 keskiarvo</strong> on tavallinen aritmeettinen keskiarvo niistä vuosista, joilla <em>molemmat</em> asteet ovat olemassa. Jos jokin vuosi puuttuu, sitä ei arvata eikä korvata. Keskiarvo voi siis perustua 1–5 vuoteen; käytetyt vuodet kerrotaan sivulla.</p>
-      <p>Suhde ei vakioi ikää, sukupuolta, oleskelun pituutta eikä sitä, asuuko henkilö maassa. Tuomioihin voi sisältyä ihmisiä, jotka eivät ole vakituista väestöä.</p>
+      <p data-i18n="suhde_ka"></p>
+      <p data-i18n="suhde_raja"></p>
     </section>
 
     <section>
-      <h2>Tuomittujen lukumäärä</h2>
+      <h2 data-i18n="lkm_otsikko"></h2>
       <canvas id="kaavio-tuomitut-lkm"></canvas>
     </section>
 
     <section class="kortti">
-      <h2>Kannattaako epäillyt ottaa mukaan?</h2>
-      <p><strong>Kyllä, mutta eri lukuna — ei todisteena syyllisyydestä.</strong> Eurostat erottaa kolme vaihetta:</p>
+      <h2 data-i18n="vaiheet_otsikko"></h2>
+      <p data-i18n="vaiheet_p1"></p>
       <ol>
-        <li><strong>Epäillyt (PER_SUSP)</strong> — henkilöt, jotka poliisi on tilastoinut epäillyiksi / viralliseen kontaktiin rikoksen vuoksi.</li>
-        <li><strong>Syytteeseen asetetut (PER_PRSC)</strong> — syyteharkinta on aloitettu.</li>
-        <li><strong>Tuomitut (PER_CNV)</strong> — tuomioistuin on todennut syylliseksi.</li>
+        <li><strong>PER_SUSP.</strong> <span data-i18n="vaihe_susp"></span></li>
+        <li><strong>PER_PRSC.</strong> <span data-i18n="vaihe_prsc"></span></li>
+        <li><strong>PER_CNV.</strong> <span data-i18n="vaihe_cnv"></span></li>
       </ol>
-      <p>Datasta <em>ei näe, miksi</em> joku jäi “vain epäillyksi”: näyttö ei riittänyt, syyte peruttiin, syyteharkinta siirtyi seuraavaan vuoteen, henkilö vapautettiin, tai kyseessä oli eri laskentatapa. Sama ihminen voi olla epäiltynä vuonna T ja tuomittuna vuonna T+1. Siksi epäiltyjä ei saa jakaa tuomituilla ja kutsua sitä “syyllistymisprosentiksi”.</p>
-      <p>Epäilyaste kertoo silti jotain: sen, miten usein ryhmä päätyy poliisin kirjaamaksi epäillyksi suhteessa asukaslukuun. Se mittaa kontaktia rikosprosessin alkuun, ei tuomioita.</p>
+      <p data-i18n="vaiheet_p2"></p>
     </section>
 
     <section>
-      <h2>Epäilyaste, 100&nbsp;000 asukasta kohden</h2>
-      <p>Sama väestönimittäjä kuin tuomituilla. Puuttuvat vuodet jätetään tyhjiksi.</p>
+      <h2 data-i18n="epailly_otsikko"></h2>
+      <p data-i18n="epailly_p"></p>
       <canvas id="kaavio-epaillyt-aste"></canvas>
     </section>
 
     <section>
-      <h2>Lukumäärät vaiheittain (oma maa vs. ulkomaat)</h2>
-      <p>Nämä pylväät ovat rinnakkain vertailua varten. Ne eivät ole saman henkilöjoukon eteneminen putkessa.</p>
+      <h2 data-i18n="pylvas_otsikko"></h2>
+      <p data-i18n="pylvas_p"></p>
       <canvas id="kaavio-vaiheet"></canvas>
     </section>
 
     <section>
-      <h2>Vuosittaiset luvut</h2>
+      <h2 data-i18n="taulu_otsikko"></h2>
       <div class="taulu-wrap"><table id="taulu"></table></div>
     </section>
 
-    <p class="alaviite">Ei ikä- ja sukupuolivakioitu. Laskentayksikkö vaihtelee maittain (henkilöitä vs. tapauksia). Lähde: Eurostat, crim_just_ctz ja migr_pop5ctz. Ei virallinen EU-julkaisu.</p>
+    <p class="alaviite" data-i18n="alaviite"></p>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script>window.SIVUN_MAA = "PL"; window.DATA_URL = "../data.json";</script>
