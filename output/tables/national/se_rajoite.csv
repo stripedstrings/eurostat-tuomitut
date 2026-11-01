@@ -1,0 +1,2 @@
+rajoite,tiedosto
+"Ruotsi: Brå:lla ei ole julkista API:a kansalaisuus- tai syntymämaakohtaisille tuomituille. Virallinen rikosstatistiikka (anmälda brott, lagförda) ei erittele Eurostatin NAT/FOR-luokkia CSV:nä. Brån raportti 2021 (misstänkta, inrikes/utrikes bakgrund) on epäillyt ja syntymämaa/vanhempien syntymämaa, ei tuomitut × kansalaisuus. Sijoita käsin ladattu CSV/XLSX kansioon data/national/ nimellä se_bra.csv. Ei yhdistetä EU-aggregaattiin. Lukuja ei ole kopioitu PDF:stä.",

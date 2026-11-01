@@ -142,13 +142,15 @@ K2-suodatus: LFS sex=T, age Y15-64 (asteet) / Y25-64 ja isced11 ∈ {ED0-2, ED3_
 
 ## Kansalliset (maakohtaiset tapaustutkimukset)
 
-- Tanska: Danmarks Statistik
-- Ruotsi: Brå
-- Suomi: Tilastokeskus, Poliisi, Rikosseuraamuslaitos
-- Alankomaat: CBS
-- Saksa: BKA, Polizeiliche Kriminalstatistik
+Koodit luettu ladatuista tiedostoista 2026-11-01. Ei EU-aggregaattiin.
 
-Kansalliset aineistot eivät ole keskenään yhteismitallisia. Älä yhdistä EU-aggregaattiin.
+| Maa | Taulu | Unique (poiminta) | Rajoite |
+|---|---|---|---|
+| Tanska | DST STRFNA13 | STATSB: DANSK, VEST, IKKEVEST; OVERTRÆD=1; Tid 2018–2025 | ei NAT/FOR; ei nimittäjää |
+| Suomi | StatFin 15hh | Kansalaisuus: Suomi, Ulkomaat yhteensä (kyselyssä 246, ULK); Asuinpaikka Yhteensä; rikosryhmä Yhteensä | rangaistus ≠ Eurostat PER_CNV |
+| Ruotsi | Brå | CSV puuttuu | ei julkista API:a; ei PDF-lukuja |
+
+Alankomaat (CBS) ja Saksa (BKA PKS) eivät ole vaiheessa 9.
 
 ## MANIFEST (data/raw/MANIFEST.csv)
 

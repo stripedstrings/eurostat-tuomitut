@@ -125,6 +125,7 @@ python -m src.rates
 python -m src.standardize
 python -m src.coverage
 python -m src.plots
+python -m src.national     # DK/SE/FI, ei EU-aggregaattiin
 pytest
 ```
 
@@ -139,7 +140,19 @@ kirjaa tiedoston lataus pvm ja URL tiedostoon `data/raw/MANIFEST.csv`.
 - Kaikki maat ja kaikki vuodet raportoidaan, ei vain valikoituja.
 - Kaikki kaaviot ja taulukot tuotetaan koodista, ei käsin.
 
-## 9. Lisenssi ja lähdeviitteet
+## 9. Kansalliset tapaustutkimukset (erillään EU-aggregaatista)
+
+Ajo: `python -m src.national`. Tiedostot: `data/national/`. **Ei lisätä `eu_aggregaattiin`.**
+
+**Tanska (Danmarks Statistik STRFNA13).** Syylliseksi todetut 2018–2025. Kansalaisuus unique: `DANSK`, `VEST`, `IKKEVEST` (tanskalainen / länsimainen / ei-länsimainen). Ei Eurostatin NAT/FOR. Taulukossa ei ole väestönimittäjää. Lähde: StatBank API.
+
+**Ruotsi (Brå).** Ei julkista API:a tuomituille × kansalaisuus. Brån 2021-raportti koskee epäiltyjä ja inrikes/utrikes bakgrund (syntymämaa), ei NAT/FOR-tuomittuja. CSV/XLSX voi sijoittaa nimellä `data/national/se_bra.csv`. Lukuja ei kopioida PDF:stä.
+
+**Suomi (Tilastokeskus StatFin 15hh).** Rangaistukset 2009–2024, kansalaisuus unique-listasta `Suomi` ja `Ulkomaat yhteensä`. Kaksi saraketta: oikeudessa tuomitut vs. kaikki seuraamukset (ml. rangaistus- ja rikesakot). Laskentayksikkö on rangaistus. Poliisin ja Rikosseuraamuslaitoksen aineistoja ei ole tässä vaiheessa.
+
+Maiden tilastot eivät ole yhteismitallisia keskenään eivätkä Eurostatin `crim_just_ctz`:n kanssa.
+
+## 10. Lisenssi ja lähdeviitteet
 
 Koodi: MIT (tai valittu). Eurostat-data: Eurostatin uudelleenkäyttöehdot,
 mainittava lähde. Kansalliset aineistot: kunkin tilastoviranomaisen ehdot.
