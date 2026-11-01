@@ -118,15 +118,27 @@ Luettu `crim_just_ctz.csv`-sarakkeista (ei arvattu):
 - S4: `unit` = NR, P_HTHAB. Ei henkilö vs. tapaus -dimensiota.
 - S7: ei naturalisaatiota tai entistä kansalaisuutta.
 
-## Muut (ei haettu vaiheessa 1)
+## Vaihe 8 K2 (haettu 2026-11-01, koodit unique-listasta)
+
+Kuvaileva, ei K1-selittäjä. Täydet listat: `data/interim/dimensiot_k2.txt`.
+
+| Koodi | Dimensiot (poiminta) |
+|---|---|
+| lfsa_ergan | unit=PC; citizen NAT, FOR, EU27_2020_FOR, NEU27_2020_FOR, NRP, STLS, TOTAL, EU27_2020; age mm. Y15-64 |
+| lfsa_urgan | unit=PC; citizen NAT, FOR, EU27_2020_FOR, NEU27_2020_FOR, NRP, STLS, TOTAL; ei EU27_2020-citizen |
+| edat_lfs_9911 | unit=PC; isced11 ED0-2, ED3-8, ED34_44, ED35_45, ED3_4, ED5-8; citizen kuten urgan; age mm. Y25-64 |
+| migr_resfirst | reason EDUC, EMP, FAM, OTH, TOTAL; duration M3-5, M6-11, M_GE12, TOTAL; unit=PER; citizen ISO-maat (ei NAT/FOR) |
+| migr_resvalid | reason EDUC, EMP, FAM, OTH, RFG, SPROT, TOTAL; muuten kuten first |
+
+K2-suodatus: LFS sex=T, age Y15-64 (asteet) / Y25-64 ja isced11 ∈ {ED0-2, ED3_4, ED5-8} (koulutus). Luvat: duration=TOTAL, citizen=TOTAL, geo EU-27 + EU27_2020.
+
+## Muut (ei haettu)
 
 | Koodi | Sisältö | Huomio |
 |---|---|---|
-| crim_pris_ctz | Vangit kansalaisuuden mukaan | myöhempi vaihe |
+| crim_pris_ctz | Vangit kansalaisuuden mukaan | ei vaiheessa 8 |
 | crim_hom_soff | Henkirikokset, seksuaalirikokset | ei kansalaisuutta; ei yhdistettävissä K1:een |
-| edat_lfs_*, lfsa_ergan, lfsa_urgan | Koulutus, työllisyys | K2, kansalaisuus vs. syntymämaa |
-| migr_resfirst, migr_resvalid | Oleskeluluvat perusteen mukaan | K2 |
-| migr_asydcfsta | Turvapaikkapäätökset | K2 |
+| migr_asydcfsta | Turvapaikkapäätökset | ei haettu; luvat kattavat OTH/RFG/SPROT |
 
 ## Kansalliset (maakohtaiset tapaustutkimukset)
 

@@ -23,6 +23,10 @@ DIM_COLS = (
     "TIME_PERIOD",
     "OBS_FLAG",
     "CONF_STATUS",
+    "isced11",
+    "reason",
+    "duration",
+    "wstatus",
 )
 
 DATASETS = {
@@ -30,6 +34,14 @@ DATASETS = {
     "migr_pop5ctz": "Population on 1 January by sex, citizenship and group of country of birth",
     "migr_pop1ctz": "Population on 1 January by age group, sex and citizenship",
     "migr_pop3ctb": "Population on 1 January by age group, sex and country of birth",
+}
+
+K2_DATASETS = {
+    "lfsa_ergan": "Employment rates by sex, age and citizenship",
+    "lfsa_urgan": "Unemployment rates by sex, age and citizenship",
+    "edat_lfs_9911": "Population by educational attainment level, sex, age and citizenship",
+    "migr_resfirst": "First permits by reason, length of validity and citizenship",
+    "migr_resvalid": "All valid permits by reason, length of validity and citizenship",
 }
 
 USER_AGENT = "eu-rikollisuus-kansalaisuus/0.1 (tutkimuskäyttö)"
@@ -67,7 +79,7 @@ def _kirjaa_manifest(tiedosto: str, url: str, kuvaus: str, huomiot: str) -> None
 def fetch_sdmx_csv(dataset_code: str, refresh: bool = False) -> Path:
     path = cache_path(dataset_code)
     url = SDMX_CSV_URL.format(code=dataset_code)
-    kuvaus = DATASETS.get(dataset_code, dataset_code)
+    kuvaus = {**DATASETS, **K2_DATASETS}.get(dataset_code, dataset_code)
     if path.exists() and path.stat().st_size > 0 and not refresh:
         _kirjaa_manifest(
             path.name,
@@ -101,7 +113,7 @@ def inspect_dimensions(df: pd.DataFrame, nimi: str) -> str:
     for col in df.columns:
         nun = int(df[col].nunique(dropna=False))
         lines.append(f"\n{col}: nunique={nun}")
-        if col not in DIM_COLS and col not in {"DATAFLOW", "LAST UPDATE"}:
+        if col not in DIM_COLS and col not in {"DATAFLOW", "LAST UPDATE"} and nun > 30:
             continue
         values = sorted(df[col].dropna().astype(str).unique().tolist())
         if len(values) > 80:
@@ -149,10 +161,27 @@ def hae_kaikki(refresh: bool = False) -> None:
     (INTERIM_DIR / "dimensiot.txt").write_text("\n".join(osat), encoding="utf-8")
 
 
+def hae_k2(refresh: bool = False) -> None:
+    INTERIM_DIR.mkdir(parents=True, exist_ok=True)
+    osat: list[str] = []
+    for koodi, kuvaus in K2_DATASETS.items():
+        print(f"Haetaan {koodi} ({kuvaus})...", flush=True)
+        df = load_dataset(koodi, refresh=refresh)
+        teksti = inspect_dimensions(df, koodi)
+        (INTERIM_DIR / f"dimensiot_{koodi}.txt").write_text(teksti, encoding="utf-8")
+        osat.append(teksti)
+        print(teksti)
+    (INTERIM_DIR / "dimensiot_k2.txt").write_text("\n".join(osat), encoding="utf-8")
+
+
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--k2", action="store_true")
     args = parser.parse_args()
-    hae_kaikki(refresh=args.refresh)
+    if args.k2:
+        hae_k2(refresh=args.refresh)
+    else:
+        hae_kaikki(refresh=args.refresh)
