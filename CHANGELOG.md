@@ -10,3 +10,9 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Aiempi sivusto merkitään tutkivaksi (`docs/`). Jatkossa noudatetaan
   `PREREGISTRATION.md`:tä; uudet analyysit (Poisson-CI, SIR, S1–S7)
   kirjataan erikseen.
+
+- 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
+  on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
+  ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI
+  määritellään lukumäärille; puuttuvia vuosia ei täytetä. Tutkiva `docs/`-sivusto
+  käytti vuosiasteiden keskiarvoa.

@@ -6,7 +6,18 @@ import numpy as np
 import pandas as pd
 from scipy.stats import chi2, norm
 
-from src.config import ASTEET_PATH, MAA_VUOSI_PATH, TABLES_DIR
+from src.config import (
+    ASTEET_PATH,
+    EU27,
+    EU_AGGR_PATH,
+    KAUSI_RR_PATH,
+    MAA_VUOSI_PATH,
+    MAAN_NIMET,
+    TABLES_DIR,
+    YEARS_ABS,
+    YEARS_AVG,
+    YEARS_RATE,
+)
 
 Z_95 = float(norm.ppf(0.975))
 ALPHA = 0.05
@@ -102,6 +113,110 @@ def laske_asteet(paneeli: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def eu_aggregaatti(asteet: pd.DataFrame, paneeli: pd.DataFrame) -> pd.DataFrame:
+    """Summaa vain maat, joilla molemmat ryhmät (ja asteissa myös nimittäjät)."""
+    rows: list[dict[str, object]] = []
+    for y in YEARS_ABS:
+        p_y = paneeli[paneeli["vuosi"] == y]
+        abs_ok = p_y["tuomitut_NAT"].notna() & p_y["tuomitut_FOR"].notna()
+        abs_df = p_y.loc[abs_ok]
+        a_y = asteet[asteet["vuosi"] == y]
+        aste_df = a_y.loc[a_y["kelpoinen_aste"]]
+
+        eu_tot = pd.to_numeric(p_y.get("vaesto_TOTAL"), errors="coerce").sum(min_count=1)
+        mukana_vaesto = (
+            pd.to_numeric(aste_df["vaesto_NAT"], errors="coerce").sum(min_count=1)
+            + pd.to_numeric(aste_df["vaesto_FOR"], errors="coerce").sum(min_count=1)
+            if len(aste_df)
+            else np.nan
+        )
+        osuus = (
+            mukana_vaesto / eu_tot
+            if pd.notna(mukana_vaesto) and pd.notna(eu_tot) and eu_tot > 0
+            else np.nan
+        )
+
+        d_n = pd.to_numeric(aste_df["tuomitut_NAT"], errors="coerce").sum(min_count=1) if len(aste_df) else np.nan
+        d_f = pd.to_numeric(aste_df["tuomitut_FOR"], errors="coerce").sum(min_count=1) if len(aste_df) else np.nan
+        p_n = pd.to_numeric(aste_df["vaesto_NAT"], errors="coerce").sum(min_count=1) if len(aste_df) else np.nan
+        p_f = pd.to_numeric(aste_df["vaesto_FOR"], errors="coerce").sum(min_count=1) if len(aste_df) else np.nan
+
+        row: dict[str, object] = {
+            "vuosi": y,
+            "n_maata_abs": int(len(abs_df)),
+            "maat_abs": ",".join(abs_df["geo"].tolist()),
+            "tuomitut_NAT": pd.to_numeric(abs_df["tuomitut_NAT"], errors="coerce").sum(min_count=1),
+            "tuomitut_FOR": pd.to_numeric(abs_df["tuomitut_FOR"], errors="coerce").sum(min_count=1),
+            "n_maata_aste": int(len(aste_df)),
+            "maat_aste": ",".join(aste_df["geo"].tolist()),
+            "vaesto_NAT": p_n,
+            "vaesto_FOR": p_f,
+            "vaesto_EU27_TOTAL": eu_tot,
+            "vaesto_osuus": osuus,
+            "aste_NAT": np.nan,
+            "aste_FOR": np.nan,
+            "RR": np.nan,
+        }
+        if y in YEARS_RATE and len(aste_df):
+            asteet_tmp = pd.DataFrame(
+                {
+                    "tuomitut_NAT": [d_n],
+                    "tuomitut_FOR": [d_f],
+                    "vaesto_NAT": [p_n],
+                    "vaesto_FOR": [p_f],
+                }
+            )
+            lask = laske_asteet(asteet_tmp)
+            row["aste_NAT"] = lask["aste_NAT"].iloc[0]
+            row["aste_FOR"] = lask["aste_FOR"].iloc[0]
+            row["RR"] = lask["RR"].iloc[0]
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def kausi_rr(asteet: pd.DataFrame, vuodet: list[int] | None = None) -> pd.DataFrame:
+    """Yhteenlasketut kelpoiset vuodet (ei täyttöä). Poisson-CI summista."""
+    if vuodet is None:
+        vuodet = YEARS_AVG
+    rows: list[dict[str, object]] = []
+    for geo in EU27:
+        s = asteet[(asteet["geo"] == geo) & (asteet["vuosi"].isin(vuodet)) & (asteet["kelpoinen_aste"])]
+        n = int(len(s))
+        d_n = pd.to_numeric(s["tuomitut_NAT"], errors="coerce").sum(min_count=1) if n else np.nan
+        d_f = pd.to_numeric(s["tuomitut_FOR"], errors="coerce").sum(min_count=1) if n else np.nan
+        p_n = pd.to_numeric(s["vaesto_NAT"], errors="coerce").sum(min_count=1) if n else np.nan
+        p_f = pd.to_numeric(s["vaesto_FOR"], errors="coerce").sum(min_count=1) if n else np.nan
+        tmp = pd.DataFrame(
+            {
+                "tuomitut_NAT": [d_n],
+                "tuomitut_FOR": [d_f],
+                "vaesto_NAT": [p_n],
+                "vaesto_FOR": [p_f],
+            }
+        )
+        lask = laske_asteet(tmp).iloc[0]
+        rows.append(
+            {
+                "geo": geo,
+                "maa": MAAN_NIMET[geo],
+                "n_vuotta": n,
+                "vuodet": ",".join(str(int(v)) for v in s["vuosi"]) if n else "",
+                "tuomitut_NAT": d_n,
+                "tuomitut_FOR": d_f,
+                "vaesto_NAT": p_n,
+                "vaesto_FOR": p_f,
+                "aste_NAT": lask["aste_NAT"],
+                "aste_FOR": lask["aste_FOR"],
+                "RR": lask["RR"],
+                "RR_lo": lask["RR_lo"],
+                "RR_hi": lask["RR_hi"],
+                "epaluotettava": bool(lask["epaluotettava"]) if n else False,
+                "varoitus_pieni_D": bool(lask["varoitus_pieni_D"]) if n else False,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def aja() -> pd.DataFrame:
     paneeli = pd.read_csv(MAA_VUOSI_PATH)
     df = laske_asteet(paneeli)
@@ -129,12 +244,17 @@ def aja() -> pd.DataFrame:
     ]
     out = df[sarakkeet]
     out.to_csv(ASTEET_PATH, index=False)
+    eu = eu_aggregaatti(out, paneeli)
+    eu.to_csv(EU_AGGR_PATH, index=False)
+    kausi = kausi_rr(out)
+    kausi.to_csv(KAUSI_RR_PATH, index=False)
     n = len(out)
     kelp = int(out["kelpoinen_aste"].sum())
     epa = int(out["epaluotettava"].sum())
     pieni = int(out["varoitus_pieni_D"].sum())
     print(f"Kirjoitettu {ASTEET_PATH} ({n} riviä)")
     print(f"kelpoinen_aste={kelp} epaluotettava_Dlt10={epa} varoitus_Dlt20={pieni}")
+    print(f"Kirjoitettu {EU_AGGR_PATH} ja {KAUSI_RR_PATH}")
     return out
 
 

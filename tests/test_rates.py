@@ -95,3 +95,51 @@ def test_laske_asteet_merkitsee_eika_poista():
     assert bool(out.loc[2, "kelpoinen_aste"]) is False
     assert pd.isna(out.loc[2, "RR"])
     assert pd.isna(out.loc[2, "aste_NAT"])
+
+
+def test_eu_aggregaatti_vain_molemmat_ryhmat():
+    from src.rates import eu_aggregaatti
+
+    paneeli = pd.DataFrame(
+        {
+            "geo": ["AT", "BE", "FI"],
+            "maa": ["Itävalta", "Belgia", "Suomi"],
+            "vuosi": [2010, 2010, 2010],
+            "tuomitut_NAT": [100.0, 80.0, 50.0],
+            "tuomitut_FOR": [225.0, float("nan"), 10.0],
+            "vaesto_NAT": [1_000_000.0, 1_000_000.0, 1_000_000.0],
+            "vaesto_FOR": [1_000_000.0, 100_000.0, 0.0],
+            "vaesto_TOTAL": [2_000_000.0, 1_100_000.0, 1_000_000.0],
+        }
+    )
+    asteet = laske_asteet(paneeli)
+    eu = eu_aggregaatti(asteet, paneeli)
+    r = eu.loc[eu["vuosi"] == 2010].iloc[0]
+    assert int(r["n_maata_abs"]) == 2  # AT ja FI; BE:ltä puuttuu FOR
+    assert int(r["n_maata_aste"]) == 1  # vain AT: nimittäjä > 0 molemmille
+    assert r["aste_NAT"] == 10.0
+    assert r["aste_FOR"] == 22.5
+    assert abs(r["vaesto_osuus"] - 2_000_000.0 / 4_100_000.0) < 1e-12
+
+
+def test_kausi_rr_ei_tayta_puuttuvia_vuosia():
+    from src.rates import kausi_rr
+
+    paneeli = pd.DataFrame(
+        {
+            "geo": ["FI", "FI", "FI", "FI", "FI"],
+            "maa": ["Suomi"] * 5,
+            "vuosi": [2020, 2021, 2022, 2023, 2024],
+            "tuomitut_NAT": [100.0, 100.0, float("nan"), 100.0, 100.0],
+            "tuomitut_FOR": [50.0, 50.0, 50.0, 50.0, 50.0],
+            "vaesto_NAT": [1_000_000.0] * 5,
+            "vaesto_FOR": [100_000.0] * 5,
+        }
+    )
+    asteet = laske_asteet(paneeli)
+    kausi = kausi_rr(asteet)
+    fi = kausi.loc[kausi["geo"] == "FI"].iloc[0]
+    assert int(fi["n_vuotta"]) == 4
+    assert fi["vuodet"] == "2020,2021,2023,2024"
+    assert fi["tuomitut_NAT"] == 400.0
+    assert abs(fi["RR"] - 5.0) < 1e-12

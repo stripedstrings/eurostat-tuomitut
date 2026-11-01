@@ -12,6 +12,10 @@ MANIFEST_PATH = CACHE_DIR / "MANIFEST.csv"
 MAA_VUOSI_PATH = PROCESSED_DIR / "maa_vuosi.csv"
 COVERAGE_PATH = TABLES_DIR / "coverage_matrix.csv"
 ASTEET_PATH = TABLES_DIR / "asteet.csv"
+EU_AGGR_PATH = TABLES_DIR / "eu_aggregaatti.csv"
+KAUSI_RR_PATH = TABLES_DIR / "rr_2020_2024.csv"
+FIGURES_DIR = OUTPUT_DIR / "figures"
+DPI_KUVA = 200
 
 SDMX_CSV_URL = (
     "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{code}"
