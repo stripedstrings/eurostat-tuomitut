@@ -1,5 +1,6 @@
 # EU-maiden tuomitut kansalaisuuden mukaan 2008–2024
 
+Esirekisteröity raportti: [`output/RAPORTTI.md`](output/RAPORTTI.md).  
 Tutkiva visualisointi (ei esirekisteröity): [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/).
 Ks. `CHANGELOG.md`.
 
