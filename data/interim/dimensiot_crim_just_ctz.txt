@@ -1,0 +1,36 @@
+=== crim_just_ctz ===
+rivit=7801 sarakkeet=['DATAFLOW', 'LAST UPDATE', 'freq', 'leg_stat', 'citizen', 'unit', 'geo', 'TIME_PERIOD', 'OBS_VALUE', 'OBS_FLAG', 'CONF_STATUS']
+
+DATAFLOW: nunique=1
+unique: ESTAT:CRIM_JUST_CTZ(1.0)
+
+LAST UPDATE: nunique=1
+unique: 29/04/26 11:00:00
+
+freq: nunique=1
+unique: A
+
+leg_stat: nunique=3
+unique: PER_CNV, PER_PRSC, PER_SUSP
+
+citizen: nunique=3
+unique: FOR, NAT, TOTAL
+
+unit: nunique=2
+unique: NR, P_HTHAB
+
+geo: nunique=41
+unique: AL, AT, BA, BE, BG, CH, CY, CZ, DE, DK, EE, EL, ES, FI, FR, HR, HU, IE, IS, IT, LI, LT, LU, LV, ME, MK, MT, NL, NO, PL, PT, RO, RS, SE, SI, SK, TR, UKC-L, UKM, UKN, XK
+
+TIME_PERIOD: nunique=17
+unique: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024
+
+OBS_VALUE: nunique=7582
+
+OBS_FLAG: nunique=1
+unique: (tyhjä)
+NaN-rivejä: 7801
+
+CONF_STATUS: nunique=1
+unique: (tyhjä)
+NaN-rivejä: 7801

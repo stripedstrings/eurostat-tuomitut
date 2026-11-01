@@ -1,0 +1,41 @@
+=== migr_pop5ctz ===
+rivit=387617 sarakkeet=['DATAFLOW', 'LAST UPDATE', 'freq', 'c_birth', 'citizen', 'unit', 'sex', 'geo', 'TIME_PERIOD', 'OBS_VALUE', 'OBS_FLAG', 'CONF_STATUS']
+
+DATAFLOW: nunique=1
+unique: ESTAT:MIGR_POP5CTZ(1.0)
+
+LAST UPDATE: nunique=1
+unique: 25/09/26 23:00:00
+
+freq: nunique=1
+unique: A
+
+c_birth: nunique=11
+unique: EU27_2007_FOR, EU27_2020_FOR, EU28_FOR, EXT_EU27_2007, FOR, NAT, NEU27_2007_FOR, NEU27_2020_FOR, NEU28_FOR, TOTAL, UNK
+
+citizen: nunique=281
+unique (80 ensimmäistä): AD, AE, AF, AFR, AFR_C, AFR_E, AFR_N, AFR_OTH, AFR_S, AFR_W, AG, AI, AL, AM, AME, AME_C, AME_N, AME_OTH, AME_S, AN, AO, AR, ASI, ASI_C, ASI_E, ASI_OTH, ASI_S, ASI_S_E, ASI_W, AT, AU, AU_NZ, AW, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BR, BS, BT, BW, BY, BZ, CA, CC3_07, CC4_10, CD, CF, CG, CH, CI, CL, CM, CN, CO, CR, CRB, CU, CV, CY, CZ, CZ_SK, DE, DJ, DK, DM, DO, DZ, EC, EE ...
+avainkoodit: NAT, FOR, TOTAL, UNK, STLS, NR
+NaN-rivejä: 1454
+
+unit: nunique=1
+unique: NR
+
+sex: nunique=3
+unique: F, M, T
+
+geo: nunique=42
+unique: AL, AM, AT, BE, BG, CH, CY, CZ, DE, DK, EE, EL, ES, EU27_2020, FI, FR, GE, HR, HU, IE, IS, IT, LI, LT, LU, LV, MC, MD, ME, MK, MT, NL, NO, PL, PT, RO, RS, SE, SI, SK, TR, UA
+
+TIME_PERIOD: nunique=17
+unique: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+
+OBS_VALUE: nunique=40031
+
+OBS_FLAG: nunique=7
+unique: b, be, bep, e, ep, p
+NaN-rivejä: 357650
+
+CONF_STATUS: nunique=2
+unique: N
+NaN-rivejä: 387422

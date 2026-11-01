@@ -1,1 +1,5 @@
 tiedosto,lähde,URL,hakupäivä,kuvaus,huomiot
+crim_just_ctz.csv,Eurostat,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/crim_just_ctz?format=SDMX-CSV,2026-11-01,Suspects and offenders by citizenship,välimuisti; koko_tavua=644113
+migr_pop5ctz.csv,Eurostat,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_pop5ctz?format=SDMX-CSV,2026-11-01,"Population on 1 January by sex, citizenship and group of country of birth",välimuisti; koko_tavua=29147755
+migr_pop1ctz.csv,Eurostat,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_pop1ctz?format=SDMX-CSV,2026-11-01,"Population on 1 January by age group, sex and citizenship",koko_tavua=642514888
+migr_pop3ctb.csv,Eurostat,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_pop3ctb?format=SDMX-CSV,2026-11-01,"Population on 1 January by age group, sex and country of birth",välimuisti; koko_tavua=519240179

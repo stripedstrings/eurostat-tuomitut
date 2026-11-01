@@ -1,0 +1,41 @@
+=== migr_pop1ctz ===
+rivit=8795902 sarakkeet=['DATAFLOW', 'LAST UPDATE', 'freq', 'citizen', 'age', 'unit', 'sex', 'geo', 'TIME_PERIOD', 'OBS_VALUE', 'OBS_FLAG', 'CONF_STATUS']
+
+DATAFLOW: nunique=1
+unique: ESTAT:MIGR_POP1CTZ(1.0)
+
+LAST UPDATE: nunique=1
+unique: 25/09/26 23:00:00
+
+freq: nunique=1
+unique: A
+
+citizen: nunique=287
+unique (80 ensimmäistä): AD, AE, AF, AFR, AFR_C, AFR_E, AFR_N, AFR_OTH, AFR_S, AFR_W, AG, AI, AL, AM, AME, AME_C, AME_N, AME_OTH, AME_S, AN, AO, AR, ASI, ASI_C, ASI_E, ASI_OTH, ASI_S, ASI_S_E, ASI_W, AT, AU, AU_NZ, AW, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BW, BY, BZ, CA, CC3_07, CC4_10, CC8_22_FOR, CC9_23_FOR, CD, CF, CG, CH, CI, CL, CM, CN, CO, CR, CRB, CU, CV, CW, CY, CZ, CZ_SK, DE, DJ, DK, DM ...
+avainkoodit: NAT, TOTAL, UNK, STLS, FOR_STLS, NR
+NaN-rivejä: 32869
+
+age: nunique=27
+unique: TOTAL, UNK, Y10-14, Y15-19, Y15-64, Y20-24, Y25-29, Y30-34, Y35-39, Y40-44, Y45-49, Y5-9, Y50-54, Y55-59, Y60-64, Y65-69, Y70-74, Y75-79, Y80-84, Y85-89, Y90-94, Y95-99, Y_GE100, Y_GE65, Y_GE85, Y_LT15, Y_LT5
+
+unit: nunique=1
+unique: NR
+
+sex: nunique=3
+unique: F, M, T
+
+geo: nunique=45
+unique: AD, AL, AM, AT, AZ, BE, BG, CH, CY, CZ, DE, DK, EE, EL, ES, EU27_2020, FI, FR, GE, HR, HU, IE, IS, IT, LI, LT, LU, LV, MC, MD, ME, MK, MT, NL, NO, PL, PT, RO, RS, SE, SI, SK, TR, UA, UK
+
+TIME_PERIOD: nunique=28
+unique: 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+
+OBS_VALUE: nunique=209298
+
+OBS_FLAG: nunique=9
+unique: b, be, bep, bp, e, ep, ip, p
+NaN-rivejä: 8471200
+
+CONF_STATUS: nunique=2
+unique: N
+NaN-rivejä: 8785957

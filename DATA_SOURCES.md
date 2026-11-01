@@ -1,31 +1,135 @@
 # Datalähteet ja datasanakirja
 
-HUOM: koodit ja dimensioarvot ovat muistinvaraisia. Tarkista ne API:sta
-(`.unique()` jokaiselle dimensiolle) ja päivitä tämä tiedosto.
+Koodit on luettu Eurostat SDMX-CSV:stä (`python -m src.fetch`, 2026-11-01).
+Koodeja ei ole keksitty. Täydet unique-listat: `data/interim/dimensiot_*.txt`.
 
 API (SDMX 2.1, CSV):
 `https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/<koodi>?format=SDMX-CSV`
 
-## Eurostat
-| Koodi | Sisältö | Tarkista |
+Windows-haku: `curl.exe -fsSL` (`src/fetch.py`), koska Pythonin SSL ei löytänyt CA-ketjua.
+
+## Eurostat — vaiheen 1 aineistot
+
+### crim_just_ctz — Suspects and offenders by citizenship
+
+| | |
+|---|---|
+| Rivimäärä | 7 801 |
+| LAST UPDATE | 29/04/26 11:00:00 |
+| Välimuisti | `data/raw/crim_just_ctz.csv` (644 113 t) |
+
+Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `leg_stat`, `citizen`, `unit`, `geo`, `TIME_PERIOD`, `OBS_VALUE`, `OBS_FLAG`, `CONF_STATUS`.
+
+**Ei saraketta `sex` eikä `age`.** Rikostilastoa ei voi vakioida iän tai sukupuolen mukaan tästä datasetistä.
+
+| Dimensio | Arvot |
+|---|---|
+| freq | A |
+| leg_stat | PER_CNV, PER_PRSC, PER_SUSP |
+| citizen | FOR, NAT, TOTAL |
+| unit | NR, P_HTHAB |
+| geo | AL, AT, BA, BE, BG, CH, CY, CZ, DE, DK, EE, EL, ES, FI, FR, HR, HU, IE, IS, IT, LI, LT, LU, LV, ME, MK, MT, NL, NO, PL, PT, RO, RS, SE, SI, SK, TR, UKC-L, UKM, UKN, XK (41; ei EU27_2020-aggregaattia; UK jaettu) |
+| TIME_PERIOD | 2008–2024 |
+| OBS_FLAG, CONF_STATUS | kaikki tyhjiä |
+
+`P_HTHAB` on Eurostatin oma 100 000 asukasta kohti -luku. Oma osoittaja/nimittäjä -laskenta käyttää `NR` + väestöä.
+
+### migr_pop5ctz — Population on 1 January by sex, citizenship and group of country of birth
+
+| | |
+|---|---|
+| Rivimäärä | 387 617 |
+| LAST UPDATE | 25/09/26 23:00:00 |
+| Välimuisti | `data/raw/migr_pop5ctz.csv` (29 147 755 t) |
+
+Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `c_birth`, `citizen`, `unit`, `sex`, `geo`, `TIME_PERIOD`, `OBS_VALUE`, `OBS_FLAG`, `CONF_STATUS`.
+
+**Ei saraketta `age`.** Sukupuoli on (`F`, `M`, `T`).
+
+| Dimensio | Arvot |
+|---|---|
+| freq | A |
+| c_birth | EU27_2007_FOR, EU27_2020_FOR, EU28_FOR, EXT_EU27_2007, FOR, NAT, NEU27_2007_FOR, NEU27_2020_FOR, NEU28_FOR, TOTAL, UNK |
+| citizen | 281 koodia (maakoodit + aggregaatit). Mukana: NAT, FOR, TOTAL, UNK, STLS |
+| unit | NR |
+| sex | F, M, T |
+| geo | 42, mukana EU27_2020 ja FI; ei UK-koodia tässä otoksessa |
+| TIME_PERIOD | 2009–2025 |
+| OBS_FLAG | b, be, bep, e, ep, p (suurin osa tyhjä) |
+| CONF_STATUS | N tai tyhjä |
+
+NAT/FOR-väestö vaatii filtterin: `citizen` ∈ {NAT, FOR} (ja tyypillisesti `c_birth=TOTAL`, `sex=T`). Älä sekoita `c_birth=FOR` ja `citizen=FOR`.
+
+### migr_pop1ctz — Population on 1 January by age group, sex and citizenship
+
+| | |
+|---|---|
+| Rivimäärä | 8 795 902 |
+| LAST UPDATE | 25/09/26 23:00:00 |
+| Välimuisti | `data/raw/migr_pop1ctz.csv` (642 514 888 t) |
+
+Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `citizen`, `age`, `unit`, `sex`, `geo`, `TIME_PERIOD`, `OBS_VALUE`, `OBS_FLAG`, `CONF_STATUS`.
+
+| Dimensio | Arvot |
+|---|---|
+| freq | A |
+| citizen | 287 koodia. Mukana: NAT, TOTAL, UNK, STLS, FOR_STLS. **Aggregaattia FOR ei ole unique-listassa.** |
+| age | TOTAL, UNK, Y_LT5, Y5-9, Y10-14, Y15-19, Y15-64, Y20-24, Y25-29, Y30-34, Y35-39, Y40-44, Y45-49, Y50-54, Y55-59, Y60-64, Y65-69, Y70-74, Y75-79, Y80-84, Y85-89, Y90-94, Y95-99, Y_GE100, Y_GE65, Y_GE85, Y_LT15 |
+| unit | NR |
+| sex | F, M, T |
+| geo | 45, mukana EU27_2020, FI, UK |
+| TIME_PERIOD | 1998–2025 |
+| OBS_FLAG | b, be, bep, bp, e, ep, ip, p |
+| CONF_STATUS | N tai tyhjä |
+
+Ikä × sukupuoli × kansalaisuus on tässä, mutta rikosaineistossa ei. SIR crim_just_ctz:stä ei ole mahdollinen ilman ulkopuolista ikäjakaumaa rikoksille.
+
+### migr_pop3ctb — Population on 1 January by age group, sex and country of birth
+
+| | |
+|---|---|
+| Rivimäärä | 7 100 600 |
+| LAST UPDATE | 25/09/26 23:00:00 |
+| Välimuisti | `data/raw/migr_pop3ctb.csv` (519 240 179 t) |
+
+Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `c_birth`, `age`, `unit`, `sex`, `geo`, `TIME_PERIOD`, `OBS_VALUE`, `OBS_FLAG`, `CONF_STATUS`.
+
+| Dimensio | Arvot |
+|---|---|
+| freq | A |
+| c_birth | 307 koodia. Mukana: NAT, FOR, TOTAL, UNK |
+| age | sama 27 koodia kuin migr_pop1ctz |
+| unit | NR |
+| sex | F, M, T |
+| geo | 45, mukana EU27_2020, FI, UK |
+| TIME_PERIOD | 1998–2025 |
+| OBS_FLAG | b, be, bep, bp, e, ep, ip, p |
+| CONF_STATUS | N tai tyhjä |
+
+Syntymämaa ≠ kansalaisuus. crim_just_ctz on kansalaisuus (NAT/FOR).
+
+## Muut (ei haettu vaiheessa 1)
+
+| Koodi | Sisältö | Huomio |
 |---|---|---|
-| crim_just_ctz | Epäillyt/tuomitut kansalaisuuden mukaan | dimensiot: leg_stat, citizen, sex, age, unit, geo; vuodet |
-| migr_pop5ctz | Väestö kansalaisuuden mukaan | alkaa 2009; citizen-koodit |
-| migr_pop1ctz | Väestö ikä x sukupuoli x kansalaisuus | ikäryhmien rajat |
-| migr_pop3ctb | Väestö syntymämaan mukaan | |
-| crim_pris_ctz | Vangit kansalaisuuden mukaan | |
-| crim_hom_soff | Henkirikokset, seksuaalirikokset (ei kansalaisuutta) | ei yhdistettävissä |
-| edat_lfs_*, lfsa_ergan, lfsa_urgan | Koulutus, työllisyys | kansalaisuus vs. syntymämaa |
-| migr_resfirst, migr_resvalid | Oleskeluluvat perusteen mukaan | |
-| migr_asydcfsta | Turvapaikkapäätökset | |
+| crim_pris_ctz | Vangit kansalaisuuden mukaan | myöhempi vaihe |
+| crim_hom_soff | Henkirikokset, seksuaalirikokset | ei kansalaisuutta; ei yhdistettävissä K1:een |
+| edat_lfs_*, lfsa_ergan, lfsa_urgan | Koulutus, työllisyys | K2, kansalaisuus vs. syntymämaa |
+| migr_resfirst, migr_resvalid | Oleskeluluvat perusteen mukaan | K2 |
+| migr_asydcfsta | Turvapaikkapäätökset | K2 |
 
 ## Kansalliset (maakohtaiset tapaustutkimukset)
-- Tanska: Danmarks Statistik (esim. indikaattorit lähtömaaryhmittäin, vakioitu)
-- Ruotsi: Brå (Brottsförebyggande rådet)
+
+- Tanska: Danmarks Statistik
+- Ruotsi: Brå
 - Suomi: Tilastokeskus, Poliisi, Rikosseuraamuslaitos
 - Alankomaat: CBS
-- Saksa: BKA, Polizeiliche Kriminalstatistik (epäillyt kansalaisuuden mukaan)
+- Saksa: BKA, Polizeiliche Kriminalstatistik
+
 Kansalliset aineistot eivät ole keskenään yhteismitallisia. Älä yhdistä EU-aggregaattiin.
 
 ## MANIFEST (data/raw/MANIFEST.csv)
-Sarakkeet: tiedosto, lähde, URL, hakupäivä, kuvaus, hakijan_huomiot.
+
+Sarakkeet: tiedosto, lähde, URL, hakupäivä, kuvaus, huomiot.
+
+Raaka-CSV:t (`data/raw/*.csv` paitsi MANIFEST) ovat git-ignorissa koon vuoksi.
