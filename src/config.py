@@ -5,8 +5,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_DIR = ROOT / "data" / "raw"
 OUTPUT_DIR = ROOT / "output"
+TABLES_DIR = OUTPUT_DIR / "tables"
 INTERIM_DIR = ROOT / "data" / "interim"
+PROCESSED_DIR = ROOT / "data" / "processed"
 MANIFEST_PATH = CACHE_DIR / "MANIFEST.csv"
+MAA_VUOSI_PATH = PROCESSED_DIR / "maa_vuosi.csv"
+COVERAGE_PATH = TABLES_DIR / "coverage_matrix.csv"
 
 SDMX_CSV_URL = (
     "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{code}"
