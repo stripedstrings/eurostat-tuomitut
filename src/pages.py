@@ -7,7 +7,7 @@ import re
 import shutil
 from pathlib import Path
 
-from src.config import DOCS_DIR, FIGURES_DIR, OUTPUT_DIR
+from src.config import DOCS_DIR, FIGURES_DIR, OUTPUT_DIR, ROOT
 
 RAPORTTI_MD = OUTPUT_DIR / "RAPORTTI.md"
 RAPORTTI_EN_MD = OUTPUT_DIR / "RAPORTTI_en.md"
@@ -166,7 +166,7 @@ def _taulu(rivit: list[str]) -> str:
 
 
 def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
-    from src.site import LIPUT, _valikko
+    from src.site import LIPUT, _valikko, aihe_nav
 
     return f"""<!DOCTYPE html>
 <html lang="fi">
@@ -179,6 +179,7 @@ def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
 <body class="raportti">
   <header>
     <div class="wrap">
+      {aihe_nav(juuri=True, aktiivinen="maahanmuutto")}
       <div class="yla">
         <p class="kicker"><a href="index.html" data-i18n="raportti_kicker"></a></p>
         {LIPUT}
@@ -186,6 +187,7 @@ def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
       <h1 data-i18n="raportti_h1">Tuomitut kansalaisuuden mukaan, EU-27</h1>
       <p class="lead" data-i18n="raportti_lead"></p>
       <div class="valitsin">{_valikko("RAPORTTI", True)}</div>
+      <p class="navi"><a href="lahteet.html">Lähteet</a></p>
     </div>
   </header>
   <main class="wrap">
@@ -233,6 +235,185 @@ def korjaa_valikot() -> None:
         vert.write_text(t, encoding="utf-8")
 
 
+def lisaa_aihe_palkki() -> None:
+    from src.site import aihe_nav
+
+    merkit = [
+        (DOCS_DIR / "vertailu.html", aihe_nav(juuri=True, aktiivinen="maahanmuutto")),
+    ]
+    nav_maat = aihe_nav(juuri=False, aktiivinen="maahanmuutto")
+    for p in (DOCS_DIR / "maat").glob("*.html"):
+        merkit.append((p, nav_maat))
+    ankkuri = '    <div class="wrap">\n'
+    for p, nav in merkit:
+        if not p.exists():
+            continue
+        t = p.read_text(encoding="utf-8")
+        if 'class="aiheet"' in t:
+            continue
+        t = t.replace(ankkuri, ankkuri + "      " + nav, 1)
+        p.write_text(t, encoding="utf-8")
+
+
+def _kehys(otsikko: str, aktiivinen: str, juuri: bool, media_sivu: bool, css: str, js: str, sisalto: str) -> str:
+    from src.site import LIPUT, aihe_nav
+
+    return f"""<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{otsikko}</title>
+  <link rel="stylesheet" href="{css}">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      {aihe_nav(juuri=juuri, aktiivinen=aktiivinen, media_sivu=media_sivu)}
+      <div class="yla">
+        <p class="kicker"><a href="{'../index.html' if media_sivu else 'index.html'}" data-i18n="raportti_kicker"></a></p>
+        {LIPUT}
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+{sisalto}
+  </main>
+  <script src="{js}"></script>
+</body>
+</html>
+"""
+
+
+def kirjoita_aihesivut() -> None:
+    (DOCS_DIR / "media").mkdir(parents=True, exist_ok=True)
+    for nimi in (
+        "MEDIA_README.md",
+        "MEDIA_PREREGISTRATION.md",
+        "MEDIA_DATA_SOURCES.md",
+        "MEDIA_METHODS.md",
+        "MEDIA_CURSOR_TASKS.md",
+        "DATA_SOURCES.md",
+    ):
+        src = ROOT / nimi
+        if src.exists():
+            kohde = DOCS_DIR / "media" / nimi if nimi.startswith("MEDIA") else DOCS_DIR / nimi
+            shutil.copy2(src, kohde)
+
+    lahteet = """
+    <div class="kieli-fi">
+      <h1>Viralliset lähteet (maahanmuutto / K1)</h1>
+      <p>Koodit on luettu Eurostat SDMX-CSV:stä 2026-11-01. Koodeja ei ole keksitty. Täysi lista: <a href="DATA_SOURCES.md">DATA_SOURCES.md</a>.</p>
+      <p><a href="index.html">K1-raportti</a></p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Koodi</th><th>Sisältö</th><th>Tila</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://doi.org/10.2908/crim_just_ctz">crim_just_ctz</a></td><td>epäillyt ja tuomitut kansalaisuuden mukaan</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop5ctz/default/table?lang=en">migr_pop5ctz</a></td><td>väestö kansalaisuuden ja syntymämaan ryhmän mukaan</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop1ctz/default/table?lang=en">migr_pop1ctz</a></td><td>väestö ikä × sukupuoli × kansalaisuus</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop3ctb/default/table?lang=en">migr_pop3ctb</a></td><td>väestö ikä × sukupuoli × syntymämaa</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>lfsa_ergan, lfsa_urgan, edat_lfs_9911</td><td>K2 työllisyys, työttömyys, koulutus</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>migr_resfirst, migr_resvalid</td><td>K2 oleskeluluvat</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>DST STRFNA13, StatFin 15hh</td><td>kansalliset lukumäärät (ei EU-aggregaatti)</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>Brå</td><td>Ruotsi</td><td>CSV puuttuu</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="kieli-en" hidden>
+      <h1>Official sources (immigration / K1)</h1>
+      <p>Codes were read from Eurostat SDMX-CSV on 2026-11-01. Codes were not invented. Full list: <a href="DATA_SOURCES.md">DATA_SOURCES.md</a>.</p>
+      <p><a href="index.html">K1 report</a></p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Code</th><th>Content</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://doi.org/10.2908/crim_just_ctz">crim_just_ctz</a></td><td>suspects and convicted persons by citizenship</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop5ctz/default/table?lang=en">migr_pop5ctz</a></td><td>population by citizenship and country-of-birth group</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop1ctz/default/table?lang=en">migr_pop1ctz</a></td><td>population by age × sex × citizenship</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop3ctb/default/table?lang=en">migr_pop3ctb</a></td><td>population by age × sex × country of birth</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>lfsa_ergan, lfsa_urgan, edat_lfs_9911</td><td>K2 employment, unemployment, education</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>migr_resfirst, migr_resvalid</td><td>K2 residence permits</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>DST STRFNA13, StatFin 15hh</td><td>national counts (not in EU aggregate)</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>Brå</td><td>Sweden</td><td>CSV missing</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <p class="alaviite"><a href="index.html">K1</a> · <a href="media/index.html">Media</a></p>
+"""
+    (DOCS_DIR / "lahteet.html").write_text(
+        _kehys(
+            "Lähteet — maahanmuutto",
+            "maahanmuutto",
+            True,
+            False,
+            "tyyli.css",
+            "sivu.js",
+            lahteet,
+        ),
+        encoding="utf-8",
+    )
+
+    media = """
+    <div class="kieli-fi">
+      <h1>Media</h1>
+      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Haku on vaiheen 1 jälkeen.</p>
+      <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
+      <ul>
+        <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
+        <li><a href="MEDIA_README.md">MEDIA_README.md</a></li>
+        <li><a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a></li>
+        <li><a href="MEDIA_METHODS.md">MEDIA_METHODS.md</a></li>
+      </ul>
+      <h2>Lähde-ehdokkaat</h2>
+      <p>Saatavuutta ei ole testattu. Tila: ei testattu (vaihe 1). Ei kattavuusväitteitä.</p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Ehdokas</th><th>Käyttö</th><th>Tila</th></tr></thead>
+        <tbody>
+          <tr><td>Wayback Machine CDX</td><td>etusivu-/kansiarkisto</td><td>ei testattu (vaihe 1)</td></tr>
+          <tr><td>Yle API</td><td>julkisen palvelun otsikot</td><td>ei testattu (vaihe 1)</td></tr>
+          <tr><td>GDELT</td><td>kansainvälinen uutisvirta</td><td>ei testattu (vaihe 1)</td></tr>
+          <tr><td>Media Cloud</td><td>mediavertailu</td><td>ei testattu (vaihe 1)</td></tr>
+          <tr><td>RSS</td><td>tuoreet otsikot</td><td>ei testattu (vaihe 1)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="kieli-en" hidden>
+      <h1>Media</h1>
+      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Fetch starts after phase 1.</p>
+      <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
+      <ul>
+        <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
+        <li><a href="MEDIA_README.md">MEDIA_README.md</a></li>
+        <li><a href="MEDIA_DATA_SOURCES.md">MEDIA_DATA_SOURCES.md</a></li>
+        <li><a href="MEDIA_METHODS.md">MEDIA_METHODS.md</a></li>
+      </ul>
+      <h2>Candidate sources</h2>
+      <p>Availability has not been tested. Status: not tested (phase 1). No coverage claims.</p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Candidate</th><th>Use</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Wayback Machine CDX</td><td>front-page archive</td><td>not tested (phase 1)</td></tr>
+          <tr><td>Yle API</td><td>public-service headlines</td><td>not tested (phase 1)</td></tr>
+          <tr><td>GDELT</td><td>international news stream</td><td>not tested (phase 1)</td></tr>
+          <tr><td>Media Cloud</td><td>outlet comparison</td><td>not tested (phase 1)</td></tr>
+          <tr><td>RSS</td><td>recent headlines</td><td>not tested (phase 1)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+"""
+    (DOCS_DIR / "media" / "index.html").write_text(
+        _kehys(
+            "Media",
+            "media",
+            True,
+            True,
+            "../tyyli.css",
+            "../sivu.js",
+            media,
+        ),
+        encoding="utf-8",
+    )
+
+
 def kirjoita() -> None:
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     kohde = DOCS_DIR / "figures"
@@ -248,6 +429,8 @@ def kirjoita() -> None:
         _sivu_html(sisalto_fi, sisalto_en), encoding="utf-8"
     )
     korjaa_valikot()
+    lisaa_aihe_palkki()
+    kirjoita_aihesivut()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,36 @@
+---
+description: Mediahaaran säännöt (uutisagenda)
+alwaysApply: false
+---
+# Mediahaara
+
+Lue ensin MEDIA_README.md, MEDIA_PREREGISTRATION.md, MEDIA_METHODS.md,
+MEDIA_DATA_SOURCES.md ja MEDIA_CURSOR_TASKS.md.
+
+## Tieteelliset säännöt
+- Älä hae media-aineistoa ennen kuin MEDIA_PREREGISTRATION.md on päivätty
+  ja commitoitu.
+- Älä keksi, interpoloi tai täytä puuttuvia päiviä, otsikoita tai osuuksia.
+  Käytä NaN / tyhjä.
+- Älä arvaa lähteiden saatavuutta, ehtoja tai kattavuutta. Testaa, kirjaa
+  MEDIA_DATA_SOURCES.md.
+- Älä poista medioita, päiviä tai havaintoja tuloksen perusteella.
+- Älä muuta menetelmää tuloksen perusteella. Kirjaa CHANGELOG.md.
+- Raportoi kaikki valitut mediat ja jaksot, suunnasta riippumatta.
+- Näytä epävarmuus (esim. Wilson-välit, koodaajien α).
+- Tulkinta erillään tuloksista. Ei motiiveja, ei lukijavaikutuksia, ei
+  propaganda- tai syyväitteitä ilman erillistä näyttöä.
+- Esirekisteröinnin ulkopuolinen = "TUTKIVA (ei esirekisteröity)".
+- Kokotekstit vain julkaisijan ehtojen mukaisesti; otsikot ja URL:t
+  tutkimuskäyttöön kirjataan lähteineen.
+- K1-rikostilastoa ei yhdistetä mediaan ennen vaihetta 7.
+- Goebbels-sitaattia ei käytetä lähteenä ilman alkuperäisviitettä.
+- H3 ilman julkaisijan analytiikkaa = ei testattavissa.
+
+## Koodi
+- Python 3.11+, pandas, välimuisti `media/data/raw`, MANIFEST.csv.
+- Ei kovakoodattuja lukuja. Ei satunnaisuutta ilman siementä.
+
+## Tulosteet
+- media/output/figures, media/output/tables
+- coverage: media × päivä

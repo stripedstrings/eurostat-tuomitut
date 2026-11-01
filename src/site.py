@@ -23,6 +23,26 @@ LIPUT = """
 </nav>
 """
 
+
+def aihe_nav(*, juuri: bool = True, aktiivinen: str = "maahanmuutto", media_sivu: bool = False) -> str:
+    """Yläpalkki: Maahanmuutto | Media. Suhteelliset polut sivun kansiosta."""
+    if media_sivu:
+        maa, med = "../index.html", "index.html"
+    elif juuri:
+        maa, med = "index.html", "media/index.html"
+    else:
+        maa, med = "../index.html", "../media/index.html"
+
+    def luokka(nimi: str) -> str:
+        return ' class="aktiivinen"' if aktiivinen == nimi else ""
+
+    return f"""<nav class="aiheet" aria-label="Aiheet">
+  <a href="{maa}"{luokka("maahanmuutto")} data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="{med}"{luokka("media")} data-i18n="nav_media">Media</a>
+</nav>
+"""
+
+
 LAHTEET = """
 <section class="kortti">
   <h2 data-i18n="lahteet_otsikko"></h2>
@@ -173,6 +193,7 @@ def _sivu(geo: str, juuri: bool) -> str:
 <body>
   <header>
     <div class="wrap">
+      {aihe_nav(juuri=juuri, aktiivinen="maahanmuutto")}
       <div class="yla">
         <p class="kicker"><a href="{pre}index.html" data-i18n="kicker"></a></p>
         {LIPUT}
@@ -270,6 +291,7 @@ def _vertailu() -> str:
 <body>
   <header>
     <div class="wrap">
+      {aihe_nav(juuri=True, aktiivinen="maahanmuutto")}
       <div class="yla">
         <p class="kicker"><a href="index.html" data-i18n="kicker"></a></p>
         {LIPUT}
@@ -346,6 +368,9 @@ code { font-size:0.9em; }
 .raportti header .navi a { margin-right:0.2rem; }
 .raportti h3 { font-size:1.05rem; margin:1.2rem 0 0.4rem; }
 .raportti hr { border:0; border-top:1px solid var(--line); margin:1.6rem 0; }
+.aiheet { display:flex; gap:1.1rem; margin:0 0 0.7rem; font-size:0.95rem; }
+.aiheet a { text-decoration:none; color:#f4d2b0; padding-bottom:0.15rem; border-bottom:2px solid transparent; }
+.aiheet a.aktiivinen { border-bottom-color:#f4d2b0; }
 """
 
 SIVU_JS = r"""
@@ -354,6 +379,8 @@ const I18N = {
     kicker: "Tuomitut ja epäillyt EU-maissa",
     lead: "Oman maan kansalaiset ja ulkomaan kansalaiset, 2008–2024.",
     maa: "Maa",
+    nav_maahanmuutto: "Maahanmuutto",
+    nav_media: "Media",
     raportti_kicker: "Esirekisteröity raportti",
     raportti_h1: "Tuomitut kansalaisuuden mukaan, EU-27",
     raportti_lead: "K1: asteet NAT vs FOR, 2008–2024. Ei täyttöä, ei syy-yhteyttä.",
@@ -417,6 +444,8 @@ const I18N = {
     kicker: "Convicted and suspected persons in EU countries",
     lead: "National citizens and foreign citizens, 2008–2024.",
     maa: "Country",
+    nav_maahanmuutto: "Immigration",
+    nav_media: "Media",
     raportti_kicker: "Preregistered report",
     raportti_h1: "Convicted persons by citizenship, EU-27",
     raportti_lead: "K1: rates NAT vs FOR, 2008–2024. No filling, no causal claims.",

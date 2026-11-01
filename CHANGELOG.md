@@ -20,6 +20,10 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
 - 2026-11-01. Raportin etusivulle palautettu maavalikko ja FI/EN-liput.
   Maasivut ovat edelleen merkitty tutkiviksi. Kaaviot pysyvät suomenkielisinä.
 
+- 2026-11-01. Mediahaara esirekisteröity (`MEDIA_PREREGISTRATION.md`) ennen
+  datan hakua. Sivustolle välilehdet Maahanmuutto ja Media. Media-lähteitä
+  ei ole testattu (vaihe 1). K1:tä ei yhdistetä mediaan.
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI

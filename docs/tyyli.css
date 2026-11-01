@@ -36,3 +36,6 @@ code { font-size:0.9em; }
 .raportti header .navi a { margin-right:0.2rem; }
 .raportti h3 { font-size:1.05rem; margin:1.2rem 0 0.4rem; }
 .raportti hr { border:0; border-top:1px solid var(--line); margin:1.6rem 0; }
+.aiheet { display:flex; gap:1.1rem; margin:0 0 0.7rem; font-size:0.95rem; }
+.aiheet a { text-decoration:none; color:#f4d2b0; padding-bottom:0.15rem; border-bottom:2px solid transparent; }
+.aiheet a.aktiivinen { border-bottom-color:#f4d2b0; }

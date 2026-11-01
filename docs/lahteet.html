@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lähteet — maahanmuutto</title>
+  <link rel="stylesheet" href="tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      <nav class="aiheet" aria-label="Aiheet">
+  <a href="index.html" class="aktiivinen" data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="media/index.html" data-i18n="nav_media">Media</a>
+</nav>
+
+      <div class="yla">
+        <p class="kicker"><a href="index.html" data-i18n="raportti_kicker"></a></p>
+        
+<nav class="kielet">
+  <button type="button" class="lippu" data-lang="fi" title="Suomi" aria-label="Suomi">
+    <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="18" height="11" fill="#fff"/><rect y="4" width="18" height="3" fill="#002f6c"/><rect x="5" width="3" height="11" fill="#002f6c"/></svg>
+  </button>
+  <button type="button" class="lippu" data-lang="en" title="English" aria-label="English">
+    <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="10"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="6"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+  </button>
+</nav>
+
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <div class="kieli-fi">
+      <h1>Viralliset lähteet (maahanmuutto / K1)</h1>
+      <p>Koodit on luettu Eurostat SDMX-CSV:stä 2026-11-01. Koodeja ei ole keksitty. Täysi lista: <a href="DATA_SOURCES.md">DATA_SOURCES.md</a>.</p>
+      <p><a href="index.html">K1-raportti</a></p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Koodi</th><th>Sisältö</th><th>Tila</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://doi.org/10.2908/crim_just_ctz">crim_just_ctz</a></td><td>epäillyt ja tuomitut kansalaisuuden mukaan</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop5ctz/default/table?lang=en">migr_pop5ctz</a></td><td>väestö kansalaisuuden ja syntymämaan ryhmän mukaan</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop1ctz/default/table?lang=en">migr_pop1ctz</a></td><td>väestö ikä × sukupuoli × kansalaisuus</td><td>haettu 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop3ctb/default/table?lang=en">migr_pop3ctb</a></td><td>väestö ikä × sukupuoli × syntymämaa</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>lfsa_ergan, lfsa_urgan, edat_lfs_9911</td><td>K2 työllisyys, työttömyys, koulutus</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>migr_resfirst, migr_resvalid</td><td>K2 oleskeluluvat</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>DST STRFNA13, StatFin 15hh</td><td>kansalliset lukumäärät (ei EU-aggregaatti)</td><td>haettu 2026-11-01</td></tr>
+          <tr><td>Brå</td><td>Ruotsi</td><td>CSV puuttuu</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="kieli-en" hidden>
+      <h1>Official sources (immigration / K1)</h1>
+      <p>Codes were read from Eurostat SDMX-CSV on 2026-11-01. Codes were not invented. Full list: <a href="DATA_SOURCES.md">DATA_SOURCES.md</a>.</p>
+      <p><a href="index.html">K1 report</a></p>
+      <div class="taulu-wrap"><table>
+        <thead><tr><th>Code</th><th>Content</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://doi.org/10.2908/crim_just_ctz">crim_just_ctz</a></td><td>suspects and convicted persons by citizenship</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop5ctz/default/table?lang=en">migr_pop5ctz</a></td><td>population by citizenship and country-of-birth group</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop1ctz/default/table?lang=en">migr_pop1ctz</a></td><td>population by age × sex × citizenship</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td><a href="https://ec.europa.eu/eurostat/databrowser/view/migr_pop3ctb/default/table?lang=en">migr_pop3ctb</a></td><td>population by age × sex × country of birth</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>lfsa_ergan, lfsa_urgan, edat_lfs_9911</td><td>K2 employment, unemployment, education</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>migr_resfirst, migr_resvalid</td><td>K2 residence permits</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>DST STRFNA13, StatFin 15hh</td><td>national counts (not in EU aggregate)</td><td>retrieved 2026-11-01</td></tr>
+          <tr><td>Brå</td><td>Sweden</td><td>CSV missing</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <p class="alaviite"><a href="index.html">K1</a> · <a href="media/index.html">Media</a></p>
+
+  </main>
+  <script src="sivu.js"></script>
+</body>
+</html>
