@@ -60,6 +60,8 @@ Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `c_birth`, `citizen`, `unit`, `sex
 
 NAT/FOR-väestö vaatii filtterin: `citizen` ∈ {NAT, FOR} (ja tyypillisesti `c_birth=TOTAL`, `sex=T`). Älä sekoita `c_birth=FOR` ja `citizen=FOR`.
 
+Vaihe 7: `citizen`-aggregaatit `EU27_2020_FOR` ja `NEU27_2020_FOR` ovat unique-listassa (myös `EU15_FOR`, `NEU27_2007_FOR` ym.). K1-asteisiin niitä ei yhdistetä, koska `crim_just_ctz` ei erota FOR-osoittajaa.
+
 ### migr_pop1ctz — Population on 1 January by age group, sex and citizenship
 
 | | |

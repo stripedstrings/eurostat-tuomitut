@@ -17,6 +17,12 @@ KAUSI_RR_PATH = TABLES_DIR / "rr_2020_2024.csv"
 SIR_PATH = TABLES_DIR / "sir_maa.csv"
 SIR_RAJOITE_PATH = TABLES_DIR / "sir_rajoite.csv"
 HERKKYYS_PATH = TABLES_DIR / "herkkyys_S1_S7.csv"
+EU_KOLMAS_PATH = TABLES_DIR / "vaesto_eu_vs_kolmas.csv"
+EU_KOLMAS_RAJOITE_PATH = TABLES_DIR / "eu_vs_kolmas_rajoite.csv"
+
+# Väestön kansalaisuusaggregaatit (luettu migr_pop5ctz.citizen unique, ei arvattu).
+CITIZEN_EU27_FOR = "EU27_2020_FOR"
+CITIZEN_NEU27_FOR = "NEU27_2020_FOR"
 FIGURES_DIR = OUTPUT_DIR / "figures"
 DPI_KUVA = 200
 

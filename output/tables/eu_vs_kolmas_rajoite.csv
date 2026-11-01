@@ -1,0 +1,2 @@
+ehto,tayttyy,crime_citizen,vaesto_koodit,rajoite
+citizen_EU_NEU_crim_just_ctz,False,"FOR,NAT,TOTAL","EU27_2020_FOR,NEU27_2020_FOR","K1-asteita EU-sisäisille vs. kolmansien maiden kansalaisille ei voi laskea: crim_just_ctz.citizen unique = FOR, NAT, TOTAL. FOR-tuomittuja ei ole jaettu. Väestössä (migr_pop5ctz) citizen-koodit EU27_2020_FOR ja NEU27_2020_FOR ovat olemassa (c_birth=TOTAL, sex=T). Niitä ei käytetä rikososoittajan nimittäjänä, koska osoittaja on vain FOR-yhteensä."
