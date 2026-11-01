@@ -1,72 +1,145 @@
-# Tuomitut EU-maissa kansalaisuuden mukaan (2008–2024)
+# EU-maiden tuomitut kansalaisuuden mukaan 2008–2024
 
-**Lue selaimessa:** [https://stripedstrings.github.io/eurostat-tuomitut/](https://stripedstrings.github.io/eurostat-tuomitut/) (oletus: Suomi; valikosta muut EU-maat ja [EU-vertailu](https://stripedstrings.github.io/eurostat-tuomitut/vertailu.html))
+Tutkiva visualisointi (ei esirekisteröity): [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/).
+Ks. `CHANGELOG.md`.
 
-Python-projekti hakee Eurostatin SDMX 2.1 -rajapinnasta tuomittujen määrät kansalaisuuden mukaan ja suhteuttaa ne saman kansalaisuusryhmän väestöön (per 100 000).
+Avoin, toistettava ja dataan perustuva tarkastelu siitä, eroavatko oman maan
+kansalaisten ja ulkomaan kansalaisten tuomitsemisasteet EU-maissa, ja kuinka
+suuri osa erosta säilyy, kun ikä ja sukupuoli huomioidaan.
 
-## Ajokomennot
+> **Periaate:** Kysymys on asetettu avoimeksi. Tulokset raportoidaan siitä
+> riippumatta, mihin suuntaan ne osoittavat. Johtopäätökset kirjoitetaan vasta
+> tulosten jälkeen, ja vain siltä osin kuin data niitä tukee.
+
+## 1. Tutkimuskysymykset
+
+Projekti jaetaan kahteen erilliseen kysymykseen, joita ei sekoiteta.
+
+**K1 (rikostilasto, tämän projektin ydin):**
+Eroavatko tuomitut per 100 000 asukasta oman maan ja ulkomaan kansalaisten
+välillä EU-maittain vuosina 2008/2009–2024? Kuinka suuri osa erosta selittyy
+ikä- ja sukupuolirakenteella?
+
+**K2 (valinnainen laajennus, raportoidaan erikseen):**
+Mitä aineisto kertoo työllisyydestä, koulutuksesta ja oleskeluluvan perusteesta
+kansalaisuusryhmittäin?
+
+**Mitä projekti EI väitä ratkaisevansa:** onko EU:n turvapaikka-, pakolais- tai
+kiintiöpolitiikka perusteltua. Se on normatiivinen ja monitekijäinen kysymys
+(oikeudelliset velvoitteet, työmarkkinat, julkinen talous, demografia,
+humanitaariset näkökohdat). Rikostilasto on vain yksi osa-alue.
+
+## 2. Esirekisteröidyt säännöt
+
+Katso `PREREGISTRATION.md`. Kysymykset, menetelmät ja tulkintasäännöt on
+lukittu ennen tulosten katsomista. Poikkeamat kirjataan `CHANGELOG.md`:hen
+perusteluineen.
+
+## 3. Datalähteet
+
+Yksityiskohdat: `DATA_SOURCES.md`. Dimensiokoodit tarkistetaan datasta, ei
+arvata.
+
+| Tarve | Eurostat-koodi (tarkistettava) |
+|---|---|
+| Tuomitut/epäillyt kansalaisuuden mukaan | `crim_just_ctz` |
+| Väestö kansalaisuuden mukaan | `migr_pop5ctz` |
+| Väestö ikä x sukupuoli x kansalaisuus | `migr_pop1ctz` |
+| Väestö syntymämaan mukaan | `migr_pop3ctb` |
+| Vankilaväestö kansalaisuuden mukaan | `crim_pris_ctz` |
+| Koulutus, työllisyys | `edat_lfs_*`, `lfsa_ergan`, `lfsa_urgan` |
+| Oleskeluluvat | `migr_resfirst`, `migr_resvalid` |
+| Turvapaikkapäätökset | `migr_asydcfsta` |
+
+Kansalliset lisäaineistot (maakohtaiset tapaustutkimukset, ei EU-aggregaattiin):
+Tanska (Danmarks Statistik), Ruotsi (Brå), Suomi (Tilastokeskus), Alankomaat
+(CBS), Saksa (BKA PKS).
+
+## 4. Menetelmät
+
+Yksityiskohdat: `METHODS.md`.
+
+1. Raaka-aste: tuomitut / ryhmän väestö x 100 000, maittain ja vuosittain.
+2. Suhdeluku (ulkomaat / oma maa) Poisson-luottamusväleineen.
+3. Epäsuora ikä-sukupuolivakiointi (SIR), jos ikä x sukupuoli -data on
+   saatavilla molemmille ryhmille.
+4. Jaottelu: EU-sisäiset vs. kolmansien maiden kansalaiset, jos data sallii.
+5. EU-aggregaatti vain maista, joilta on data molemmille ryhmille samana vuonna.
+6. Herkkyysanalyysit (katso `PREREGISTRATION.md`).
+
+## 5. Tunnetut rajoitteet (näytetään jokaisessa kaaviossa)
+
+- **Kansalaisuus ≠ maahanmuuttotausta ≠ pakolaisuus.** "Ulkomaan kansalaiset"
+  sisältää työperäiset, opiskelijat, EU-sisäiset muuttajat, perheenyhdistämiset
+  ja turvapaikan saaneet. Naturalisoituneet siirtyvät "oman maan kansalaisiin".
+- **Epäillyt vs. tuomitut.** Ne mittaavat eri asioita (poliisin kohdentaminen,
+  syyttäjäkäytäntö, tuomioistuinten käytäntö).
+- **Laskentayksiköt vaihtelevat** maittain (henkilöt, tapaukset, tuomiot).
+- **Oikeusjärjestelmien erot** rajoittavat maiden välistä vertailua.
+- **Matkailijat ja ei-asukkaat** voivat esiintyä rikostilastossa mutta ei
+  asukasväestössä, mikä vääristää nimittäjää.
+- **Ekologinen virhepäätelmä:** maatason aggregaatit eivät kerro yksilötason
+  syistä.
+- **Ei ikä- ja sukupuolivakioitu**, ellei kaaviossa nimenomaisesti toisin sanota.
+- **Puuttuva data** jätetään puuttuvaksi (ei interpolointia).
+
+## 6. Rakenne
+
+```
+eu-rikollisuus-kansalaisuus/
+├── README.md
+├── PREREGISTRATION.md
+├── METHODS.md
+├── DATA_SOURCES.md
+├── CURSOR_TASKS.md
+├── CHANGELOG.md
+├── requirements.txt
+├── .cursor/rules/project.mdc
+├── data/
+│   ├── raw/          # API-vastaukset (välimuisti), ei muokata käsin
+│   ├── interim/
+│   └── processed/
+├── src/
+│   ├── fetch.py      # Eurostat-haku + välimuisti
+│   ├── clean.py
+│   ├── rates.py      # asteet, suhdeluvut, Poisson-CI
+│   ├── standardize.py# SIR
+│   ├── coverage.py   # coverage matrix
+│   ├── plots.py
+│   └── national/     # dk.py, se.py, fi.py (erillään EU-aggregaatista)
+├── tests/
+├── output/
+│   ├── figures/
+│   └── tables/
+└── notebooks/
+```
+
+## 7. Ajaminen
 
 ```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m src.main
+python -m src.fetch        # hakee ja välimuistittaa datan
+python -m src.clean
+python -m src.rates
+python -m src.standardize
+python -m src.coverage
+python -m src.plots
+pytest
 ```
 
-Uudelleenhaku (ohittaa `cache/`-välimuistin):
+Jos Eurostatin rajapinta ei vastaa, lataa CSV käsin kansioon `data/raw/` ja
+kirjaa tiedoston lataus pvm ja URL tiedostoon `data/raw/MANIFEST.csv`.
 
-```bash
-python -m src.main --refresh
-```
+## 8. Toistettavuus ja avoimuus
 
-Tulosteet syntyvät kansioon `output/`. API-vastaukset tallennetaan kansioon `cache/`, jotta dataa ei haeta joka ajolla.
+- Koodi ja data julkisesti versionhallinnassa.
+- Jokaisen raakatiedoston hakupäivä ja URL kirjataan `MANIFEST.csv`:ään.
+- Satunnaisuutta ei käytetä; jos käytetään (bootstrap), siemen kirjataan.
+- Kaikki maat ja kaikki vuodet raportoidaan, ei vain valikoituja.
+- Kaikki kaaviot ja taulukot tuotetaan koodista, ei käsin.
 
-## Datalähteet
+## 9. Lisenssi ja lähdeviitteet
 
-Aineistot ovat Eurostatin (EU:n tilastovirasto) julkisia virallisia tilastoja.
-
-Molemmat haetaan muodossa `format=SDMX-CSV`:
-
-| Koodi | Sisältö | Rajaus tässä projektissa |
-| --- | --- | --- |
-| `crim_just_ctz` | Suspects and offenders by citizenship | `leg_stat=PER_CNV` (tuomitut), `unit=NR`, `citizen` ∈ {NAT, FOR, TOTAL} |
-| `migr_pop5ctz` | Väestö 1.1. kansalaisuuden ja syntymämaan mukaan | `c_birth=TOTAL`, `sex=T`, `unit=NR`, `citizen` ∈ {NAT, FOR, UNK, TOTAL} |
-
-Dimensioiden koodit on luettu datasta (`.nunique()` / `.unique()`), ei arvattu. Täysi listaus: `output/dimensiot.txt`.
-
-### Datasetin vastaavuus
-
-- `crim_just_ctz` vastaa odotettua: tuomitut 2008–2024, kansalaisuus `NAT` / `FOR` / `TOTAL`. Tuntematonta kansalaisuutta (`UNK`) **ei ole** erillisenä luokkana; jäännös lasketaan vain kun `TOTAL`, `NAT` ja `FOR` ovat kaikki ilmoitettu (`TOTAL − NAT − FOR`, negatiivinen jäännös jätetään NaN:iksi).
-- `migr_pop5ctz` on voimassa. Kansalaisuusryhmät `NAT` ja `FOR` ovat `citizen`-dimensiossa. `c_birth` pitää rajata arvoon `TOTAL`, muuten väestö pilkkoutuisi syntymämaan mukaan. Aikasarja alkaa **2009** (ei 2008), kuten tehtävässä oletettiin.
-- Vertailun vuoksi: `migr_pop2ctz` (väestö iän, sukupuolen ja *laajan* kansalaisuusryhmän mukaan) käyttää ulkomaalaisille koodia `FOR_STLS` (ulkomaat + kansalaisuudettomat) ja sisältää myös vuoden 2008. Sitä **ei käytetä**, koska tehtävä nimesi nimittäjäksi `migr_pop5ctz`.
-
-## Laskenta
-
-- Luku = tuomitut / kansalaisuusryhmän väestö × 100 000.
-- Vuosi 2008: vain absoluuttiset määrät (erillinen kaavio). Suhteelliset luvut 2009–2024.
-- Puuttuvia arvoja ei interpoloida, estimoida eikä täytetä. Kaavioissa NaN näkyy katkoksena.
-- **EU-aggregaatti** ei ole virallinen EU-27-luku eikä mediaani. Kullekin vuodelle summataan **vain ne maat, joilla on data molemmille ryhmille (NAT ja FOR) kyseisenä vuonna**. Absoluuttisiin lukuihin riittävät tuomitut; suhteellisiin vaaditaan lisäksi molempien ryhmien väestö. Joukko vaihtelee (sarakkeet `maat_abs` / `maat_aste`).
-- **2020–2024 keskiarvo** maittain: aritmeettinen keskiarvo niistä vuosista, joilla *molemmat* ryhmät ovat saatavilla. Puuttuvia vuosia ei täytetä. Käytettyjen vuosien lukumäärä on sarakkeessa `n_vuotta`.
-
-## Rajoitteet ja tulkinta
-
-- **Ei ikä- ja sukupuolivakioitu.** Ikä- ja sukupuolirakenne eroaa kansalaisuusryhmien välillä ja vaikuttaa raakalukuihin. Alaviite on jokaisessa kaaviossa.
-- Oikeuslaitostilastojen **laskentayksikkö vaihtelee maittain** (henkilöitä vs. tapauksia / prosesseja). Eurostat suosittelee henkilöitä, mutta kansalliset rekisterit poikkeavat. Maat eivät ole suoraan vertailukelpoisia.
-- Tuomitut voivat sisältää myös ei-asukkaita (esim. matkailijat); väestönimittäjä on *vakituinen väestö 1.1.*
-- `FOR` väestössä (`migr_pop5ctz`) ei sisällä kansalaisuudettomia (`STLS`); nämä on jätetty pois molemmista ryhmistä.
-- Malta: ei tuomittuja kansalaisuuden mukaan koko jaksolla. Kypros, Viro, Irlanti, Liettua, Alankomaat ja Ruotsi: ei NAT/FOR-tuomittuja (vain TOTAL tai ei mitään).
-- Espanja 2009: `NAT` ja `FOR` on merkitty nolliksi vaikka `TOTAL` > 0. Nollia ei muuteta NaN:iksi; rivi on merkitty coverage-taulukkoon.
-
-## Tulosteet (`output/`)
-
-1. `01_eu_per_100000.png` — EU-aggregaatti per 100 000, 2009–2024
-2. `02_suhdeluku_maittain.png` — ulkomaalaisten / kansalaisten suhde (2020–2024 keskiarvo)
-3. `03_pienoiskaaviot_maittain.png` — small multiples 2009–2024
-4. `04_absoluuttiset_maarat.png` — absoluuttiset määrät 2008–2024
-5. `yhdistetty_data.csv`, `coverage_matrix.csv` — puhdistettu data ja puuttuvuus
-6. Lisäksi: `eu_aggregaatti.csv`, `keskiarvo_2020_2024.csv`, `dimensiot.txt`
-
-## Riippuvuudet
-
-`pandas`, `matplotlib`, `requests` (ks. `requirements.txt`).
+Koodi: MIT (tai valittu). Eurostat-data: Eurostatin uudelleenkäyttöehdot,
+mainittava lähde. Kansalliset aineistot: kunkin tilastoviranomaisen ehdot.

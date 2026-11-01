@@ -3,8 +3,10 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHE_DIR = ROOT / "cache"
+CACHE_DIR = ROOT / "data" / "raw"
 OUTPUT_DIR = ROOT / "output"
+INTERIM_DIR = ROOT / "data" / "interim"
+MANIFEST_PATH = CACHE_DIR / "MANIFEST.csv"
 
 SDMX_CSV_URL = (
     "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{code}"

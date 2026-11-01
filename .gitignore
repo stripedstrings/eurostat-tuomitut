@@ -2,7 +2,12 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-cache/
 *.egg-info/
 .idea/
 .vscode/
+.ipynb_checkpoints/
+.DS_Store
+cache/
+data/raw/*.csv
+!data/raw/MANIFEST.csv
+.http_cache.sqlite

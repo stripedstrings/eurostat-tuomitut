@@ -1,0 +1,41 @@
+---
+description: Projektin säännöt (EU rikollisuus kansalaisuuden mukaan)
+alwaysApply: true
+---
+# Projektisäännöt
+
+Lue ensin README.md, PREREGISTRATION.md, METHODS.md ja DATA_SOURCES.md.
+
+## Tieteelliset säännöt (ehdottomat)
+- Älä koskaan keksi, interpoloi, imputoi tai arvioi puuttuvia arvoja. Käytä NaN.
+- Älä arvaa Eurostatin dimensiokoodeja. Hae data, tulosta .unique() ja
+  dokumentoi DATA_SOURCES.md:hen.
+- Älä poista maita, vuosia tai havaintoja tuloksen perusteella.
+- Älä muuta menetelmää tuloksen perusteella. Kirjaa muutokset CHANGELOG.md:hen.
+- Raportoi kaikki maat ja vuodet, suunnasta riippumatta.
+- Näytä aina epävarmuus (luottamusvälit) ja raaka- ja vakioitu luku rinnakkain.
+- Älä kirjoita johtopäätöksiä, jotka ylittävät datan (ei syy-yhteyksiä,
+  ei politiikkajohtopäätöksiä rikostilastosta).
+- Kansalliset aineistot pidetään erillään EU-aggregaatista.
+- Esirekisteröinnin ulkopuoliset analyysit merkitään "TUTKIVA (ei esirekisteröity)".
+
+## Jokaisen kaavion pakolliset alaviitteet (suomeksi)
+- "Lähde: Eurostat <koodi>, haettu <pvm>."
+- "Ei ikä- ja sukupuolivakioitu." (poikkeus: SIR-kaaviot)
+- "Kansalaisuus ei kuvaa maahanmuuttotaustaa tai pakolaisuutta."
+- "Laskentayksikkö vaihtelee maittain; maiden välinen vertailu on rajallinen."
+- "Katkos viivassa = data puuttuu."
+- Epäluotettavat (D<10) merkitään selvästi.
+
+## Koodi
+- Python 3.11+, pandas, matplotlib/plotly, requests-cache.
+- Funktiot pieniä ja puhtaita; lyhyet kommentit; tyyppivihjeet.
+- Välimuistita API-vastaukset kansioon data/raw ja kirjaa MANIFEST.csv.
+- Kirjoita testit (pytest) rate-, CI- ja SIR-funktioille tunnetuilla esimerkeillä.
+- Ei kovakoodattuja lukuja. Kaikki luvut tulevat datasta.
+- Kaikki kaavioiden tekstit suomeksi.
+- Ei satunnaisuutta ilman kirjattua siementä.
+
+## Tulosteet
+- output/figures/*.png (200 dpi) ja output/tables/*.csv
+- coverage matrix: maa x vuosi x muuttuja
