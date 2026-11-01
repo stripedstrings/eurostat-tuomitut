@@ -14,6 +14,8 @@ COVERAGE_PATH = TABLES_DIR / "coverage_matrix.csv"
 ASTEET_PATH = TABLES_DIR / "asteet.csv"
 EU_AGGR_PATH = TABLES_DIR / "eu_aggregaatti.csv"
 KAUSI_RR_PATH = TABLES_DIR / "rr_2020_2024.csv"
+SIR_PATH = TABLES_DIR / "sir_maa.csv"
+SIR_RAJOITE_PATH = TABLES_DIR / "sir_rajoite.csv"
 FIGURES_DIR = OUTPUT_DIR / "figures"
 DPI_KUVA = 200
 

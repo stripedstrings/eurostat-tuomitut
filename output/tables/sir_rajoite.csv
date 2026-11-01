@@ -1,0 +1,2 @@
+ehto,tayttyy,sarakkeet,rajoite
+age_ja_sex_crim_just_ctz,False,"DATAFLOW,LAST UPDATE,freq,leg_stat,citizen,unit,geo,TIME_PERIOD,OBS_VALUE,OBS_FLAG,CONF_STATUS","SIR ei ole laskettavissa Eurostatin crim_just_ctz-aineistosta: sarakkeita age ja sex ei ole. migr_pop1ctz sisältää ikä×sukupuoli×kansalaisuus -väestön, mutta NAT-ryhmän ikä-sukupuolikohtaisia tuomitsemisasteita ei ole. Osoittajaa ei ole arvattu eikä jaettu ikäryhmiin. Vaihtoehto: kansalliset aineistot (vaihe 9), jos niissä on virallinen vakiointi."
