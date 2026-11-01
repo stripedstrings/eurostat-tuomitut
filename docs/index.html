@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tuomitut EU-maissa kansalaisuuden mukaan, 2008–2024</title>
+  <style>
+    :root {
+      --text: #1b1f24;
+      --muted: #4b5563;
+      --line: #d8dee6;
+      --bg: #f7f5f1;
+      --card: #fff;
+      --nat: #2c5aa0;
+      --for: #c45c26;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Georgia, serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2.2rem 1.2rem 4rem;
+    }
+    h1 { font-size: 1.85rem; margin: 0 0 0.4rem; line-height: 1.25; }
+    h2 { font-size: 1.25rem; margin: 2.2rem 0 0.6rem; }
+    p, li { color: var(--text); }
+    .lead { font-size: 1.08rem; color: var(--muted); margin-top: 0; }
+    .meta {
+      font-size: 0.92rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .warn {
+      background: #fff7ed;
+      border: 1px solid #f3d5b5;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+    }
+    figure { margin: 1.4rem 0 2rem; }
+    figure img {
+      width: 100%;
+      height: auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.45rem; }
+    a { color: var(--nat); }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Tuomitut EU-maissa kansalaisuuden mukaan, 2008–2024</h1>
+    <p class="lead">
+      Oman maan kansalaisten ja ulkomaan kansalaisten tuomitsemisasteet
+      100&nbsp;000 asukasta kohden. Lähde: Eurostat.
+    </p>
+    <p class="meta">
+      Ei virallinen EU-tilastojulkaisu.
+      <a href="https://github.com/stripedstrings/eurostat-tuomitut">Koodi ja data GitHubissa</a>.
+    </p>
+
+    <div class="warn">
+      <strong>Lue ensin.</strong>
+      Luvut eivät ole ikä- tai sukupuolivakioituja. Oikeuslaitostilastojen
+      laskentayksikkö vaihtelee maittain (henkilöitä vs. tapauksia), joten maat
+      eivät ole suoraan vertailukelpoisia. Tuomitut voivat sisältää myös
+      ei-asukkaita; nimittäjä on vakituinen väestö vuoden alussa.
+    </div>
+
+    <h2>1. EU-aggregaatti per 100&nbsp;000, 2009–2024</h2>
+    <p>
+      Kullekin vuodelle on laskettu summa vain niistä maista, joilla on data
+      <em>molemmille</em> ryhmille kyseisenä vuonna. Tämä ei ole virallinen
+      EU-27-luku eikä mediaani. Mukana olevien maiden määrä vaihtelee.
+    </p>
+    <figure>
+      <img src="01_eu_per_100000.png" alt="Viivakaavio: tuomitut 100 000 asukasta kohden, oman maan ja ulkomaan kansalaiset, 2009–2024">
+      <figcaption>Sininen = oman maan kansalaiset, oranssi = ulkomaan kansalaiset.</figcaption>
+    </figure>
+
+    <h2>2. Suhdeluku maittain, 2020–2024 keskiarvo</h2>
+    <p>
+      Ulkomaan kansalaisten tuomitsemisaste jaettuna oman maan kansalaisten
+      asteella. Keskiarvoon otetaan vain vuodet, joilla molemmat ryhmät ovat
+      saatavilla. Puuttuvia vuosia ei täytetä.
+    </p>
+    <figure>
+      <img src="02_suhdeluku_maittain.png" alt="Pylväskaavio: ulkomaalaisten ja kansalaisten tuomitsemisasteen suhde maittain">
+    </figure>
+
+    <h2>3. Maittain, 2009–2024</h2>
+    <p>
+      Tyhjä ruutu tarkoittaa, ettei NAT/FOR-tuomittuja ole Eurostatissa.
+      Katkos viivassa on puuttuva arvo, ei nolla.
+    </p>
+    <figure>
+      <img src="03_pienoiskaaviot_maittain.png" alt="Pienoiskaaviot tuomitsemisasteista kaikissa EU-maissa">
+    </figure>
+
+    <h2>4. Absoluuttiset määrät, 2008–2024</h2>
+    <p>
+      Vuodelta 2008 ei ole väestöä datasetissä <code>migr_pop5ctz</code>, joten
+      2008 näytetään vain lukumäärinä. Summaan kuuluvien maiden joukko vaihtelee;
+      vuosia ei pidä tulkita saman maan joukon kehitykseksi.
+    </p>
+    <figure>
+      <img src="04_absoluuttiset_maarat.png" alt="Viivakaavio tuomittujen absoluuttisista määristä 2008–2024">
+    </figure>
+
+    <h2>Miten luvut on laskettu</h2>
+    <ul>
+      <li>Tuomitut: Eurostat <code>crim_just_ctz</code>, <code>leg_stat=PER_CNV</code> (convicted), <code>citizen</code> NAT ja FOR.</li>
+      <li>Väestö: Eurostat <code>migr_pop5ctz</code>, <code>c_birth=TOTAL</code>, <code>sex=T</code>, samat kansalaisuusryhmät, 2009–2024.</li>
+      <li>Aste = tuomitut / ryhmän väestö × 100&nbsp;000.</li>
+      <li>Puuttuvia arvoja ei interpoloida eikä arvioida.</li>
+    </ul>
+    <p>
+      Taulukot:
+      <a href="https://github.com/stripedstrings/eurostat-tuomitut/blob/master/output/yhdistetty_data.csv">yhdistetty data</a>,
+      <a href="https://github.com/stripedstrings/eurostat-tuomitut/blob/master/output/coverage_matrix.csv">coverage-matrix</a>.
+    </p>
+
+    <footer>
+      Lähde: Eurostat (crim_just_ctz, migr_pop5ctz). Tämä sivu on itsenäinen
+      visualisointi, ei Eurostatin eikä EU:n julkaisu.
+    </footer>
+  </main>
+</body>
+</html>
