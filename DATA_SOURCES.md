@@ -108,6 +108,14 @@ Sarakkeet: `DATAFLOW`, `LAST UPDATE`, `freq`, `c_birth`, `age`, `unit`, `sex`, `
 
 Syntymämaa ≠ kansalaisuus. crim_just_ctz on kansalaisuus (NAT/FOR).
 
+## Vaihe 6 (S2, S4, S7) — mitä data ei salli
+
+Luettu `crim_just_ctz.csv`-sarakkeista (ei arvattu):
+
+- S2: `citizen` = FOR, NAT, TOTAL. Ei EU-sisäistä / kolmansien maiden jakoa osoittajassa.
+- S4: `unit` = NR, P_HTHAB. Ei henkilö vs. tapaus -dimensiota.
+- S7: ei naturalisaatiota tai entistä kansalaisuutta.
+
 ## Muut (ei haettu vaiheessa 1)
 
 | Koodi | Sisältö | Huomio |

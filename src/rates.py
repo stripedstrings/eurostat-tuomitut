@@ -174,6 +174,32 @@ def eu_aggregaatti(asteet: pd.DataFrame, paneeli: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def poolaa(asteet: pd.DataFrame) -> pd.Series:
+    """Yksi RR: summa kelpoisista maa–vuosista. Tyhjä joukko → NaN."""
+    s = asteet.loc[asteet["kelpoinen_aste"]].copy() if "kelpoinen_aste" in asteet.columns else asteet
+    if len(s) == 0:
+        return laske_asteet(
+            pd.DataFrame(
+                {
+                    "tuomitut_NAT": [np.nan],
+                    "tuomitut_FOR": [np.nan],
+                    "vaesto_NAT": [np.nan],
+                    "vaesto_FOR": [np.nan],
+                }
+            )
+        ).iloc[0]
+    tmp = pd.DataFrame(
+        {
+            "tuomitut_NAT": [pd.to_numeric(s["tuomitut_NAT"], errors="coerce").sum(min_count=1)],
+            "tuomitut_FOR": [pd.to_numeric(s["tuomitut_FOR"], errors="coerce").sum(min_count=1)],
+            "vaesto_NAT": [pd.to_numeric(s["vaesto_NAT"], errors="coerce").sum(min_count=1)],
+            "vaesto_FOR": [pd.to_numeric(s["vaesto_FOR"], errors="coerce").sum(min_count=1)],
+        }
+    )
+    out = laske_asteet(tmp).iloc[0]
+    return out
+
+
 def kausi_rr(asteet: pd.DataFrame, vuodet: list[int] | None = None) -> pd.DataFrame:
     """Yhteenlasketut kelpoiset vuodet (ei täyttöä). Poisson-CI summista."""
     if vuodet is None:

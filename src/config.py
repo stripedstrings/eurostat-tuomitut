@@ -16,6 +16,7 @@ EU_AGGR_PATH = TABLES_DIR / "eu_aggregaatti.csv"
 KAUSI_RR_PATH = TABLES_DIR / "rr_2020_2024.csv"
 SIR_PATH = TABLES_DIR / "sir_maa.csv"
 SIR_RAJOITE_PATH = TABLES_DIR / "sir_rajoite.csv"
+HERKKYYS_PATH = TABLES_DIR / "herkkyys_S1_S7.csv"
 FIGURES_DIR = OUTPUT_DIR / "figures"
 DPI_KUVA = 200
 
