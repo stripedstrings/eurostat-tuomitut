@@ -1,6 +1,6 @@
 # Tuomitut EU-maissa kansalaisuuden mukaan (2008–2024)
 
-**Lue selaimessa:** [https://stripedstrings.github.io/eurostat-tuomitut/](https://stripedstrings.github.io/eurostat-tuomitut/)
+**Lue selaimessa:** [https://stripedstrings.github.io/eurostat-tuomitut/](https://stripedstrings.github.io/eurostat-tuomitut/) (oletus: Suomi; valikosta muut EU-maat ja [EU-vertailu](https://stripedstrings.github.io/eurostat-tuomitut/vertailu.html))
 
 Python-projekti hakee Eurostatin SDMX 2.1 -rajapinnasta tuomittujen määrät kansalaisuuden mukaan ja suhteuttaa ne saman kansalaisuusryhmän väestöön (per 100 000).
 

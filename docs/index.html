@@ -3,144 +3,120 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tuomitut EU-maissa kansalaisuuden mukaan, 2008–2024</title>
-  <style>
-    :root {
-      --text: #1b1f24;
-      --muted: #4b5563;
-      --line: #d8dee6;
-      --bg: #f7f5f1;
-      --card: #fff;
-      --nat: #2c5aa0;
-      --for: #c45c26;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Georgia, serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.55;
-    }
-    main {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 2.2rem 1.2rem 4rem;
-    }
-    h1 { font-size: 1.85rem; margin: 0 0 0.4rem; line-height: 1.25; }
-    h2 { font-size: 1.25rem; margin: 2.2rem 0 0.6rem; }
-    p, li { color: var(--text); }
-    .lead { font-size: 1.08rem; color: var(--muted); margin-top: 0; }
-    .meta {
-      font-size: 0.92rem;
-      color: var(--muted);
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1rem;
-      margin-bottom: 1.4rem;
-    }
-    .warn {
-      background: #fff7ed;
-      border: 1px solid #f3d5b5;
-      padding: 0.9rem 1rem;
-      border-radius: 8px;
-    }
-    figure { margin: 1.4rem 0 2rem; }
-    figure img {
-      width: 100%;
-      height: auto;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-    }
-    figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.45rem; }
-    a { color: var(--nat); }
-    footer {
-      margin-top: 2.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    ul { padding-left: 1.2rem; }
-  </style>
+  <title>Suomi — tuomitut ja epäillyt kansalaisuuden mukaan</title>
+  <link rel="stylesheet" href="tyyli.css">
 </head>
 <body>
-  <main>
-    <h1>Tuomitut EU-maissa kansalaisuuden mukaan, 2008–2024</h1>
-    <p class="lead">
-      Oman maan kansalaisten ja ulkomaan kansalaisten tuomitsemisasteet
-      100&nbsp;000 asukasta kohden. Lähde: Eurostat.
-    </p>
-    <p class="meta">
-      Ei virallinen EU-tilastojulkaisu.
-      <a href="https://github.com/stripedstrings/eurostat-tuomitut">Koodi ja data GitHubissa</a>.
-    </p>
-
-    <div class="warn">
-      <strong>Lue ensin.</strong>
-      Luvut eivät ole ikä- tai sukupuolivakioituja. Oikeuslaitostilastojen
-      laskentayksikkö vaihtelee maittain (henkilöitä vs. tapauksia), joten maat
-      eivät ole suoraan vertailukelpoisia. Tuomitut voivat sisältää myös
-      ei-asukkaita; nimittäjä on vakituinen väestö vuoden alussa.
+  <header>
+    <div class="wrap">
+      <p class="kicker"><a href="index.html">Tuomitut ja epäillyt EU-maissa</a></p>
+      <h1>Suomi</h1>
+      <p class="lead">Oman maan kansalaiset ja ulkomaan kansalaiset, Eurostat 2008–2024.</p>
+      <div class="valitsin"><label for="maa">Maa</label>
+<select id="maa" onchange="location.href=this.value">
+<option value="index.html" selected>Suomi</option>
+<option value="maat/nl.html">Alankomaat</option>
+<option value="maat/be.html">Belgia</option>
+<option value="maat/bg.html">Bulgaria</option>
+<option value="maat/es.html">Espanja</option>
+<option value="maat/ie.html">Irlanti</option>
+<option value="maat/it.html">Italia</option>
+<option value="maat/at.html">Itävalta</option>
+<option value="maat/el.html">Kreikka</option>
+<option value="maat/hr.html">Kroatia</option>
+<option value="maat/cy.html">Kypros</option>
+<option value="maat/lv.html">Latvia</option>
+<option value="maat/lt.html">Liettua</option>
+<option value="maat/lu.html">Luxemburg</option>
+<option value="maat/mt.html">Malta</option>
+<option value="maat/pt.html">Portugali</option>
+<option value="maat/pl.html">Puola</option>
+<option value="maat/fr.html">Ranska</option>
+<option value="maat/ro.html">Romania</option>
+<option value="maat/se.html">Ruotsi</option>
+<option value="maat/de.html">Saksa</option>
+<option value="maat/sk.html">Slovakia</option>
+<option value="maat/si.html">Slovenia</option>
+<option value="maat/dk.html">Tanska</option>
+<option value="maat/cz.html">Tšekki</option>
+<option value="maat/hu.html">Unkari</option>
+<option value="maat/ee.html">Viro</option>
+<option value="vertailu.html">EU-vertailu</option>
+</select></div>
     </div>
+  </header>
+  <main class="wrap">
+    <section class="kortti">
+      <h2>Ketä nämä ryhmät ovat?</h2>
+      <p>Eurostatin oikeustilasto <code>crim_just_ctz</code> ei erittele yksittäisiä kansalaisuuksia
+      (esimerkiksi virolaisia, irakilaisia tai ruotsalaisia). Se tuntee vain kolme luokkaa:</p>
+      <ul>
+        <li><strong>NAT — oman maan kansalaiset.</strong> Sen maan kansalaiset, joka ilmoittaa tilaston (tällä sivulla: Suomi).</li>
+        <li><strong>FOR — ulkomaan kansalaiset.</strong> Kaikki muut kansalaisuudet <em>yhdessä</em>, yksi summa. Mukana voi olla EU-kansalaisia, EU:n ulkopuolisia, turisteja, kausityöntekijöitä ja muita ei-asukkaita. Datasta ei näe, mitä passeja joukossa on.</li>
+        <li><strong>TOTAL — yhteensä.</strong> Jos TOTAL on suurempi kuin NAT + FOR, erotus on tuntematon kansalaisuus. Sitä ei laiteta kumpaankaan ryhmään.</li>
+      </ul>
+      <p>Nämä eivät ole etnisiä tai syntymämaaluokkia. Väestönimittäjä on vakituinen väestö 1.&nbsp;tammikuuta
+      (<code>migr_pop5ctz</code>, NAT ja FOR). Kansalaisuudettomat (STLS) on jätetty pois molemmista ryhmistä.</p>
+    </section>
 
-    <h2>1. EU-aggregaatti per 100&nbsp;000, 2009–2024</h2>
-    <p>
-      Kullekin vuodelle on laskettu summa vain niistä maista, joilla on data
-      <em>molemmille</em> ryhmille kyseisenä vuonna. Tämä ei ole virallinen
-      EU-27-luku eikä mediaani. Mukana olevien maiden määrä vaihtelee.
-    </p>
-    <figure>
-      <img src="01_eu_per_100000.png" alt="Viivakaavio: tuomitut 100 000 asukasta kohden, oman maan ja ulkomaan kansalaiset, 2009–2024">
-      <figcaption>Sininen = oman maan kansalaiset, oranssi = ulkomaan kansalaiset.</figcaption>
-    </figure>
+    <section class="kortti avain" id="avainluvut"></section>
 
-    <h2>2. Suhdeluku maittain, 2020–2024 keskiarvo</h2>
-    <p>
-      Ulkomaan kansalaisten tuomitsemisaste jaettuna oman maan kansalaisten
-      asteella. Keskiarvoon otetaan vain vuodet, joilla molemmat ryhmät ovat
-      saatavilla. Puuttuvia vuosia ei täytetä.
-    </p>
-    <figure>
-      <img src="02_suhdeluku_maittain.png" alt="Pylväskaavio: ulkomaalaisten ja kansalaisten tuomitsemisasteen suhde maittain">
-    </figure>
+    <section>
+      <h2>Tuomitsemisaste, 100&nbsp;000 asukasta kohden</h2>
+      <p>Aste = tuomitut / saman kansalaisuusryhmän väestö × 100&nbsp;000. Vuosi 2008 näkyy vain lukumäärinä, koska väestöä ei ole. Katkos viivassa on puuttuva tieto, ei nolla.</p>
+      <canvas id="kaavio-tuomitut-aste"></canvas>
+    </section>
 
-    <h2>3. Maittain, 2009–2024</h2>
-    <p>
-      Tyhjä ruutu tarkoittaa, ettei NAT/FOR-tuomittuja ole Eurostatissa.
-      Katkos viivassa on puuttuva arvo, ei nolla.
-    </p>
-    <figure>
-      <img src="03_pienoiskaaviot_maittain.png" alt="Pienoiskaaviot tuomitsemisasteista kaikissa EU-maissa">
-    </figure>
+    <section class="kortti">
+      <h2>Mitä suhdeluku tarkoittaa?</h2>
+      <p>Suhde <strong>ulkomaat / oma maa</strong> = ulkomaan kansalaisten tuomitsemisaste jaettuna oman maan kansalaisten tuomitsemisasteella <em>samana vuonna</em>.</p>
+      <ul>
+        <li><strong>Suhde 1</strong> tarkoittaa, että molemmissa ryhmissä tilastoitiin yhtä monta tuomiota 100&nbsp;000 asukasta kohden.</li>
+        <li><strong>Suhde 2,3</strong> tarkoittaa, että ulkomaan kansalaisten aste oli 2,3-kertainen oman maan kansalaisiin nähden. Se ei tarkoita, että “ulkomaalaiset tekevät 2,3 kertaa enemmän rikoksia”, vaan että <em>kirjatut tuomiot suhteessa asukaslukuun</em> erosivat näin.</li>
+      </ul>
+      <p id="suhde-esimerkki"></p>
+      <p><strong>2020–2024 keskiarvo</strong> on tavallinen aritmeettinen keskiarvo niistä vuosista, joilla <em>molemmat</em> asteet ovat olemassa. Jos jokin vuosi puuttuu, sitä ei arvata eikä korvata. Keskiarvo voi siis perustua 1–5 vuoteen; käytetyt vuodet kerrotaan sivulla.</p>
+      <p>Suhde ei vakioi ikää, sukupuolta, oleskelun pituutta eikä sitä, asuuko henkilö maassa. Tuomioihin voi sisältyä ihmisiä, jotka eivät ole vakituista väestöä.</p>
+    </section>
 
-    <h2>4. Absoluuttiset määrät, 2008–2024</h2>
-    <p>
-      Vuodelta 2008 ei ole väestöä datasetissä <code>migr_pop5ctz</code>, joten
-      2008 näytetään vain lukumäärinä. Summaan kuuluvien maiden joukko vaihtelee;
-      vuosia ei pidä tulkita saman maan joukon kehitykseksi.
-    </p>
-    <figure>
-      <img src="04_absoluuttiset_maarat.png" alt="Viivakaavio tuomittujen absoluuttisista määristä 2008–2024">
-    </figure>
+    <section>
+      <h2>Tuomittujen lukumäärä</h2>
+      <canvas id="kaavio-tuomitut-lkm"></canvas>
+    </section>
 
-    <h2>Miten luvut on laskettu</h2>
-    <ul>
-      <li>Tuomitut: Eurostat <code>crim_just_ctz</code>, <code>leg_stat=PER_CNV</code> (convicted), <code>citizen</code> NAT ja FOR.</li>
-      <li>Väestö: Eurostat <code>migr_pop5ctz</code>, <code>c_birth=TOTAL</code>, <code>sex=T</code>, samat kansalaisuusryhmät, 2009–2024.</li>
-      <li>Aste = tuomitut / ryhmän väestö × 100&nbsp;000.</li>
-      <li>Puuttuvia arvoja ei interpoloida eikä arvioida.</li>
-    </ul>
-    <p>
-      Taulukot:
-      <a href="https://github.com/stripedstrings/eurostat-tuomitut/blob/master/output/yhdistetty_data.csv">yhdistetty data</a>,
-      <a href="https://github.com/stripedstrings/eurostat-tuomitut/blob/master/output/coverage_matrix.csv">coverage-matrix</a>.
-    </p>
+    <section class="kortti">
+      <h2>Kannattaako epäillyt ottaa mukaan?</h2>
+      <p><strong>Kyllä, mutta eri lukuna — ei todisteena syyllisyydestä.</strong> Eurostat erottaa kolme vaihetta:</p>
+      <ol>
+        <li><strong>Epäillyt (PER_SUSP)</strong> — henkilöt, jotka poliisi on tilastoinut epäillyiksi / viralliseen kontaktiin rikoksen vuoksi.</li>
+        <li><strong>Syytteeseen asetetut (PER_PRSC)</strong> — syyteharkinta on aloitettu.</li>
+        <li><strong>Tuomitut (PER_CNV)</strong> — tuomioistuin on todennut syylliseksi.</li>
+      </ol>
+      <p>Datasta <em>ei näe, miksi</em> joku jäi “vain epäillyksi”: näyttö ei riittänyt, syyte peruttiin, syyteharkinta siirtyi seuraavaan vuoteen, henkilö vapautettiin, tai kyseessä oli eri laskentatapa. Sama ihminen voi olla epäiltynä vuonna T ja tuomittuna vuonna T+1. Siksi epäiltyjä ei saa jakaa tuomituilla ja kutsua sitä “syyllistymisprosentiksi”.</p>
+      <p>Epäilyaste kertoo silti jotain: sen, miten usein ryhmä päätyy poliisin kirjaamaksi epäillyksi suhteessa asukaslukuun. Se mittaa kontaktia rikosprosessin alkuun, ei tuomioita.</p>
+    </section>
 
-    <footer>
-      Lähde: Eurostat (crim_just_ctz, migr_pop5ctz). Tämä sivu on itsenäinen
-      visualisointi, ei Eurostatin eikä EU:n julkaisu.
-    </footer>
+    <section>
+      <h2>Epäilyaste, 100&nbsp;000 asukasta kohden</h2>
+      <p>Sama väestönimittäjä kuin tuomituilla. Puuttuvat vuodet jätetään tyhjiksi.</p>
+      <canvas id="kaavio-epaillyt-aste"></canvas>
+    </section>
+
+    <section>
+      <h2>Lukumäärät vaiheittain (oma maa vs. ulkomaat)</h2>
+      <p>Nämä pylväät ovat rinnakkain vertailua varten. Ne eivät ole saman henkilöjoukon eteneminen putkessa.</p>
+      <canvas id="kaavio-vaiheet"></canvas>
+    </section>
+
+    <section>
+      <h2>Vuosittaiset luvut</h2>
+      <div class="taulu-wrap"><table id="taulu"></table></div>
+    </section>
+
+    <p class="alaviite">Ei ikä- ja sukupuolivakioitu. Laskentayksikkö vaihtelee maittain (henkilöitä vs. tapauksia). Lähde: Eurostat, crim_just_ctz ja migr_pop5ctz. Ei virallinen EU-julkaisu.</p>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>window.SIVUN_MAA = "FI"; window.DATA_URL = "data.json";</script>
+  <script src="sivu.js"></script>
 </body>
 </html>

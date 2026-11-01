@@ -1,0 +1,26 @@
+
+:root { --text:#1b1f24; --muted:#4b5563; --line:#d8dee6; --bg:#f4f1ea; --card:#fff; --nat:#2c5aa0; --for:#c45c26; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Segoe UI", Georgia, serif; color:var(--text); background:var(--bg); line-height:1.55; }
+.wrap { max-width:920px; margin:0 auto; padding:0 1.2rem; }
+header { background:#1b1f24; color:#f4f1ea; padding:1.4rem 0 1.2rem; }
+header h1 { margin:0.2rem 0 0.3rem; font-size:1.85rem; }
+header a { color:#f4d2b0; }
+.kicker { margin:0; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase; }
+.lead { margin:0 0 0.8rem; color:#d8dee6; }
+.valitsin { display:flex; gap:0.6rem; align-items:center; }
+.valitsin label { font-size:0.9rem; }
+.valitsin select { font-size:1rem; padding:0.35rem 0.5rem; }
+main { padding:1.4rem 0 3.5rem; }
+h2 { font-size:1.25rem; margin:1.8rem 0 0.5rem; }
+.kortti { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; margin:1rem 0; }
+canvas { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0.6rem; margin:0.6rem 0 1.2rem; max-height:380px; }
+.taulu-wrap { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:0.88rem; background:var(--card); }
+th, td { border-bottom:1px solid var(--line); padding:0.35rem 0.45rem; text-align:right; white-space:nowrap; }
+th:first-child, td:first-child { text-align:left; }
+.alaviite { font-size:0.88rem; color:var(--muted); margin-top:2rem; }
+figure img { width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#fff; }
+figcaption { color:var(--muted); font-size:0.9rem; margin:0.4rem 0 1.4rem; }
+.avain p { margin:0.35rem 0; }
+code { font-size:0.9em; }

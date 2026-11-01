@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EU-vertailu — tuomitut kansalaisuuden mukaan</title>
+  <link rel="stylesheet" href="tyyli.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="kicker"><a href="index.html">Tuomitut ja epäillyt EU-maissa</a></p>
+      <h1>EU-vertailu</h1>
+      <p class="lead">Kaikkien maiden yhteenveto. Yksittäinen maa valitaan etusivun valikosta (oletus: Suomi).</p>
+      <div class="valitsin"><label for="maa">Maa</label>
+<select id="maa" onchange="location.href=this.value">
+<option value="index.html">Suomi</option>
+<option value="maat/nl.html">Alankomaat</option>
+<option value="maat/be.html">Belgia</option>
+<option value="maat/bg.html">Bulgaria</option>
+<option value="maat/es.html">Espanja</option>
+<option value="maat/ie.html">Irlanti</option>
+<option value="maat/it.html">Italia</option>
+<option value="maat/at.html">Itävalta</option>
+<option value="maat/el.html">Kreikka</option>
+<option value="maat/hr.html">Kroatia</option>
+<option value="maat/cy.html">Kypros</option>
+<option value="maat/lv.html">Latvia</option>
+<option value="maat/lt.html">Liettua</option>
+<option value="maat/lu.html">Luxemburg</option>
+<option value="maat/mt.html">Malta</option>
+<option value="maat/pt.html">Portugali</option>
+<option value="maat/pl.html">Puola</option>
+<option value="maat/fr.html">Ranska</option>
+<option value="maat/ro.html">Romania</option>
+<option value="maat/se.html">Ruotsi</option>
+<option value="maat/de.html">Saksa</option>
+<option value="maat/sk.html">Slovakia</option>
+<option value="maat/si.html">Slovenia</option>
+<option value="maat/dk.html">Tanska</option>
+<option value="maat/cz.html">Tšekki</option>
+<option value="maat/hu.html">Unkari</option>
+<option value="maat/ee.html">Viro</option>
+<option value="vertailu.html" selected>EU-vertailu</option>
+</select></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="kortti">
+      <h2>Miten EU-luku on laskettu</h2>
+      <p>Kullekin vuodelle summataan vain ne EU-maat, joilla on data <em>molemmille</em> ryhmille kyseisenä vuonna. Se ei ole virallinen EU-27-luku eikä mediaani. Mukana olevien maiden joukko vaihtuu, joten viiva ei ole saman maan joukon kehitys.</p>
+    </section>
+    <figure>
+      <img src="01_eu_per_100000.png" alt="EU-aggregaatti tuomitsemisasteista">
+      <figcaption>Tuomitut / 100 000, maat joilla NAT ja FOR samana vuonna.</figcaption>
+    </figure>
+    <figure>
+      <img src="02_suhdeluku_maittain.png" alt="Suhdeluku maittain">
+      <figcaption>Suhde = ulkomaalaisten tuomitsemisaste / kansalaisten tuomitsemisaste, keskiarvo niistä vuosista 2020–2024 joilla molemmat asteet ovat olemassa.</figcaption>
+    </figure>
+    <figure>
+      <img src="03_pienoiskaaviot_maittain.png" alt="Pienoiskaaviot maittain">
+    </figure>
+    <figure>
+      <img src="04_absoluuttiset_maarat.png" alt="Absoluuttiset tuomitut">
+    </figure>
+    <p class="alaviite">Ei ikä- ja sukupuolivakioitu. Laskentayksikkö vaihtelee maittain. Lähde: Eurostat.</p>
+  </main>
+</body>
+</html>

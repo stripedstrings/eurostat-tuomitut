@@ -66,3 +66,18 @@ ALAVIITE = (
     "Eurostatin oikeuslaitostilastoissa laskentayksikkö vaihtelee maittain "
     "(henkilöitä vs. tapauksia). Lähde: Eurostat (crim_just_ctz, migr_pop5ctz)."
 )
+
+# crim_just_ctz / leg_stat (tarkistettu datasta, ei arvattu)
+VAIHEET = {
+    "PER_CNV": "tuomitut",
+    "PER_SUSP": "epaillyt",
+    "PER_PRSC": "syyteeseen",
+}
+
+VAIHE_NIMET = {
+    "tuomitut": "Tuomitut",
+    "epaillyt": "Epäillyt",
+    "syyteeseen": "Syytteeseen asetetut",
+}
+
+DOCS_DIR = ROOT / "docs"
