@@ -11,6 +11,7 @@ PROCESSED_DIR = ROOT / "data" / "processed"
 MANIFEST_PATH = CACHE_DIR / "MANIFEST.csv"
 MAA_VUOSI_PATH = PROCESSED_DIR / "maa_vuosi.csv"
 COVERAGE_PATH = TABLES_DIR / "coverage_matrix.csv"
+ASTEET_PATH = TABLES_DIR / "asteet.csv"
 
 SDMX_CSV_URL = (
     "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{code}"
