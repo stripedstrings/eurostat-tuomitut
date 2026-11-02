@@ -28,6 +28,11 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   `MEDIA_DATA_SOURCES.md`. Ei koko-arkistoa. GDELT 429; Media Cloud API
   ei DNS:ää; Yle-artikkeli-API ei julkinen.
 
+- 2026-11-02 (vaihe 2, ennen otsikkopoimintaa). CDX-peitto on kalenteripäivän
+  ensimmäinen osuma (`collapse=timestamp:8`), ei kaikkien snapshotien lista
+  eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
+  puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI

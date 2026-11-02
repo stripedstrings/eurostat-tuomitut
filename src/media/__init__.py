@@ -1,1 +1,1 @@
-"""Mediahaara. Hakua ei ole (vaihe 0)."""
+"""Mediahaara. Haku: python -m src.fetch_media."""

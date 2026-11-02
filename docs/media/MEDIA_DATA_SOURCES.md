@@ -104,3 +104,23 @@ Muiden medioiden RSS-osoitteita ei haettu.
 - Media Cloud: ei ennen avainta ja onnistunutta API-kutsua.
 
 H3 (klikit) = ei testattavissa näillä lähteillä.
+
+---
+
+## Vaihe 2 (haettu 2026-11-02)
+
+CDX koko jaksolle 2015–2025, `python -m src.fetch_media`. Ruudukko:
+`media/output/tables/coverage_media_paiva.csv` (puuttuva päivä tyhjä, ei täyttöä).
+Yhteenveto: `coverage_media_yhteenveto.csv`.
+
+| media | n_paivaa | n_cdx | n_cdx_200 | n_puuttuu_cdx | n_puuttuu_200 |
+|---|---:|---:|---:|---:|---:|
+| iltalehti_etusivu | 4018 | 3286 | 3159 | 732 | 859 |
+| yle_uutiset | 4018 | 3741 | 3686 | 277 | 332 |
+
+Luvut CDX-vastauksesta. IL:n ensimmäinen `statuscode=200`-päivä näytteessä 2015-04-28;
+Ylen 2015-01-02. Viimeiset 200-rivit 2025-12-31.
+
+RSS 2026-11-02: IL 20 item, Yle 13 item. Ei historiaruudukossa.
+
+HTML-snapshotteja ei haettu. GDELT/Media Cloud/Yle-artikkeli-API ei.

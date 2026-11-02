@@ -1,12 +1,19 @@
-# Mediahaaran menetelmät (runko, ennen hakua)
+# Mediahaaran menetelmät
 
-Yksityiskohdat täydennetään, kun lähteet on testattu (vaihe 1). Tätä ei
-muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
+Vaihe 1 (saatavuus) 2026-11-01. Vaihe 2 (CDX-indeksi) 2026-11-02.
+Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 
-## Yksikkö
+## Yksikkö ja jakso (vaihe 2)
 
-Yksi tietue = yksi etusivu-/kansi- tai otsikkohavainto yhdeltä medialta
-yhtenä päivänä. Puuttuva päivä jätetään tyhjäksi.
+- Kalenteri: 2015-01-01 … 2025-12-31 (H7). Jokainen päivä rivi, myös puuttuvat.
+- Mediat (vain vaiheessa 1 vastanneet URL:t): `iltalehti_etusivu` =
+  `www.iltalehti.fi/`, `yle_uutiset` = `yle.fi/uutiset`.
+- Wayback CDX, `collapse=timestamp:8` (ensimmäinen osuma kalenteripäivältä).
+  Ei interpolointia. Päivä ilman CDX-riviä: `on_cdx=False`.
+- `on_cdx_200`: sama, suodatin `statuscode:200`.
+- RSS haetaan vain hakupäivältä; sitä ei kopioida tyhjiin historiapäiviin.
+- Etusivujen HTML-snapshotteja ei ladattu vaiheessa 2 (otsikot = vaihe 3).
+- GDELT, Media Cloud, Yle-artikkeli-API: ei haussa (vaihe 1).
 
 ## Koodikirjan kentät (tyhjä aineisto)
 
