@@ -33,6 +33,12 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-02 (vaihe 3, ennen ihmiskoodausta). Wayback-HTML haettu osittain;
+  Internet Archive katkaisi rinnakkaiset yhteydet. Puuttuvat päivät jätettiin
+  tyhjiksi. Otsikot konepoiminnalla; `aihe`/`savy` tyhjiä. Perustelu:
+  esikäsittely ei täytä aukkoja eikä koodaa sävyä. IL 2023-HTML:ssä ei
+  `h1`/`otsikko`; luokat luettu snapshotista (`front-title` ym.).
+
 - 2026-11-01 (vaihe 4, ennen kaavioiden piirtoa). Forest-kaavion 2020–2024-RR
   on yhteenlaskettu kelpoisista vuosista (summa osoittajista ja nimittäjistä),
   ei aritmeettinen keskiarvo vuosittaisista RR-luvuista. Perustelu: Poisson-CI

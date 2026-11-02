@@ -1,6 +1,7 @@
 # Mediahaaran menetelmät
 
 Vaihe 1 (saatavuus) 2026-11-01. Vaihe 2 (CDX-indeksi) 2026-11-02.
+Vaihe 3 (HTML-otsikot) 2026-11-02.
 Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 
 ## Yksikkö ja jakso (vaihe 2)
@@ -15,7 +16,21 @@ Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 - Etusivujen HTML-snapshotteja ei ladattu vaiheessa 2 (otsikot = vaihe 3).
 - GDELT, Media Cloud, Yle-artikkeli-API: ei haussa (vaihe 1).
 
-## Koodikirjan kentät (tyhjä aineisto)
+## Esikäsittely (vaihe 3)
+
+- Snapshot-URL = CDX-päivän ensimmäinen osuma. Ei id_-moodia (redirect-silmukka).
+- Otsikot: HTML-luokan täysi tokeni (`otsikko`, `headline`, `article-title`,
+  IL 2023 `front-title` / `a-title-font` / `latest-pala-title` / `big-title` /
+  `newsticker-title-text`) ja `h1`–`h3`.
+  Ei `<title>` / `og:title`. Ei osamerkkijonoa (`MinimalHeadlines` ≠ `headline`).
+  Luokat luettu snapshotista.
+- Kuvateksti: ensimmäinen `figcaption`. Kuva: `og:image`.
+- Entiteetti: merkkijono-osuma M1-avaimista; ei ihmiskoodaus.
+- `aihe`, `savy`, ihmis-`koodaaja` tyhjiä.
+- Puuttuva HTML tai tyhjä poiminta = tyhjä, ei interpolointia.
+- IA-rajoitus: HTML-kattavuus < CDX-kattavuus; katkos = puuttuva.
+
+## Koodikirjan kentät (esikäsittely-v1)
 
 | Kenttä | Sisältö |
 |---|---|

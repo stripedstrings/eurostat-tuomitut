@@ -124,3 +124,23 @@ Ylen 2015-01-02. Viimeiset 200-rivit 2025-12-31.
 RSS 2026-11-02: IL 20 item, Yle 13 item. Ei historiaruudukossa.
 
 HTML-snapshotteja ei haettu. GDELT/Media Cloud/Yle-artikkeli-API ei.
+
+---
+
+## Vaihe 3 (esikäsittely, 2026-11-02)
+
+HTML Wayback-snapshotit: `python -m src.parse_media`. Tiedostot
+`media/data/raw/snapshots/{media}/{paiva}.html` (git-ignorissa).
+Jäsennys: `tietueet_etusivu.csv`, `tietueet_otsikko.csv`,
+`tietueet_yhteenveto.csv`. Koodikirja: `media/codebook_esikasittely_v1.md`.
+
+Rinnakkainen haku (5 työntekijää) katkaisi IA-yhteyksiä (curl 7 / HTTP 0).
+Jatko: yksi työntekijä, 1,5 s tauko. Ei täyttöä. Päivä ilman tiedostoa:
+tyhjät otsikkokentät. `aihe` ja `savy` tyhjiä.
+
+| media | n_paivaa | n_tiedosto | n_otsikko_paiva | n_otsikkoa | n_ilman_otsikkoa |
+|---|---:|---:|---:|---:|---:|
+| iltalehti_etusivu | 4018 | 165 | 165 | 10545 | 0 |
+| yle_uutiset | 4018 | 81 | 81 | 3526 | 0 |
+
+HTML-kattavuus << CDX. Jatko: `python -m src.parse_media --tyot 1`. GDELT/Media Cloud/Yle-artikkeli-API ei. RSS ei täytä historiaa.

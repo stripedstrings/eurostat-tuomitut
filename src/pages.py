@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import html
 import re
 import shutil
@@ -285,6 +286,37 @@ def _kehys(otsikko: str, aktiivinen: str, juuri: bool, media_sivu: bool, css: st
 """
 
 
+def _media_taulu_osio(
+    polku: Path,
+    otsikko_fi: str,
+    teksti_fi: str,
+    otsikko_en: str,
+    teksti_en: str,
+) -> tuple[str, str]:
+    if not polku.exists():
+        return "", ""
+    with polku.open(encoding="utf-8", newline="") as f:
+        rivit = list(csv.DictReader(f))
+    if not rivit:
+        return "", ""
+    avaimet = list(rivit[0].keys())
+    solut = "".join(
+        "<tr>"
+        + "".join(f"<td>{html.escape(str(r[k]))}</td>" for k in avaimet)
+        + "</tr>"
+        for r in rivit
+    )
+    paa = "".join(f"<th>{html.escape(k)}</th>" for k in avaimet)
+    taulu = (
+        f'<div class="taulu-wrap"><table><thead><tr>{paa}</tr></thead>'
+        f"<tbody>{solut}</tbody></table></div>"
+    )
+    return (
+        f"<h2>{html.escape(otsikko_fi)}</h2><p>{teksti_fi}</p>{taulu}",
+        f"<h2>{html.escape(otsikko_en)}</h2><p>{teksti_en}</p>{taulu}",
+    )
+
+
 def kirjoita_aihesivut() -> None:
     (DOCS_DIR / "media").mkdir(parents=True, exist_ok=True)
     for nimi in (
@@ -301,6 +333,9 @@ def kirjoita_aihesivut() -> None:
             shutil.copy2(src, kohde)
     for csv_polku in (ROOT / "media" / "output" / "tables").glob("*.csv"):
         shutil.copy2(csv_polku, DOCS_DIR / "media" / csv_polku.name)
+    koodikirja = ROOT / "media" / "codebook_esikasittely_v1.md"
+    if koodikirja.exists():
+        shutil.copy2(koodikirja, DOCS_DIR / "media" / koodikirja.name)
 
     lahteet = """
     <div class="kieli-fi">
@@ -354,41 +389,39 @@ def kirjoita_aihesivut() -> None:
         encoding="utf-8",
     )
 
-    peitto_fi = ""
-    peitto_en = ""
-    yht = ROOT / "media" / "output" / "tables" / "coverage_media_yhteenveto.csv"
-    if yht.exists():
-        import csv as _csv
-
-        with yht.open(encoding="utf-8", newline="") as f:
-            rivit = list(_csv.DictReader(f))
-        solut = "".join(
-            "<tr>"
-            + "".join(f"<td>{html.escape(str(r[k]))}</td>" for k in rivit[0].keys())
-            + "</tr>"
-            for r in rivit
-        )
-        paa = "".join(f"<th>{html.escape(k)}</th>" for k in rivit[0].keys())
-        taulu = f'<div class="taulu-wrap"><table><thead><tr>{paa}</tr></thead><tbody>{solut}</tbody></table></div>'
-        peitto_fi = (
-            "<h2>Peitto (vaihe 2, CDX, 2015–2025)</h2>"
-            "<p>Kalenteriruudukko, puuttuva päivä tyhjä. Ei HTML-otsikoita. "
-            '<a href="coverage_media_yhteenveto.csv">yhteenveto</a>, '
-            '<a href="coverage_media_paiva.csv">päivittäin</a>.</p>'
-            + taulu
-        )
-        peitto_en = (
-            "<h2>Coverage (phase 2, CDX, 2015–2025)</h2>"
-            "<p>Full calendar; missing days left empty. No HTML headlines. "
-            '<a href="coverage_media_yhteenveto.csv">summary</a>, '
-            '<a href="coverage_media_paiva.csv">by day</a>.</p>'
-            + taulu
-        )
+    peitto_fi, peitto_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "coverage_media_yhteenveto.csv",
+        "Peitto (vaihe 2, CDX, 2015–2025)",
+        "Kalenteriruudukko, puuttuva päivä tyhjä. "
+        '<a href="coverage_media_yhteenveto.csv">yhteenveto</a>, '
+        '<a href="coverage_media_paiva.csv">päivittäin</a>.',
+        "Coverage (phase 2, CDX, 2015–2025)",
+        "Full calendar; missing days left empty. "
+        '<a href="coverage_media_yhteenveto.csv">summary</a>, '
+        '<a href="coverage_media_paiva.csv">by day</a>.',
+    )
+    esik_fi, esik_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "tietueet_yhteenveto.csv",
+        "Esikäsittely (vaihe 3, 2026-11-02)",
+        "Otsikot Wayback-HTML:stä. Puuttuva snapshot = tyhjä rivi, ei täyttöä. "
+        "aihe ja sävy tyhjiä (vaihe 4). "
+        '<a href="tietueet_yhteenveto.csv">yhteenveto</a>, '
+        '<a href="tietueet_etusivu.csv">etusivu</a>, '
+        '<a href="tietueet_otsikko.csv">otsikot</a>, '
+        '<a href="codebook_esikasittely_v1.md">koodikirja</a>.',
+        "Preprocessing (phase 3, 2026-11-02)",
+        "Headlines from Wayback HTML. Missing snapshot = empty row, no fill. "
+        "topic and tone empty (phase 4). "
+        '<a href="tietueet_yhteenveto.csv">summary</a>, '
+        '<a href="tietueet_etusivu.csv">front page</a>, '
+        '<a href="tietueet_otsikko.csv">headlines</a>, '
+        '<a href="codebook_esikasittely_v1.md">codebook</a>.',
+    )
 
     media = f"""
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 2: CDX-indeksi haettu 2026-11-02. Otsikot = vaihe 3.</p>
+      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 2: CDX 2026-11-02. Vaihe 3: otsikot olemassa olevista snapshotista; puuttuva päivä tyhjä. Ihmiskoodaus = vaihe 4.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -409,10 +442,11 @@ def kirjoita_aihesivut() -> None:
         </tbody>
       </table></div>
       {peitto_fi}
+      {esik_fi}
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phase 2: CDX index retrieved 2026-11-02. Headlines = phase 3.</p>
+      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phase 2: CDX 2026-11-02. Phase 3: headlines from available snapshots; missing days empty. Human coding = phase 4.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -433,6 +467,7 @@ def kirjoita_aihesivut() -> None:
         </tbody>
       </table></div>
       {peitto_en}
+      {esik_en}
     </div>
 """
     (DOCS_DIR / "media" / "index.html").write_text(
