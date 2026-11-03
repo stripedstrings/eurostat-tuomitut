@@ -1,0 +1,18 @@
+lahde,koodi,kuvaus,url,http,tavut,saatavuus,huom
+Eurostat,migr_imm1ctz,maahanmuutto kansalaisuuden mukaan,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_imm1ctz?format=SDMX-CSV&geo=FI,0,0,ei,ei dataa / virhe
+Eurostat,migr_imm3ctb,maahanmuutto syntymämaan mukaan,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_imm3ctb?format=SDMX-CSV&geo=FI,0,0,ei,ei dataa / virhe
+Eurostat,migr_asyappctza,turvapaikkahakemukset,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_asyappctza?format=SDMX-CSV&geo=FI,0,0,ei,ei dataa / virhe
+Eurostat,migr_asydcfsta,turvapaikkapäätökset,https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_asydcfsta?format=SDMX-CSV&geo=FI,200,77216694,kylla,FI-suodatettu SDMX-CSV-näyte
+Eurostat,migr_pop1ctz,väestö ikä×sukupuoli×kansalaisuus (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_pop1ctz?format=SDMX-CSV&geo=FI,200,642514888,kylla,välimuisti; FI-rivejä≈455873
+Eurostat,lfsa_ergan,työllisyysaste kansalaisuus (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/lfsa_ergan?format=SDMX-CSV&geo=FI,200,53416405,kylla,välimuisti; FI-rivejä≈23379
+Eurostat,lfsa_urgan,työttömyysaste kansalaisuus (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/lfsa_urgan?format=SDMX-CSV&geo=FI,200,43810263,kylla,välimuisti; FI-rivejä≈19684
+Eurostat,edat_lfs_9911,koulutusaste kansalaisuus (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/edat_lfs_9911?format=SDMX-CSV&geo=FI,200,85676861,kylla,välimuisti; FI-rivejä≈32250
+Eurostat,migr_resfirst,ensimmäiset oleskeluluvat (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_resfirst?format=SDMX-CSV&geo=FI,200,154329258,kylla,välimuisti; FI-rivejä≈63996
+Eurostat,migr_resvalid,voimassa olevat luvat (välimuisti),https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/migr_resvalid?format=SDMX-CSV&geo=FI,200,130470211,kylla,välimuisti; FI-rivejä≈89712
+StatFin,statfin_vaerak_pxt_11ra,väestö syntyperän mukaan (ehdokas),https://pxdata.stat.fi/PXWeb/api/v1/fi/StatFin/vaerak/statfin_vaerak_pxt_11ra.px,400,11,ei,PxWeb meta JSON
+StatFin,statfin_muutl_pxt_11a8,maahan-/maastamuutto (ehdokas),https://pxdata.stat.fi/PXWeb/api/v1/fi/StatFin/muutl/statfin_muutl_pxt_11a8.px,400,11,ei,PxWeb meta JSON
+HTTP,migri_tilastot,Migri tilastopalvelu,https://tilastot.migri.fi/,206,794,ei,sivutason saatavuus; ei vielä aikasarjaa
+HTTP,migri_kiintio,Migri kiintiöpakolaistilastot,https://migri.fi/kiintiopakolaistilastot,200,504694,kylla,sivutason saatavuus; ei vielä aikasarjaa
+HTTP,kotoutuminen_indikaattorit,Kotoutumisen indikaattorit (kuvaussivu),https://kotoutuminen.fi/kotoutumisen-indikaattorit-tietokanta,206,345705,ei,sivutason saatavuus; ei vielä aikasarjaa
+HTTP,kotoutuminen_pxweb,Kotoutumisen indikaattorit PxWeb (ehdokas),https://kototietokannat.stat.fi/PXWeb/pxweb/fi/Kotoutumisenindikaattorit/,0,0,ei,sivutason saatavuus; ei vielä aikasarjaa
+—,kieli_oppimisaika_kk,kielitaidon oppimisaika kuukausina,,,0,ei,ei avointa aikasarjaa; ei estimoida

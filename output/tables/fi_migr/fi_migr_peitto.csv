@@ -1,0 +1,8 @@
+aihe,lahde,vuosi_min,vuosi_max,n_rivia,saatavuus
+tulot_maahanmuutto,StatFin 11a8,1990,2025,108,kylla
+ika_sukupuoli_syntypera,StatFin 11rt,2000,2025,2496,kylla
+tyollisyys,Eurostat LFS,1995,2025,310,kylla
+koulutus,Eurostat edat_lfs_9911,2004,2025,318,kylla
+oleskeluluvat,Eurostat migr_res*,2008,2025,216,kylla
+kiintiopakolaiset,Migri,2017,2025,9,kylla
+kieli_oppimisaika,—,,,0,ei

@@ -33,6 +33,12 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (TUTKIVA, FI maahanmuuttopaneeli). Uusi Suomi-only -haara:
+  tulot, kiintiöt (+ asettaja lähteestä), ikä/sukupuoli, työllisyys,
+  koulutus, kotoutuminen/kieli jos avoinna. Ei K1-yhdistämistä. Puuttuva
+  = NaN. Perustelu: K1/K2 eivät kata tulovirtoja eikä kansallisia
+  kiintiö-/kotoutumislukuja.
+
 - 2026-11-03 (TUTKIVA, HTML-tihennys). Iltalehti + Yle Wayback-HTML:n
   tihentäminen jaksolle 2015–2025 (ei uusia medioita, ei 2000–2014).
   Prioriteetti: vuodet 2017–2022 ja 2024–2025. Haku vuorottelee näitä

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <title>Suomi maahanmuutto (TUTKIVA)</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body>
+  <header><div class="wrap">
+  <nav class="aiheet" aria-label="Aiheet">
+    <a href="../index.html">Maahanmuutto</a>
+    <a href="index.html" class="aktiivinen">Maahanmuutto FI (TUTKIVA)</a>
+    <a href="../media/index.html">Media</a>
+  </nav>
+  </div></header>
+  <main>
+    <p class="tutkiva">TUTKIVA (ei esirekisteröity). Ei yhdistetty K1-rikostilastoon.</p>
+    <h1>Raportti: Suomi maahanmuuton avoin tietopaneeli (TUTKIVA)</h1>
+
+<p>Ei esirekisteröity. Ei yhdistetty K1-rikostilastoon. Vain Suomi.  </p>
+<p>Haettu 2026-11-03. Puuttuva = tyhjä / `saatavuus=ei`, ei täyttöä.</p>
+
+<p>**Tulosluvut erillään tulkinnasta** (osio 8).</p>
+
+<h2>1. Peitto</h2>
+
+<p>Lähde: `output/tables/fi_migr/fi_migr_peitto.csv`.</p>
+
+<pre>| aihe | lähde | saatavuus | vuodet (min–max) |</pre>
+<pre>|---|---|---|---|</pre>
+<pre>| tulot_maahanmuutto | StatFin 11a8 | kyllä | 1990–2025 |</pre>
+<pre>| ika_sukupuoli_syntypera | StatFin 11rt | kyllä | 2000–2025 |</pre>
+<pre>| tyollisyys | Eurostat LFS FI | kyllä | 1995–2025 |</pre>
+<pre>| koulutus | Eurostat edat_lfs_9911 FI | kyllä | 2004–2025 |</pre>
+<pre>| oleskeluluvat | Eurostat migr_res* FI | kyllä | 2008–2025 |</pre>
+<pre>| kiintiopakolaiset (saapuneet) | Migri HTML | kyllä | 2017–2025 |</pre>
+<pre>| kieli_oppimisaika_kk | — | **ei** | — |</pre>
+<pre>| Eurostat migr_imm* / migr_asy* (FI-suodatus) | probe | **ei** (HTTP 413) | — |</pre>
+<pre>| Kotoutumisen indikaattorit PxWeb | probe | **ei** (ei vastannut) | — |</pre>
+
+<h2>2. Maahanmuutto Suomeen (StatFin 11a8)</h2>
+
+<p>Yksikkö: henkilöä / vuosi. Kansalaisuus: YHTEENSÄ, Suomi, ULKOMAAT YHTEENSÄ.</p>
+
+<p>Ulkomaan kansalaisten maahanmuutto (valitut vuodet):</p>
+
+<pre>| vuosi | maahanmuutto (ULKOMAAT YHTEENSÄ) |</pre>
+<pre>|---:|---:|</pre>
+<pre>| 2020 | 23260 |</pre>
+<pre>| 2021 | 28043 |</pre>
+<pre>| 2022 | 42470 |</pre>
+<pre>| 2023 | 66113 |</pre>
+<pre>| 2024 | 57215 |</pre>
+<pre>| 2025 | 44331 |</pre>
+
+<p>Kaavio: `output/figures/fi_migr/01_maahanmuutto_vuosi.png`.</p>
+
+<h2>3. Väestöosuudet (StatFin 159t)</h2>
+
+<p>Ulkomaalaistaustaisten / ulkomaan kansalaisten / vieraskielisten osuudet koko maan väestöstä.  </p>
+<p>Kaavio: `02_vaesto_osuudet.png`. Taulu: `fi_migr_vaesto_osuudet.csv`.</p>
+
+<h2>4. Ikä × sukupuoli × syntyperä (StatFin 11rt)</h2>
+
+<p>Ulkomaalaistaustainen väestö ikäryhmittäin ja sukupuolittain (koko maa).  </p>
+<p>Kaavio (viimeisin vuosi): `06_ika_sukupuoli.png`. Taulu: `fi_migr_ika_sukupuoli.csv`.</p>
+
+<h2>5. Työllisyys (Eurostat lfsa_ergan, geo=FI)</h2>
+
+<p>LFS-otanta. Kansalaisuusluokat NAT/FOR/… ≠ maahanmuuttotausta.</p>
+
+<p>Esim. 2024 työllisyysaste (%): NAT 73,6; FOR 60,9; NEU27_2020_FOR 56,9.  </p>
+<p>Kaavio: `03_tyollisyysaste.png`.</p>
+
+<h2>6. Koulutus (Eurostat edat_lfs_9911, geo=FI)</h2>
+
+<p>ISCED 5–8 osuus 25–64-vuotiaista kansalaisuusryhmittäin.  </p>
+<p>Kaavio: `04_koulutus_korkea.png`.</p>
+
+<h2>7. Oleskeluluvat ja kiintiö</h2>
+
+<p>Ensimmäiset oleskeluluvat syittäin (Eurostat migr_resfirst, kolmansien maiden kansalaiset): `05_oleskeluluvat.png`, `fi_migr_luvat.csv`.</p>
+
+<p>Kiintiöpakolaiset (Migri):</p>
+
+<p>- **Asettaja:** Suomen valtioneuvosto (esitys) / eduskunta (päätös talousarvion / pakolaiskiintiön yhteydessä). UNHCR ehdottaa henkilöitä, ei aseta Suomen vuosikiintiötä. (`fi_migr_kiintio_meta.csv`)</p>
+<p>- **Saapuneet** 2017–2025 poimittu Migri-sivulta (`fi_migr_kiintio.csv`). Esim. 2025: 621; 2024: 808; 2023: 1332.</p>
+<p>- HTML-poiminnan “Yhteensä / valitut” -luvut ovat TUTKIVA; osa vuosista puuttuu tai vaatii manuaalisen tarkistuksen lähteestä.</p>
+
+<h2>8. Kielitaito / oppimisaika</h2>
+
+<p>`kieli_oppimisaika_kk`: **ei saatavilla** avoimena aikasarjana (ei estimoida).  </p>
+<p>Kotoutumisen indikaattorien PxWeb ei vastannut probe:ssa → kielitaidon taso × maassaoloaika ei haettu.</p>
+
+<h2>9. Tulkinta ja rajat</h2>
+
+<p>- Luvut ovat lähteiden määritelmien mukaisia. StatFin-syntyperä ≠ Eurostat-kansalaisuus ≠ pakolaisuus.</p>
+<p>- Migri- ja Eurostat-yksiköitä ei ole summattu samaan “kokonaisfaktalukuun”.</p>
+<p>- HTTP 413 esti Eurostatin maahanmuutto-/turvapaikkasarjojen suoran FI-haun; tulovirta perustuu StatFiniin.</p>
+<p>- Ei politiikkajohtopäätöstä kiintiön koosta. Ei K1-yhdistämistä.</p>
+    <h2>Kaaviot</h2>
+    <figure><img src="figures/01_maahanmuutto_vuosi.png" alt="01_maahanmuutto_vuosi" style="max-width:100%"><figcaption>01_maahanmuutto_vuosi</figcaption></figure><figure><img src="figures/02_vaesto_osuudet.png" alt="02_vaesto_osuudet" style="max-width:100%"><figcaption>02_vaesto_osuudet</figcaption></figure><figure><img src="figures/03_tyollisyysaste.png" alt="03_tyollisyysaste" style="max-width:100%"><figcaption>03_tyollisyysaste</figcaption></figure><figure><img src="figures/04_koulutus_korkea.png" alt="04_koulutus_korkea" style="max-width:100%"><figcaption>04_koulutus_korkea</figcaption></figure><figure><img src="figures/05_oleskeluluvat.png" alt="05_oleskeluluvat" style="max-width:100%"><figcaption>05_oleskeluluvat</figcaption></figure><figure><img src="figures/06_ika_sukupuoli.png" alt="06_ika_sukupuoli" style="max-width:100%"><figcaption>06_ika_sukupuoli</figcaption></figure>
+    <h2>Peitto</h2>
+    <table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>aihe</th>
+      <th>lahde</th>
+      <th>vuosi_min</th>
+      <th>vuosi_max</th>
+      <th>n_rivia</th>
+      <th>saatavuus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>tulot_maahanmuutto</td>
+      <td>StatFin 11a8</td>
+      <td>1990.0</td>
+      <td>2025.0</td>
+      <td>108</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>ika_sukupuoli_syntypera</td>
+      <td>StatFin 11rt</td>
+      <td>2000.0</td>
+      <td>2025.0</td>
+      <td>2496</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>tyollisyys</td>
+      <td>Eurostat LFS</td>
+      <td>1995.0</td>
+      <td>2025.0</td>
+      <td>310</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>koulutus</td>
+      <td>Eurostat edat_lfs_9911</td>
+      <td>2004.0</td>
+      <td>2025.0</td>
+      <td>318</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>oleskeluluvat</td>
+      <td>Eurostat migr_res*</td>
+      <td>2008.0</td>
+      <td>2025.0</td>
+      <td>216</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>kiintiopakolaiset</td>
+      <td>Migri</td>
+      <td>2017.0</td>
+      <td>2025.0</td>
+      <td>9</td>
+      <td>kylla</td>
+    </tr>
+    <tr>
+      <td>kieli_oppimisaika</td>
+      <td>—</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>ei</td>
+    </tr>
+  </tbody>
+</table>
+    <p>CSV-tiedostot tässä kansiossa. Lähteet: <a href="FI_MIGR_DATA_SOURCES.md">FI_MIGR_DATA_SOURCES.md</a>.</p>
+  </main>
+</body>
+</html>

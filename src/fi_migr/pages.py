@@ -1,0 +1,90 @@
+"""docs/maahanmuutto-fi/ -paneeli. TUTKIVA."""
+
+from __future__ import annotations
+
+import html
+import shutil
+from pathlib import Path
+
+import pandas as pd
+
+from src.config import ROOT
+from src.fi_migr.paths import DOCS, FIGURES, TABLES
+
+
+def _df_html(path: Path, max_rows: int = 40) -> str:
+    if not path.exists():
+        return "<p>Taulu puuttuu.</p>"
+    df = pd.read_csv(path)
+    return df.head(max_rows).to_html(index=False, border=0, classes="taulu")
+
+
+def aja() -> None:
+    DOCS.mkdir(parents=True, exist_ok=True)
+    fig_dir = DOCS / "figures"
+    fig_dir.mkdir(parents=True, exist_ok=True)
+    for png in FIGURES.glob("*.png"):
+        shutil.copy2(png, fig_dir / png.name)
+    for csv in TABLES.glob("*.csv"):
+        shutil.copy2(csv, DOCS / csv.name)
+    for nimi in ("FI_MIGR_README.md", "FI_MIGR_DATA_SOURCES.md", "output/RAPORTTI_FI_MIGR.md"):
+        src = ROOT / nimi if not nimi.startswith("output") else ROOT / nimi
+        if src.exists():
+            shutil.copy2(src, DOCS / src.name)
+
+    raportti = ROOT / "output" / "RAPORTTI_FI_MIGR.md"
+    body = ""
+    if raportti.exists():
+        # yksinkertainen md→html (otsikot + kappaleet)
+        lines = []
+        for ln in raportti.read_text(encoding="utf-8").splitlines():
+            if ln.startswith("## "):
+                lines.append(f"<h2>{html.escape(ln[3:])}</h2>")
+            elif ln.startswith("# "):
+                lines.append(f"<h1>{html.escape(ln[2:])}</h1>")
+            elif ln.startswith("|"):
+                lines.append(f"<pre>{html.escape(ln)}</pre>")
+            elif ln.strip() == "":
+                lines.append("")
+            else:
+                lines.append(f"<p>{html.escape(ln)}</p>")
+        body = "\n".join(lines)
+
+    kuvat = "".join(
+        f'<figure><img src="figures/{p.name}" alt="{p.stem}" style="max-width:100%">'
+        f"<figcaption>{html.escape(p.stem)}</figcaption></figure>"
+        for p in sorted(FIGURES.glob("*.png"))
+    )
+    sivu = f"""<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <title>Suomi maahanmuutto (TUTKIVA)</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body>
+  <header><div class="wrap">
+  <nav class="aiheet" aria-label="Aiheet">
+    <a href="../index.html">Maahanmuutto</a>
+    <a href="index.html" class="aktiivinen">Maahanmuutto FI (TUTKIVA)</a>
+    <a href="../media/index.html">Media</a>
+  </nav>
+  </div></header>
+  <main>
+    <p class="tutkiva">TUTKIVA (ei esirekisteröity). Ei yhdistetty K1-rikostilastoon.</p>
+    {body}
+    <h2>Kaaviot</h2>
+    {kuvat}
+    <h2>Peitto</h2>
+    {_df_html(TABLES / "fi_migr_peitto.csv")}
+    <p>CSV-tiedostot tässä kansiossa. Lähteet: <a href="FI_MIGR_DATA_SOURCES.md">FI_MIGR_DATA_SOURCES.md</a>.</p>
+  </main>
+</body>
+</html>
+"""
+    (DOCS / "index.html").write_text(sivu, encoding="utf-8")
+    print("kirjoitettu", DOCS / "index.html", flush=True)
+
+
+if __name__ == "__main__":
+    aja()

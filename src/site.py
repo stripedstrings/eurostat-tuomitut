@@ -25,19 +25,20 @@ LIPUT = """
 
 
 def aihe_nav(*, juuri: bool = True, aktiivinen: str = "maahanmuutto", media_sivu: bool = False) -> str:
-    """Yläpalkki: Maahanmuutto | Media. Suhteelliset polut sivun kansiosta."""
+    """Yläpalkki: Maahanmuutto | FI-paneeli | Media. Suhteelliset polut sivun kansiosta."""
     if media_sivu:
-        maa, med = "../index.html", "index.html"
+        maa, med, fi_m = "../index.html", "index.html", "../maahanmuutto-fi/index.html"
     elif juuri:
-        maa, med = "index.html", "media/index.html"
+        maa, med, fi_m = "index.html", "media/index.html", "maahanmuutto-fi/index.html"
     else:
-        maa, med = "../index.html", "../media/index.html"
+        maa, med, fi_m = "../index.html", "../media/index.html", "../maahanmuutto-fi/index.html"
 
     def luokka(nimi: str) -> str:
         return ' class="aktiivinen"' if aktiivinen == nimi else ""
 
     return f"""<nav class="aiheet" aria-label="Aiheet">
   <a href="{maa}"{luokka("maahanmuutto")} data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="{fi_m}"{luokka("fi_migr")}>Maahanmuutto FI (TUTKIVA)</a>
   <a href="{med}"{luokka("media")} data-i18n="nav_media">Media</a>
 </nav>
 """
