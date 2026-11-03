@@ -24,23 +24,171 @@ LIPUT = """
 """
 
 
-def aihe_nav(*, juuri: bool = True, aktiivinen: str = "maahanmuutto", media_sivu: bool = False) -> str:
-    """Yläpalkki: Maahanmuutto | FI-paneeli | Media. Suhteelliset polut sivun kansiosta."""
-    if media_sivu:
-        maa, med, fi_m = "../index.html", "index.html", "../maahanmuutto-fi/index.html"
-    elif juuri:
-        maa, med, fi_m = "index.html", "media/index.html", "maahanmuutto-fi/index.html"
-    else:
-        maa, med, fi_m = "../index.html", "../media/index.html", "../maahanmuutto-fi/index.html"
+def _nav_polut(sijainti: str) -> dict[str, str]:
+    """Suhteelliset polut sivun kansiosta: juuri | media | fi_migr | maat | tutkimus."""
+    taulu = {
+        "juuri": {
+            "tutkimus": "tutkimus/index.html",
+            "k1": "index.html",
+            "fi": "maahanmuutto-fi/index.html",
+            "media": "media/index.html",
+        },
+        "media": {
+            "tutkimus": "../tutkimus/index.html",
+            "k1": "../index.html",
+            "fi": "../maahanmuutto-fi/index.html",
+            "media": "index.html",
+        },
+        "fi_migr": {
+            "tutkimus": "../tutkimus/index.html",
+            "k1": "../index.html",
+            "fi": "index.html",
+            "media": "../media/index.html",
+        },
+        "maat": {
+            "tutkimus": "../tutkimus/index.html",
+            "k1": "../index.html",
+            "fi": "../maahanmuutto-fi/index.html",
+            "media": "../media/index.html",
+        },
+        "tutkimus": {
+            "tutkimus": "index.html",
+            "k1": "../index.html",
+            "fi": "../maahanmuutto-fi/index.html",
+            "media": "../media/index.html",
+        },
+    }
+    if sijainti not in taulu:
+        raise ValueError(sijainti)
+    return taulu[sijainti]
+
+
+def aihe_nav(
+    *,
+    juuri: bool = True,
+    aktiivinen: str = "maahanmuutto",
+    media_sivu: bool = False,
+    sijainti: str | None = None,
+) -> str:
+    """Yläpalkki: Tutkimus | Maahanmuutto | FI | Media."""
+    if sijainti is None:
+        if media_sivu:
+            sijainti = "media"
+        elif juuri:
+            sijainti = "juuri"
+        else:
+            sijainti = "maat"
+    p = _nav_polut(sijainti)
 
     def luokka(nimi: str) -> str:
         return ' class="aktiivinen"' if aktiivinen == nimi else ""
 
     return f"""<nav class="aiheet" aria-label="Aiheet">
-  <a href="{maa}"{luokka("maahanmuutto")} data-i18n="nav_maahanmuutto">Maahanmuutto</a>
-  <a href="{fi_m}"{luokka("fi_migr")}>Maahanmuutto FI (TUTKIVA)</a>
-  <a href="{med}"{luokka("media")} data-i18n="nav_media">Media</a>
+  <a href="{p['tutkimus']}"{luokka("tutkimus")}>Tutkimus</a>
+  <a href="{p['k1']}"{luokka("maahanmuutto")} data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="{p['fi']}"{luokka("fi_migr")}>Maahanmuutto FI (TUTKIVA)</a>
+  <a href="{p['media']}"{luokka("media")} data-i18n="nav_media">Media</a>
 </nav>
+"""
+
+
+def ristiviittaukset(*, aktiivinen: str, sijainti: str = "juuri") -> str:
+    """Haarojen väliset linkit; ei yhdistä aineistoja."""
+    p = _nav_polut(sijainti)
+    kohteet = [
+        ("tutkimus", "Tutkimus-hubi", p["tutkimus"], "Kolme haaraa samalla kartalla."),
+        (
+            "maahanmuutto",
+            "K1: EU tuomitut (esirekisteröity)",
+            p["k1"],
+            "Tuomitsemisasteet kansalaisuuden mukaan.",
+        ),
+        (
+            "fi_migr",
+            "Maahanmuutto FI (TUTKIVA)",
+            p["fi"],
+            "Tulot, kiintiöt, työllisyys ym. vain Suomi. Ei yhdistetty K1:een.",
+        ),
+        (
+            "media",
+            "Media-agenda (TUTKIVA / esirek.)",
+            p["media"],
+            "Näkyvyys ja kehykset; ei motiivi- tai kontrolliväitettä. M4 ≠ K1-yksikkö.",
+        ),
+    ]
+    li = []
+    for avain, otsikko, href, teksti in kohteet:
+        if avain == aktiivinen:
+            continue
+        li.append(
+            f'<li><a href="{href}"><strong>{otsikko}</strong></a> — {teksti}</li>'
+        )
+    return f"""<aside class="ristiviittaukset kortti" aria-label="Ristiviittaukset">
+  <h2>Muut tutkimushaarat</h2>
+  <ul>
+    {"".join(li)}
+  </ul>
+  <p>Haarat ovat erillisiä. FI-paneelia ei yhdistetä K1:een. Media ei ole K1:n
+  selittäjä; M4 vertaa eri yksiköitä. Motiiveja tai “agendan kontrollia” ei päätellä datasta.</p>
+</aside>
+"""
+
+
+def tutkimus_hub_html() -> str:
+    """docs/tutkimus/index.html sisältö + kehys."""
+    nav = aihe_nav(sijainti="tutkimus", aktiivinen="tutkimus")
+    return f"""<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutkimus kokonaisuutena</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      {nav}
+      <div class="yla">
+        <p class="kicker"><a href="index.html">Tutkimus</a></p>
+        {LIPUT}
+      </div>
+      <h1>Tutkimus kokonaisuutena</h1>
+      <p class="lead">Kolme erillistä haaraa: rikostilasto (K1), Suomen maahanmuuttopaneeli
+      ja uutisagenda. Niitä ei sekoiteta samaan analyysiin.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="kortti">
+      <h2><a href="../index.html">K1 — Maahanmuutto / tuomitut (esirekisteröity)</a></h2>
+      <p>EU-27: tuomitsemisasteet oman maan ja ulkomaan kansalaisten välillä.
+      Raportti ja maasivut. Tämä on pääprojektin esirekisteröity haara.</p>
+    </section>
+    <section class="kortti">
+      <h2><a href="../maahanmuutto-fi/index.html">Maahanmuutto FI (TUTKIVA)</a></h2>
+      <p>Vain Suomi: tulot, kiintiöpakolaiset (asettaja dokumentoituna), ikä/sukupuoli,
+      työllisyys, koulutus, oleskeluluvat. Puuttuva merkitään tyhjäksi.
+      <strong>Ei yhdistetty K1-rikostilastoon.</strong></p>
+    </section>
+    <section class="kortti">
+      <h2><a href="../media/index.html">Media — uutisagenda</a></h2>
+      <p>Mittaa otsikoiden ja etusivujen <em>näkyvyyttä</em> ja kehyksiä (frekvenssi,
+      osuus, Wilson-välit). Vertaa tarvittaessa ulkoisiin indikaattoreihin (M4 vs K1:
+      eri yksiköt). <strong>Ei todistakaan</strong> “agendan kontrollia”, propagandaa
+      tai “journalismia vailla journalismia” — nuo ovat tulkintoja. Motiiveja ei päätellä.</p>
+    </section>
+    <section class="kortti">
+      <h2>Mitä ei yhdistetä</h2>
+      <ul>
+        <li>FI-paneelin lukuja ei liitetä K1-tuomioasteisiin selittäjiksi.</li>
+        <li>Mediaosuuksia ei käytetä K1:n syynä.</li>
+        <li>Kansalaisuus ≠ maahanmuuttotausta ≠ pakolaisuus.</li>
+      </ul>
+    </section>
+  </main>
+  <script src="../sivu.js"></script>
+</body>
+</html>
 """
 
 

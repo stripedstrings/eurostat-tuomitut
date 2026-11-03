@@ -1,8 +1,11 @@
 # EU-maiden tuomitut kansalaisuuden mukaan 2008–2024
 
+**Tutkimus-hubi** (kolme erillistä haaraa): [tutkimus/](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/) — K1 EU-tuomitut, FI-maahanmuuttopaneeli (TUTKIVA), media-agenda. Haaroja ei yhdistetä samaan analyysiin.
+
 Esirekisteröity raportti: [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/) ([`output/RAPORTTI.md`](output/RAPORTTI.md)).  
 Tutkiva visualisointi (ei esirekisteröity): [maasivut](https://stripedstrings.github.io/eurostat-tuomitut/maat/fi.html).  
-Mediahaara (erillinen, ei yhdistetty K1:een ennen vaihetta 7): [`MEDIA_README.md`](MEDIA_README.md), [Media-välilehti](https://stripedstrings.github.io/eurostat-tuomitut/media/).
+Mediahaara (agenda: näkyvyys/kehykset; ei motiivi- tai kontrolliväitettä): [`MEDIA_README.md`](MEDIA_README.md), [Media-välilehti](https://stripedstrings.github.io/eurostat-tuomitut/media/).  
+FI-paneeli: [maahanmuutto-fi/](https://stripedstrings.github.io/eurostat-tuomitut/maahanmuutto-fi/).
 Ks. `CHANGELOG.md`.
 
 Avoin, toistettava ja dataan perustuva tarkastelu siitä, eroavatko oman maan

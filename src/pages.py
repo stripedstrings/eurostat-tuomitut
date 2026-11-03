@@ -169,7 +169,7 @@ def _taulu(rivit: list[str]) -> str:
 
 
 def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
-    from src.site import LIPUT, _valikko, aihe_nav
+    from src.site import LIPUT, _valikko, aihe_nav, ristiviittaukset
 
     return f"""<!DOCTYPE html>
 <html lang="fi">
@@ -182,7 +182,7 @@ def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
 <body class="raportti">
   <header>
     <div class="wrap">
-      {aihe_nav(juuri=True, aktiivinen="maahanmuutto")}
+      {aihe_nav(sijainti="juuri", aktiivinen="maahanmuutto")}
       <div class="yla">
         <p class="kicker"><a href="index.html" data-i18n="raportti_kicker"></a></p>
         {LIPUT}
@@ -201,6 +201,7 @@ def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
 {sisalto_en}
     </div>
     <p class="alaviite" data-i18n="raportti_alaviite"></p>
+    {ristiviittaukset(aktiivinen="maahanmuutto", sijainti="juuri")}
   </main>
   <script src="sivu.js"></script>
 </body>
@@ -239,27 +240,46 @@ def korjaa_valikot() -> None:
 
 
 def lisaa_aihe_palkki() -> None:
+    import re
+
     from src.site import aihe_nav
 
     merkit = [
-        (DOCS_DIR / "vertailu.html", aihe_nav(juuri=True, aktiivinen="maahanmuutto")),
+        (DOCS_DIR / "vertailu.html", aihe_nav(sijainti="juuri", aktiivinen="maahanmuutto")),
     ]
-    nav_maat = aihe_nav(juuri=False, aktiivinen="maahanmuutto")
+    nav_maat = aihe_nav(sijainti="maat", aktiivinen="maahanmuutto")
     for p in (DOCS_DIR / "maat").glob("*.html"):
         merkit.append((p, nav_maat))
     ankkuri = '    <div class="wrap">\n'
+    nav_re = re.compile(r'<nav class="aiheet"[^>]*>.*?</nav>\s*', re.DOTALL)
     for p, nav in merkit:
         if not p.exists():
             continue
         t = p.read_text(encoding="utf-8")
-        if 'class="aiheet"' in t:
-            continue
-        t = t.replace(ankkuri, ankkuri + "      " + nav, 1)
+        if nav_re.search(t):
+            t = nav_re.sub(nav, t, count=1)
+        else:
+            t = t.replace(ankkuri, ankkuri + "      " + nav, 1)
         p.write_text(t, encoding="utf-8")
 
 
-def _kehys(otsikko: str, aktiivinen: str, juuri: bool, media_sivu: bool, css: str, js: str, sisalto: str) -> str:
+def _kehys(
+    otsikko: str,
+    aktiivinen: str,
+    juuri: bool,
+    media_sivu: bool,
+    css: str,
+    js: str,
+    sisalto: str,
+    *,
+    sijainti: str | None = None,
+    ristiviittaus: str = "",
+) -> str:
     from src.site import LIPUT, aihe_nav
+
+    if sijainti is None:
+        sijainti = "media" if media_sivu else ("juuri" if juuri else "maat")
+    kicker = "../index.html" if sijainti in ("media", "maat", "tutkimus", "fi_migr") else "index.html"
 
     return f"""<!DOCTYPE html>
 <html lang="fi">
@@ -272,15 +292,16 @@ def _kehys(otsikko: str, aktiivinen: str, juuri: bool, media_sivu: bool, css: st
 <body class="raportti">
   <header>
     <div class="wrap">
-      {aihe_nav(juuri=juuri, aktiivinen=aktiivinen, media_sivu=media_sivu)}
+      {aihe_nav(sijainti=sijainti, aktiivinen=aktiivinen)}
       <div class="yla">
-        <p class="kicker"><a href="{'../index.html' if media_sivu else 'index.html'}" data-i18n="raportti_kicker"></a></p>
+        <p class="kicker"><a href="{kicker}" data-i18n="raportti_kicker"></a></p>
         {LIPUT}
       </div>
     </div>
   </header>
   <main class="wrap">
 {sisalto}
+{ristiviittaus}
   </main>
   <script src="{js}"></script>
 </body>
@@ -479,13 +500,17 @@ def kirjoita_aihesivut() -> None:
         ROOT / "media" / "output" / "tables" / "m4_media_vs_k1.csv",
         "M4 media vs. K1 (vaihe 7)",
         "Suomi (FI) tuomitut vs. rikosotsikon NAT/FOR-avaimet. Yksiköt eivät täsmää. "
-        "Ei syy-yhteyttä. "
+        "Ei syy-yhteyttä. Erilliset haarat: "
+        '<a href="../index.html">K1</a>, '
+        '<a href="../maahanmuutto-fi/index.html">FI-paneeli</a>. '
         '<a href="m4_media_vs_k1.csv">taulu</a>, '
         '<a href="m4_varoitukset.csv">varoitukset</a>, '
         '<a href="codebook_m4_v1.md">koodikirja</a>.',
         "M4 media vs K1 (phase 7)",
         "Finland (FI) convictions vs NAT/FOR strings in crime headlines. Units differ. "
-        "No causal claim. "
+        "No causal claim. Separate branches: "
+        '<a href="../index.html">K1</a>, '
+        '<a href="../maahanmuutto-fi/index.html">FI panel</a>. '
         '<a href="m4_media_vs_k1.csv">table</a>, '
         '<a href="m4_varoitukset.csv">warnings</a>, '
         '<a href="codebook_m4_v1.md">codebook</a>.',
@@ -621,16 +646,32 @@ def kirjoita_aihesivut() -> None:
     rap_media = ROOT / "media" / "output" / "RAPORTTI_MEDIA.md"
     if rap_media.exists():
         shutil.copy2(rap_media, DOCS_DIR / "media" / "RAPORTTI_MEDIA.md")
+        m4_huom = """
+    <aside class="kortti" id="m4-ristiviittaus">
+      <h2>M4 ja muut haarat</h2>
+      <p>M4 vertaa FI-tuomioita (K1) rikosotsikon kansalaisuusavaimiin. Yksiköt eivät
+      täsmää; media ei selitä K1:tä. Linkit:
+      <a href="../index.html">K1</a>,
+      <a href="../maahanmuutto-fi/index.html">FI-paneeli</a> (erillinen TUTKIVA),
+      <a href="../tutkimus/index.html">tutkimus-hubi</a>.</p>
+    </aside>
+"""
         media = f"""
     <div class="kieli-fi">
 {md_html(rap_media.read_text(encoding="utf-8"))}
+{m4_huom}
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
       <p>The phase-8 report is in Finnish: <a href="RAPORTTI_MEDIA.md">RAPORTTI_MEDIA.md</a>.</p>
       <p>Preregistration 2026-11-01. Outlets: Iltalehti and Yle. Calendar 2015–2025; missing HTML is empty, not zero. Human coding is missing. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 compares FI convictions with citizenship strings in crime headlines; the units differ. No motives, audience effects, or causal claims.</p>
+      <p>Separate branches: <a href="../index.html">K1</a>,
+      <a href="../maahanmuutto-fi/index.html">FI panel</a>,
+      <a href="../tutkimus/index.html">research hub</a>.</p>
     </div>
 """
+    from src.site import ristiviittaukset
+
     (DOCS_DIR / "media" / "index.html").write_text(
         _kehys(
             "Media",
@@ -640,9 +681,19 @@ def kirjoita_aihesivut() -> None:
             "../tyyli.css",
             "../sivu.js",
             media,
+            sijainti="media",
+            ristiviittaus=ristiviittaukset(aktiivinen="media", sijainti="media"),
         ),
         encoding="utf-8",
     )
+
+
+def kirjoita_tutkimus_hub() -> None:
+    from src.site import tutkimus_hub_html
+
+    kohde = DOCS_DIR / "tutkimus"
+    kohde.mkdir(parents=True, exist_ok=True)
+    (kohde / "index.html").write_text(tutkimus_hub_html(), encoding="utf-8")
 
 
 def kirjoita() -> None:
@@ -662,6 +713,7 @@ def kirjoita() -> None:
     korjaa_valikot()
     lisaa_aihe_palkki()
     kirjoita_aihesivut()
+    kirjoita_tutkimus_hub()
 
 
 if __name__ == "__main__":

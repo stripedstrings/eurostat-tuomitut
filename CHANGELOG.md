@@ -2,6 +2,10 @@
 Kirjaa tähän jokainen poikkeama PREREGISTRATION.md:stä: pvm, muutos, perustelu,
 tehtiinkö ennen vai jälkeen tulosten näkemisen.
 
+- 2026-11-03. Sivustolle `docs/tutkimus/`-hubi ja yhtenäinen navigaatio
+  (Tutkimus | K1 | FI | Media) sekä ristiviittauslaatikot. Haaroja ei yhdistetä
+  analyysissä; media pysyy agendan mittauksena. Ei menetelmämuutosta.
+
 - 2026-11-01. Esirekisteröinti täytetty. **Poikkeama:** ennen tätä päivää on
   ajettu tutkiva visualisointi (`crim_just_ctz`, `migr_pop5ctz`: asteet,
   suhdeluvut, kaaviot, GitHub Pages) ilman lukittua esirekisteröintiä.

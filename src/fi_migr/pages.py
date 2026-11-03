@@ -50,6 +50,8 @@ def aja() -> None:
                 lines.append(f"<p>{html.escape(ln)}</p>")
         body = "\n".join(lines)
 
+    from src.site import aihe_nav, ristiviittaukset
+
     kuvat = "".join(
         f'<figure><img src="figures/{p.name}" alt="{p.stem}" style="max-width:100%">'
         f"<figcaption>{html.escape(p.stem)}</figcaption></figure>"
@@ -62,15 +64,11 @@ def aja() -> None:
   <title>Suomi maahanmuutto (TUTKIVA)</title>
   <link rel="stylesheet" href="../tyyli.css">
 </head>
-<body>
+<body class="raportti">
   <header><div class="wrap">
-  <nav class="aiheet" aria-label="Aiheet">
-    <a href="../index.html">Maahanmuutto</a>
-    <a href="index.html" class="aktiivinen">Maahanmuutto FI (TUTKIVA)</a>
-    <a href="../media/index.html">Media</a>
-  </nav>
+  {aihe_nav(sijainti="fi_migr", aktiivinen="fi_migr")}
   </div></header>
-  <main>
+  <main class="wrap">
     <p class="tutkiva">TUTKIVA (ei esirekisteröity). Ei yhdistetty K1-rikostilastoon.</p>
     {body}
     <h2>Kaaviot</h2>
@@ -78,6 +76,7 @@ def aja() -> None:
     <h2>Peitto</h2>
     {_df_html(TABLES / "fi_migr_peitto.csv")}
     <p>CSV-tiedostot tässä kansiossa. Lähteet: <a href="FI_MIGR_DATA_SOURCES.md">FI_MIGR_DATA_SOURCES.md</a>.</p>
+    {ristiviittaukset(aktiivinen="fi_migr", sijainti="fi_migr")}
   </main>
 </body>
 </html>
