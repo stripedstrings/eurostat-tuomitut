@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synteesi — ei yhteistä johtopäätöstä</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      <nav class="aiheet" aria-label="Aiheet">
+  <a href="index.html" class="aktiivinen">Tutkimus</a>
+  <a href="../index.html" data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="../maahanmuutto-fi/index.html">Maahanmuutto FI (TUTKIVA)</a>
+  <a href="../media/index.html" data-i18n="nav_media">Media</a>
+</nav>
+
+      <h1>Synteesi</h1>
+      <p class="lead">Mitä kukin haara näyttää / ei näytä / avoimet kysymykset.
+      <strong>Ei yhteistä johtopäätöstä.</strong></p>
+    </div>
+  </header>
+  <main class="wrap">
+    <aside class="kortti">
+      <p>Lähde: <a href="SYNTEESI.md">SYNTEESI.md</a> ·
+      <a href="index.html">Hub</a> · <a href="tila.html">Tila</a> ·
+      <a href="aikajana.html">Aikajanat (ei päättelyyn)</a></p>
+    </aside>
+    <p>Päiväys: 2026-11-03.  </p>
+<p>Hub: <code>docs/tutkimus/</code>. Tila: <code>docs/tutkimus/tila.html</code>.  </p>
+<p>Aikajanat (ei päättelyyn): <code>docs/tutkimus/aikajana.html</code>.</p>
+<p><strong>Tämä asiakirja ei tee yhteistä johtopäätöstä.</strong> Haarat eivät yhdisty</p>
+<p>yhdeksi selitykseksi. Jokainen osio vastaa vain oman haaransa kysymyksiin.</p>
+<hr>
+<h2>1. K1 — EU tuomitut kansalaisuuden mukaan (esirekisteröity)</h2>
+<p>Lähde: <code>output/RAPORTTI.md</code>, <code>PREREGISTRATION.md</code>. Eurostat <code>crim_just_ctz</code> /</p>
+<p><code>migr_pop5ctz</code> (haettu 2026-11-01).</p>
+<h3>Mitä haara näyttää</h3>
+<ul>
+<li>Kelpoisissa EU-27 maa–vuosissa NAT- ja FOR-tuomitsemisasteet per 100 000</li>
+</ul>
+<p>  eivät ole samat (RR-väli ei sisällä 1 lähes kaikilla kelpoisilla riveillä).</p>
+<ul>
+<li>Poolattu RR 2020–2024 (18 maata, 77 maa–vuotta): noin 3,12 (3,116–3,125).</li>
+<li>Maiden suunta vaihtelee (RR &gt; 1 tai &lt; 1); kaikki raportoidaan.</li>
+<li>Herkkyydet S1, S3, S5, S6 on laskettu; peitto ja rajoitteet dokumentoitu.</li>
+</ul>
+<h3>Mitä haara ei näytä</h3>
+<ul>
+<li>Syy-yhteyttä kansalaisuuden ja rikollisuuden välillä.</li>
+<li>Maahanmuuttotaustaa, syntymämaata tai pakolaisuutta (muuttuja = kansalaisuus).</li>
+<li>Ikä–sukupuolivakioitua eroa (SIR = NaN).</li>
+<li>EU-sisäiset vs. kolmas maa tuomioasteina (<strong>S2 = ei_dataa</strong>).</li>
+<li>Naturalisaatiokorjausta (<strong>S7 = ei_dataa</strong>).</li>
+<li>Politiikkajohtopäätöstä; K2 ei selitä K1:tä.</li>
+</ul>
+<h3>Avoimet kysymykset (K1)</h3>
+<ul>
+<li>Mikä osa RR:stä liittyy ikään, oleskeluaikaan, matkailijoihin, laskentayksikköön</li>
+</ul>
+<p>  tai ilmoitus-/syyttäjäkäytäntöön?</p>
+<ul>
+<li>Maat ilman kelpoista 2020–2024-aineistoa.</li>
+<li>Brå (SE): CSV puuttuu; määritelmä bakgrund ≠ NAT/FOR.</li>
+</ul>
+<hr>
+<h2>2. FI-maahanmuuttopaneeli (TUTKIVA)</h2>
+<p>Lähde: <code>output/RAPORTTI_FI_MIGR.md</code>, peitto <code>fi_migr_peitto_matriisi.csv</code>.</p>
+<p>Haettu 2026-11-03. Ei yhdistetty K1:een.</p>
+<h3>Mitä haara näyttää</h3>
+<ul>
+<li>Suomen tulovirtoja (StatFin 11a8), väestöosuuksia, ikä×sukupuoli×syntyperä,</li>
+</ul>
+<p>  LFS-työllisyys/koulutus (FI), oleskelulupia, Migri-kiintiösaapumisia.</p>
+<ul>
+<li>Peittomatriisin: mitkä indikaattori×vuosi -solut ovat täynnä / tyhjiä.</li>
+<li>Kiintiön asettaja (valtioneuvosto/eduskunta) + hakupäivä; <code>paatos_pvm</code> tyhjä</li>
+</ul>
+<p>  jos ei lähteessä.</p>
+<h3>Mitä haara ei näytä</h3>
+<ul>
+<li>Yhteyttä K1-tuomioasteisiin (kielletty sekoitus).</li>
+<li>Kielitaidon oppimisaikaa tai kotoutumisindikaattoreita (ei avointa aikasarjaa).</li>
+<li>Eurostat <code>migr_imm*</code> / <code>migr_asy*</code> FI-suodatusta (HTTP 413).</li>
+<li>Yhteismitallista “kokonaisfaktalukua” eri lähteistä.</li>
+<li>Politiikkajohtopäätöstä kiintiön “oikeellisuudesta”.</li>
+</ul>
+<h3>Avoimet kysymykset (FI)</h3>
+<ul>
+<li>Voidaanko Migri-tilastopalvelusta / kotoutumis-PxWebistä myöhemmin hakea</li>
+</ul>
+<p>  koneluettavaa aikasarjaa ilman imputointia?</p>
+<ul>
+<li>Vuosikohtaiset päätetyt kiintiöt ja päätöspäivämäärät virallisista päätöksistä</li>
+</ul>
+<p>  (ei arvioita).</p>
+<hr>
+<h2>3. Media — uutisagenda</h2>
+<p>Lähde: <code>media/output/RAPORTTI_MEDIA.md</code>, <code>MEDIA_PREREGISTRATION.md</code>.</p>
+<p>Mediat: Iltalehti, Yle (Wayback). Ei motiivi- tai kontrolliväitettä.</p>
+<h3>Mitä haara näyttää</h3>
+<ul>
+<li>CDX/HTML-peiton ja aukot (ei täyttöä); entiteettiosuuksia (merkkijono) Wilson-</li>
+</ul>
+<p>  väleineen havaituissa snapshoteissa.</p>
+<ul>
+<li>H1/H2-tyyppisiä esiintymislukuja; M4: FI-tuomiot vs. rikosotsikon NAT/FOR-</li>
+</ul>
+<p>  avaimet (<strong>eri yksiköt</strong>).</p>
+<ul>
+<li>Sääntökoodausotoksen (N=500) valmistelun; ihmislomakkeet A/B.</li>
+</ul>
+<h3>Mitä haara ei näytä</h3>
+<ul>
+<li>“Agendan kontrollia”, propagandaa tai journalismin motiiveja.</li>
+<li>Lukijavaikutuksia.</li>
+<li>H3 (klikit), H4 (ihmis-sävy ajassa), H6 (tuho/tuhoutuminen): <strong>ei testattavissa</strong></li>
+</ul>
+<p>  kunnes ehdot täyttyvät.</p>
+<ul>
+<li>Validoitua LLM-/sääntökoodausta koko aineistoon (ihmis-α puuttuu).</li>
+<li>HS/MTV-aineistoa (esirekisteröity lisäys; ei vielä haettu tässä synteesissä).</li>
+</ul>
+<h3>Avoimet kysymykset (Media)</h3>
+<ul>
+<li>Ihmiskaksoiskoodaus (A/B) ja α / F1 per luokka.</li>
+<li>M2: suhde ulkoisiin tapahtumaindikaattoreihin (usein puuttuu).</li>
+<li>Laajempi mediajoukko ja parempi HTML-peitto (esim. Yle 2016).</li>
+</ul>
+<hr>
+<h2>4. Hub (meta)</h2>
+<ul>
+<li><strong>Tila-sivu:</strong> commit, esirekisteröinti, haku, peitto, pytest, ei-testattavat.</li>
+<li><strong>Aikajanat:</strong> small multiples; <strong>ei päättelyyn</strong> (<code>PREREGISTRATION.md</code>).</li>
+</ul>
+<hr>
+<h2>5. Mitä synteesi tietoisesti jättää tekemättä</h2>
+<ul>
+<li>Ei yhteistä mallia “media + FI-tulot → K1”.</li>
+<li>Ei korrelaatioita hub-aikajanoista.</li>
+<li>Ei politiikkasuosituksia.</li>
+<li>Ei väitettä, että haarat vahvistavat tai kumoavat toisiaan.</li>
+</ul>
+<p>Lukija voi lukea kunkin haaran raportin erikseen ja muodostaa oman tulkinnan</p>
+<p>rajojen sisällä.</p>
+    <aside class="ristiviittaukset kortti" aria-label="Ristiviittaukset">
+  <h2>Muut tutkimushaarat</h2>
+  <ul>
+    <li><a href="../index.html"><strong>K1: EU tuomitut (esirekisteröity)</strong></a> — Tuomitsemisasteet kansalaisuuden mukaan.</li><li><a href="../maahanmuutto-fi/index.html"><strong>Maahanmuutto FI (TUTKIVA)</strong></a> — Tulot, kiintiöt, työllisyys ym. vain Suomi. Ei yhdistetty K1:een.</li><li><a href="../media/index.html"><strong>Media-agenda (TUTKIVA / esirek.)</strong></a> — Näkyvyys ja kehykset; ei motiivi- tai kontrolliväitettä. M4 ≠ K1-yksikkö.</li>
+  </ul>
+  <p>Haarat ovat erillisiä. FI-paneelia ei yhdistetä K1:een. Media ei ole K1:n
+  selittäjä; M4 vertaa eri yksiköitä. Motiiveja tai “agendan kontrollia” ei päätellä datasta.</p>
+</aside>
+
+  </main>
+  <script src="../sivu.js"></script>
+</body>
+</html>

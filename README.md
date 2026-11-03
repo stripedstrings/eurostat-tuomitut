@@ -2,7 +2,8 @@
 
 **Tutkimus-hubi** (kolme erillistä haaraa): [tutkimus/](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/) — K1 EU-tuomitut, FI-maahanmuuttopaneeli (TUTKIVA), media-agenda. Haaroja ei yhdistetä samaan analyysiin.  
 **Tila:** [tutkimus/tila.html](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/tila.html) (commit, esirekisteröinti, haku, peitto, testit, ei testattavat).  
-**Aikajanat (ei päättelyyn):** [tutkimus/aikajana.html](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/aikajana.html).
+**Aikajanat (ei päättelyyn):** [tutkimus/aikajana.html](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/aikajana.html).  
+**Synteesi (ei yhteistä johtopäätöstä):** [`output/SYNTEESI.md`](output/SYNTEESI.md), [tutkimus/synteesi.html](https://stripedstrings.github.io/eurostat-tuomitut/tutkimus/synteesi.html).
 
 Esirekisteröity raportti: [GitHub Pages](https://stripedstrings.github.io/eurostat-tuomitut/) ([`output/RAPORTTI.md`](output/RAPORTTI.md)).  
 Tutkiva visualisointi (ei esirekisteröity): [maasivut](https://stripedstrings.github.io/eurostat-tuomitut/maat/fi.html).  

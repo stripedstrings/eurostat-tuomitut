@@ -697,6 +697,7 @@ def kirjoita_aihesivut() -> None:
 def kirjoita_tutkimus_hub() -> None:
     from src.aikajana_pages import aja as kirjoita_aikajana
     from src.site import tutkimus_hub_html
+    from src.synteesi_pages import aja as kirjoita_synteesi
     from src.tila_pages import aja as kirjoita_tila
 
     kohde = DOCS_DIR / "tutkimus"
@@ -704,6 +705,7 @@ def kirjoita_tutkimus_hub() -> None:
     (kohde / "index.html").write_text(tutkimus_hub_html(), encoding="utf-8")
     kirjoita_tila()
     kirjoita_aikajana()
+    kirjoita_synteesi()
 
 
 def kirjoita() -> None:
