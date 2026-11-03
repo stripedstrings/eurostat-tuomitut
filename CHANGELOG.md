@@ -7,6 +7,9 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
   kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
 
+- 2026-11-03. Hub: `docs/tutkimus/aikajana.html` small multiples (eri akselit,
+  ei korrelaatioita). Esirekisteröintiin: sivua ei käytetä päättelyyn.
+
 - 2026-11-03. Hub: `docs/tutkimus/tila.html` — commit, esirekisteröinti,
   hakupäivä, peitto, pytest, ei-testattavat (`tila_yhteenveto.csv`). Ei tulkintaa.
 

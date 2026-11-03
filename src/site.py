@@ -156,7 +156,8 @@ def tutkimus_hub_html() -> str:
       <h1>Tutkimus kokonaisuutena</h1>
       <p class="lead">Kolme erillistä haaraa: rikostilasto (K1), Suomen maahanmuuttopaneeli
       ja uutisagenda. Niitä ei sekoiteta samaan analyysiin.</p>
-      <p class="navi"><a href="tila.html">Tila</a> (commit, esirekisteröinti, haku, peitto, testit, ei testattavat)</p>
+      <p class="navi"><a href="tila.html">Tila</a> ·
+        <a href="aikajana.html">Aikajanat</a> (ei päättelyyn)</p>
     </div>
   </header>
   <main class="wrap">
@@ -164,6 +165,11 @@ def tutkimus_hub_html() -> str:
       <h2><a href="tila.html">Tila — hankkeen tilannekuva</a></h2>
       <p>Commit, esirekisteröintipäivä, datan hakupäivä, kattavuusmatriisit,
       pytest-tulos ja lista ei-testattavista. Ei johtopäätöksiä.</p>
+    </section>
+    <section class="kortti">
+      <h2><a href="aikajana.html">Rinnakkaiset aikajanat (small multiples)</a></h2>
+      <p>Yksi sarja per paneeli, eri akselit, ei korrelaatioita.
+      <strong>Ei käytetä päättelyyn</strong> (esirekisteröity rajoitus).</p>
     </section>
     <section class="kortti">
       <h2><a href="../index.html">K1 — Maahanmuutto / tuomitut (esirekisteröity)</a></h2>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rinnakkaiset aikajanat (ei päättelyyn)</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      <nav class="aiheet" aria-label="Aiheet">
+  <a href="index.html" class="aktiivinen">Tutkimus</a>
+  <a href="../index.html" data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="../maahanmuutto-fi/index.html">Maahanmuutto FI (TUTKIVA)</a>
+  <a href="../media/index.html" data-i18n="nav_media">Media</a>
+</nav>
+
+      <h1>Rinnakkaiset aikajanat</h1>
+      <p class="lead">Small multiples: yksi sarja per paneeli, <strong>omat akselit</strong>,
+      ei päällekkäisiä käyriä, <strong>ei korrelaatioita</strong>.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <aside class="kortti" aria-label="Päättelykielto">
+      <p><strong>Esirekisteröity rajoitus:</strong> tätä sivua <em>ei käytetä päättelyyn</em>
+      (ks. <code>PREREGISTRATION.md</code>). Paneelit ovat erillisten haarojen
+      aikasarjoja rinnakkain. Yksiköt eivät ole yhteismitallisia.</p>
+      <p>TUTKIVA hub-aikajana. Eri yksiköt, eri akselit. Ei päällekkäisiä käyriä eikä korrelaatioita. Sivua ei käytetä päättelyyn (PREREGISTRATION).</p>
+      <p><a href="index.html">← Tutkimus-hubi</a> · <a href="tila.html">Tila</a></p>
+    </aside>
+    <figure>
+      <img src="figures/10_hub_aikajana_small_multiples.png" alt="Small multiples -aikajanat"
+           style="max-width:100%">
+      <figcaption>Lähteet paneeleittain: StatFin 11a8; Eurostat crim_just_ctz / migr_pop5ctz (FI);
+      media P1 IL otsikko; Migri kiintiö. Katkos = data puuttuu. 200 dpi.</figcaption>
+    </figure>
+    <h2>Paneelit</h2>
+    <table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>paneeli</th>
+      <th>haara</th>
+      <th>otsikko</th>
+      <th>yksikko</th>
+      <th>n_pistetta</th>
+      <th>vuosi_min</th>
+      <th>vuosi_max</th>
+      <th>varoitus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td>FI-paneeli</td>
+      <td>FI: ulkomaan kansalaisten maahanmuutto</td>
+      <td>henkilöä / vuosi (StatFin 11a8)</td>
+      <td>36</td>
+      <td>1990</td>
+      <td>2025</td>
+      <td>Syntyperä/kansalaisuus ≠ pakolaisuus. Ei K1-selittäjä.</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>K1</td>
+      <td>K1 FI: tuomitsemisaste FOR</td>
+      <td>tuomitut / 100 000 FOR-asukasta</td>
+      <td>15</td>
+      <td>2008</td>
+      <td>2024</td>
+      <td>Kansalaisuus ≠ maahanmuuttotausta. Ei ikä-sukupuolivakioitu.</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>Media</td>
+      <td>Media IL: Putin-osuus otsikoissa</td>
+      <td>% havaituista otsikoista (Wilson-pääanalyysi erillään)</td>
+      <td>11</td>
+      <td>2015</td>
+      <td>2025</td>
+      <td>HTML ≪ CDX; puuttuva vuosi = katkos, ei nolla. Ei motiivia.</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>FI-paneeli</td>
+      <td>FI: saapuneet kiintiöpakolaiset</td>
+      <td>henkilöä / vuosi (Migri)</td>
+      <td>9</td>
+      <td>2017</td>
+      <td>2025</td>
+      <td>Kiintiö ≠ kaikki maahanmuutto. Asettaja: valtioneuvosto/eduskunta.</td>
+    </tr>
+  </tbody>
+</table>
+    <aside class="ristiviittaukset kortti" aria-label="Ristiviittaukset">
+  <h2>Muut tutkimushaarat</h2>
+  <ul>
+    <li><a href="../index.html"><strong>K1: EU tuomitut (esirekisteröity)</strong></a> — Tuomitsemisasteet kansalaisuuden mukaan.</li><li><a href="../maahanmuutto-fi/index.html"><strong>Maahanmuutto FI (TUTKIVA)</strong></a> — Tulot, kiintiöt, työllisyys ym. vain Suomi. Ei yhdistetty K1:een.</li><li><a href="../media/index.html"><strong>Media-agenda (TUTKIVA / esirek.)</strong></a> — Näkyvyys ja kehykset; ei motiivi- tai kontrolliväitettä. M4 ≠ K1-yksikkö.</li>
+  </ul>
+  <p>Haarat ovat erillisiä. FI-paneelia ei yhdistetä K1:een. Media ei ole K1:n
+  selittäjä; M4 vertaa eri yksiköitä. Motiiveja tai “agendan kontrollia” ei päätellä datasta.</p>
+</aside>
+
+  </main>
+  <script src="../sivu.js"></script>
+</body>
+</html>

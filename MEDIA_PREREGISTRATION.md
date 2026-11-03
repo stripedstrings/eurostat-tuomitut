@@ -115,3 +115,9 @@ Ei vielä haeta tässä commitissa. Haku vasta tämän lisäyksen commitin jälk
 
 Coverage-matriisi **media × vuosi** (CDX vs. HTML) raportoidaan; aukot
 jätetään tyhjiksi / NaN, ei täytetä nolliksi osuuslaskennassa.
+
+### Hub-aikajana
+
+`docs/tutkimus/aikajana.html` voi näyttää mediaosuuden rinnakkain muiden
+haarojen kanssa. **Sivua ei käytetä päättelyyn** (ks. myös
+`PREREGISTRATION.md`). Ei korrelaatioita media↔K1.

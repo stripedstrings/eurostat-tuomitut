@@ -63,3 +63,10 @@ S7. Naturalisaation vaikutus: arvio siitä, miten tulos muuttuisi, jos
 ## Tutkivat analyysit
 Kaikki esirekisteröinnin ulkopuoliset analyysit merkitään kaavioissa ja
 taulukoissa tekstillä "TUTKIVA (ei esirekisteröity)".
+
+## Hub-aikajana (small multiples) — ei päättelyyn
+Sivu `docs/tutkimus/aikajana.html` asettaa K1-, FI- ja mediahaarojen
+aikasarjoja rinnakkain (omat akselit, ei päällekkäisiä käyriä, ei
+korrelaatioita). **Sivua ei käytetä päättelyyn:** se ei ole K1:n, K2:n
+eikä mediahaaran hypoteesitesti, eikä se yhdistä haaroja selittäjä–
+vastemuuttuja -suhteeseen. Yksikkövaroitus jokaisessa paneelissa.
