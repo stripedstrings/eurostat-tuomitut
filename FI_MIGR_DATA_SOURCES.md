@@ -25,4 +25,16 @@ ks. `fi_migr_kiintio_meta.csv`.
 
 ## Taulut
 
-`output/tables/fi_migr/*.csv`. Peitto: `fi_migr_saatavuus.csv`, `fi_migr_peitto.csv`.
+`output/tables/fi_migr/*.csv`. Peitto: `fi_migr_saatavuus.csv`,
+`fi_migr_peitto.csv` (yhteenveto), `fi_migr_peitto_matriisi.csv`
+(indikaattori × vuosi 1990–2025; 1 = peitto, tyhjä = aukko; myös tyhjät
+indikaattorit). Seloste: `FI_MIGR_PEITTO.md`.
+
+## Kiintiömeta
+
+`fi_migr_kiintio_meta.csv`: **asettaja**, **haettu** (Migri-sivun hakupäivä),
+`paatos_pvm` (tyhjä jos päätöksen päivämäärää ei poimittu lähteestä — ei arvioida).
+
+## Monivertailu
+
+Indikaattoreita ei tulkita yhteismitallisina. Ei välittäjämuuttujia puuttuvien tilalle.

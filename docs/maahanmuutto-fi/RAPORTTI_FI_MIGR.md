@@ -7,19 +7,24 @@ Haettu 2026-11-03. Puuttuva = tyhjä / `saatavuus=ei`, ei täyttöä.
 
 ## 1. Peitto
 
-Lähde: `output/tables/fi_migr/fi_migr_peitto.csv`.
+Lähde: `fi_migr_peitto.csv`, laaja matriisi `fi_migr_peitto_matriisi.csv`
+(indikaattori × vuosi; tyhjä = aukko, ei nolla). Seloste: `FI_MIGR_PEITTO.md`.
 
-| aihe | lähde | saatavuus | vuodet (min–max) |
+**Monivertailuvaroitus:** indikaattoreita ei pidä tulkita yhteismitallisina.
+Syntyperä ≠ kansalaisuus ≠ kiintiö/pakolaisuus. Ei välittäjämuuttujia.
+
+| indikaattori | lähde | saatavuus | vuodet |
 |---|---|---|---|
 | tulot_maahanmuutto | StatFin 11a8 | kyllä | 1990–2025 |
+| vaesto_osuudet | StatFin 159t | kyllä | 1990–2025 |
 | ika_sukupuoli_syntypera | StatFin 11rt | kyllä | 2000–2025 |
 | tyollisyys | Eurostat LFS FI | kyllä | 1995–2025 |
 | koulutus | Eurostat edat_lfs_9911 FI | kyllä | 2004–2025 |
 | oleskeluluvat | Eurostat migr_res* FI | kyllä | 2008–2025 |
-| kiintiopakolaiset (saapuneet) | Migri HTML | kyllä | 2017–2025 |
-| kieli_oppimisaika_kk | — | **ei** | — |
-| Eurostat migr_imm* / migr_asy* (FI-suodatus) | probe | **ei** (HTTP 413) | — |
-| Kotoutumisen indikaattorit PxWeb | probe | **ei** (ei vastannut) | — |
+| kiintiopakolaiset_saapuneet | Migri HTML | kyllä | 2017–2025 |
+| kiintiopakolaiset_paatetty | Migri meta | osittainen | ks. meta |
+| kieli_oppimisaika_kk / kielitaito_taso | — | **ei** | — |
+| Eurostat migr_imm* / migr_asy* | probe | **ei** (HTTP 413) | — |
 
 ## 2. Maahanmuutto Suomeen (StatFin 11a8)
 
@@ -67,6 +72,7 @@ Ensimmäiset oleskeluluvat syittäin (Eurostat migr_resfirst, kolmansien maiden 
 Kiintiöpakolaiset (Migri):
 
 - **Asettaja:** Suomen valtioneuvosto (esitys) / eduskunta (päätös talousarvion / pakolaiskiintiön yhteydessä). UNHCR ehdottaa henkilöitä, ei aseta Suomen vuosikiintiötä. (`fi_migr_kiintio_meta.csv`)
+- **Hakupäivä:** `haettu` = Migri-sivun nouto. `paatos_pvm` tyhjä, ellei päätöksen päivämäärää ole lähteessä (ei arvioida).
 - **Saapuneet** 2017–2025 poimittu Migri-sivulta (`fi_migr_kiintio.csv`). Esim. 2025: 621; 2024: 808; 2023: 1332.
 - HTML-poiminnan “Yhteensä / valitut” -luvut ovat TUTKIVA; osa vuosista puuttuu tai vaatii manuaalisen tarkistuksen lähteestä.
 

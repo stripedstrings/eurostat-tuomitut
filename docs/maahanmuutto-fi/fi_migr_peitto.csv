@@ -1,8 +1,13 @@
-aihe,lahde,vuosi_min,vuosi_max,n_rivia,saatavuus
-tulot_maahanmuutto,StatFin 11a8,1990,2025,108,kylla
-ika_sukupuoli_syntypera,StatFin 11rt,2000,2025,2496,kylla
-tyollisyys,Eurostat LFS,1995,2025,310,kylla
-koulutus,Eurostat edat_lfs_9911,2004,2025,318,kylla
-oleskeluluvat,Eurostat migr_res*,2008,2025,216,kylla
-kiintiopakolaiset,Migri,2017,2025,9,kylla
-kieli_oppimisaika,—,,,0,ei
+indikaattori,lahde,koodi,saatavuus,vuosi_min,vuosi_max,n_vuotta_peitto,huom
+tulot_maahanmuutto,StatFin,11a8.px,kylla,1990,2025,36,
+vaesto_osuudet,StatFin,159t.px,kylla,1990,2025,36,
+ika_sukupuoli_syntypera,StatFin,11rt.px,kylla,2000,2025,26,
+tyollisyys,Eurostat,lfsa_ergan/urgan FI,kylla,1995,2025,31,
+koulutus,Eurostat,edat_lfs_9911 FI,kylla,2004,2025,22,
+oleskeluluvat,Eurostat,migr_res* FI,kylla,2008,2025,18,
+kiintiopakolaiset_saapuneet,Migri,kiintiopakolaistilastot,kylla,2017,2025,9,
+kiintiopakolaiset_paatetty,Migri,meta / Yhteensä,kylla,2011,2025,6,
+kielitaito_taso,Kotoutuminen,PxWeb (ei vastannut),ei,,,0,ei aikasarjaa; ei välittäjämuuttujaa
+kieli_oppimisaika_kk,—,ei avointa aikasarjaa,ei,,,0,ei aikasarjaa; ei välittäjämuuttujaa
+eurostat_migr_imm1ctz,Eurostat,HTTP 413 / ei FI-aikasarjaa,ei,,,0,ei aikasarjaa; ei välittäjämuuttujaa
+eurostat_migr_asy,Eurostat,HTTP 413 / ei FI-aikasarjaa,ei,,,0,ei aikasarjaa; ei välittäjämuuttujaa

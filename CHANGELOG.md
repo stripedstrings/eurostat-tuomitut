@@ -7,6 +7,11 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
   kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
 
+- 2026-11-03. FI-paneeli: peittomatriisi indikaattori × vuosi
+  (`fi_migr_peitto_matriisi.csv`), myös tyhjät indikaattorit; kiintiömeta
+  asettaja + hakupäivä (`paatos_pvm` tyhjä jos ei lähteessä); monivertailuvaroitus
+  sivulle. Ei välittäjämuuttujia. TUTKIVA.
+
 - 2026-11-03. Media peittoaukot `coverage_media_vuosi_aukot.csv` /
   `COVERAGE_AUKOT.md` (ei täyttöä). `CODEBOOK.md` + ihmislomakkeet A/B
   (kentät tyhjiä). LLM-vs-ihminen F1 estetty ilman konsensusta.

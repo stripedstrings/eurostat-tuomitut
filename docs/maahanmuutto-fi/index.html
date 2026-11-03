@@ -17,6 +17,10 @@
   </div></header>
   <main class="wrap">
     <p class="tutkiva">TUTKIVA (ei esirekisteröity). Ei yhdistetty K1-rikostilastoon.</p>
+    <aside class="kortti" aria-label="Monivertailuvaroitus">
+      <p><strong>Monivertailuvaroitus.</strong> Monivertailuvaroitus: indikaattoreita ei pidä tulkita samanaikaisesti ikään kuin ne olisivat yhteismitallisia. StatFin-syntyperä ≠ Eurostat-kansalaisuus ≠ Migri-kiintiö/pakolaisuus. Usean testin / usean indikaattorin rinnakkain asettelu ei ole yhteisjohtopäätös.</p>
+      <p>Puuttuvaa ei korvata välittäjämuuttujalla. Katkos / tyhjä solu = data puuttuu.</p>
+    </aside>
     <h1>Raportti: Suomi maahanmuuton avoin tietopaneeli (TUTKIVA)</h1>
 
 <p>Ei esirekisteröity. Ei yhdistetty K1-rikostilastoon. Vain Suomi.  </p>
@@ -26,19 +30,24 @@
 
 <h2>1. Peitto</h2>
 
-<p>Lähde: `output/tables/fi_migr/fi_migr_peitto.csv`.</p>
+<p>Lähde: `fi_migr_peitto.csv`, laaja matriisi `fi_migr_peitto_matriisi.csv`</p>
+<p>(indikaattori × vuosi; tyhjä = aukko, ei nolla). Seloste: `FI_MIGR_PEITTO.md`.</p>
 
-<pre>| aihe | lähde | saatavuus | vuodet (min–max) |</pre>
+<p>**Monivertailuvaroitus:** indikaattoreita ei pidä tulkita yhteismitallisina.</p>
+<p>Syntyperä ≠ kansalaisuus ≠ kiintiö/pakolaisuus. Ei välittäjämuuttujia.</p>
+
+<pre>| indikaattori | lähde | saatavuus | vuodet |</pre>
 <pre>|---|---|---|---|</pre>
 <pre>| tulot_maahanmuutto | StatFin 11a8 | kyllä | 1990–2025 |</pre>
+<pre>| vaesto_osuudet | StatFin 159t | kyllä | 1990–2025 |</pre>
 <pre>| ika_sukupuoli_syntypera | StatFin 11rt | kyllä | 2000–2025 |</pre>
 <pre>| tyollisyys | Eurostat LFS FI | kyllä | 1995–2025 |</pre>
 <pre>| koulutus | Eurostat edat_lfs_9911 FI | kyllä | 2004–2025 |</pre>
 <pre>| oleskeluluvat | Eurostat migr_res* FI | kyllä | 2008–2025 |</pre>
-<pre>| kiintiopakolaiset (saapuneet) | Migri HTML | kyllä | 2017–2025 |</pre>
-<pre>| kieli_oppimisaika_kk | — | **ei** | — |</pre>
-<pre>| Eurostat migr_imm* / migr_asy* (FI-suodatus) | probe | **ei** (HTTP 413) | — |</pre>
-<pre>| Kotoutumisen indikaattorit PxWeb | probe | **ei** (ei vastannut) | — |</pre>
+<pre>| kiintiopakolaiset_saapuneet | Migri HTML | kyllä | 2017–2025 |</pre>
+<pre>| kiintiopakolaiset_paatetty | Migri meta | osittainen | ks. meta |</pre>
+<pre>| kieli_oppimisaika_kk / kielitaito_taso | — | **ei** | — |</pre>
+<pre>| Eurostat migr_imm* / migr_asy* | probe | **ei** (HTTP 413) | — |</pre>
 
 <h2>2. Maahanmuutto Suomeen (StatFin 11a8)</h2>
 
@@ -86,6 +95,7 @@
 <p>Kiintiöpakolaiset (Migri):</p>
 
 <p>- **Asettaja:** Suomen valtioneuvosto (esitys) / eduskunta (päätös talousarvion / pakolaiskiintiön yhteydessä). UNHCR ehdottaa henkilöitä, ei aseta Suomen vuosikiintiötä. (`fi_migr_kiintio_meta.csv`)</p>
+<p>- **Hakupäivä:** `haettu` = Migri-sivun nouto. `paatos_pvm` tyhjä, ellei päätöksen päivämäärää ole lähteessä (ei arvioida).</p>
 <p>- **Saapuneet** 2017–2025 poimittu Migri-sivulta (`fi_migr_kiintio.csv`). Esim. 2025: 621; 2024: 808; 2023: 1332.</p>
 <p>- HTML-poiminnan “Yhteensä / valitut” -luvut ovat TUTKIVA; osa vuosista puuttuu tai vaatii manuaalisen tarkistuksen lähteestä.</p>
 
@@ -102,74 +112,251 @@
 <p>- Ei politiikkajohtopäätöstä kiintiön koosta. Ei K1-yhdistämistä.</p>
     <h2>Kaaviot</h2>
     <figure><img src="figures/01_maahanmuutto_vuosi.png" alt="01_maahanmuutto_vuosi" style="max-width:100%"><figcaption>01_maahanmuutto_vuosi</figcaption></figure><figure><img src="figures/02_vaesto_osuudet.png" alt="02_vaesto_osuudet" style="max-width:100%"><figcaption>02_vaesto_osuudet</figcaption></figure><figure><img src="figures/03_tyollisyysaste.png" alt="03_tyollisyysaste" style="max-width:100%"><figcaption>03_tyollisyysaste</figcaption></figure><figure><img src="figures/04_koulutus_korkea.png" alt="04_koulutus_korkea" style="max-width:100%"><figcaption>04_koulutus_korkea</figcaption></figure><figure><img src="figures/05_oleskeluluvat.png" alt="05_oleskeluluvat" style="max-width:100%"><figcaption>05_oleskeluluvat</figcaption></figure><figure><img src="figures/06_ika_sukupuoli.png" alt="06_ika_sukupuoli" style="max-width:100%"><figcaption>06_ika_sukupuoli</figcaption></figure>
-    <h2>Peitto</h2>
+    <h2>Peitto (indikaattori × vuosi)</h2>
+    <p>Yhteenveto ja <a href="FI_MIGR_PEITTO.md">FI_MIGR_PEITTO.md</a>.
+    Laaja matriisi: <a href="fi_migr_peitto_matriisi.csv">fi_migr_peitto_matriisi.csv</a>
+    (1 = peitto, tyhjä = aukko; myös tyhjät indikaattorit mukana).</p>
     <table class="dataframe taulu">
   <thead>
     <tr style="text-align: right;">
-      <th>aihe</th>
+      <th>indikaattori</th>
       <th>lahde</th>
+      <th>koodi</th>
+      <th>saatavuus</th>
       <th>vuosi_min</th>
       <th>vuosi_max</th>
-      <th>n_rivia</th>
-      <th>saatavuus</th>
+      <th>n_vuotta_peitto</th>
+      <th>huom</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>tulot_maahanmuutto</td>
-      <td>StatFin 11a8</td>
+      <td>StatFin</td>
+      <td>11a8.px</td>
+      <td>kylla</td>
       <td>1990.0</td>
       <td>2025.0</td>
-      <td>108</td>
+      <td>36</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>vaesto_osuudet</td>
+      <td>StatFin</td>
+      <td>159t.px</td>
       <td>kylla</td>
+      <td>1990.0</td>
+      <td>2025.0</td>
+      <td>36</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <td>ika_sukupuoli_syntypera</td>
-      <td>StatFin 11rt</td>
+      <td>StatFin</td>
+      <td>11rt.px</td>
+      <td>kylla</td>
       <td>2000.0</td>
       <td>2025.0</td>
-      <td>2496</td>
-      <td>kylla</td>
+      <td>26</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <td>tyollisyys</td>
-      <td>Eurostat LFS</td>
+      <td>Eurostat</td>
+      <td>lfsa_ergan/urgan FI</td>
+      <td>kylla</td>
       <td>1995.0</td>
       <td>2025.0</td>
-      <td>310</td>
-      <td>kylla</td>
+      <td>31</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <td>koulutus</td>
-      <td>Eurostat edat_lfs_9911</td>
+      <td>Eurostat</td>
+      <td>edat_lfs_9911 FI</td>
+      <td>kylla</td>
       <td>2004.0</td>
       <td>2025.0</td>
-      <td>318</td>
-      <td>kylla</td>
+      <td>22</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <td>oleskeluluvat</td>
-      <td>Eurostat migr_res*</td>
+      <td>Eurostat</td>
+      <td>migr_res* FI</td>
+      <td>kylla</td>
       <td>2008.0</td>
       <td>2025.0</td>
-      <td>216</td>
-      <td>kylla</td>
+      <td>18</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <td>kiintiopakolaiset</td>
+      <td>kiintiopakolaiset_saapuneet</td>
       <td>Migri</td>
+      <td>kiintiopakolaistilastot</td>
+      <td>kylla</td>
       <td>2017.0</td>
       <td>2025.0</td>
       <td>9</td>
-      <td>kylla</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <td>kieli_oppimisaika</td>
-      <td>—</td>
+      <td>kiintiopakolaiset_paatetty</td>
+      <td>Migri</td>
+      <td>meta / Yhteensä</td>
+      <td>kylla</td>
+      <td>2011.0</td>
+      <td>2025.0</td>
+      <td>6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>kielitaito_taso</td>
+      <td>Kotoutuminen</td>
+      <td>PxWeb (ei vastannut)</td>
+      <td>ei</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>0</td>
+      <td>ei aikasarjaa; ei välittäjämuuttujaa</td>
+    </tr>
+    <tr>
+      <td>kieli_oppimisaika_kk</td>
+      <td>—</td>
+      <td>ei avointa aikasarjaa</td>
       <td>ei</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>ei aikasarjaa; ei välittäjämuuttujaa</td>
+    </tr>
+    <tr>
+      <td>eurostat_migr_imm1ctz</td>
+      <td>Eurostat</td>
+      <td>HTTP 413 / ei FI-aikasarjaa</td>
+      <td>ei</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>ei aikasarjaa; ei välittäjämuuttujaa</td>
+    </tr>
+    <tr>
+      <td>eurostat_migr_asy</td>
+      <td>Eurostat</td>
+      <td>HTTP 413 / ei FI-aikasarjaa</td>
+      <td>ei</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>ei aikasarjaa; ei välittäjämuuttujaa</td>
+    </tr>
+  </tbody>
+</table>
+    <h2>Kiintiöt: asettaja ja päivämäärä</h2>
+    <p>Asettaja + hakupäivä; <code>paatos_pvm</code> vain jos lähteessä (muuten tyhjä).
+    <a href="fi_migr_kiintio_meta.csv">fi_migr_kiintio_meta.csv</a>.</p>
+    <table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vuosi</th>
+      <th>paatetty_kiintio</th>
+      <th>asettaja</th>
+      <th>unhcr_rooli</th>
+      <th>lahde_url</th>
+      <th>haettu</th>
+      <th>huom</th>
+      <th>paatos_pvm</th>
+      <th>paatos_pvm_huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Suomen valtioneuvosto (esitys) / eduskunta (talousarvio / päätös)</td>
+      <td>ehdottaa uudelleensijoitettavia henkilöitä; ei aseta Suomen vuosikiintiötä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>TUTKIVA; vuosikohtainen päätetty luku täytetään vain jos löytyy lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2026.0</td>
+      <td>146.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2025.0</td>
+      <td>498.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2024.0</td>
+      <td>501.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2014.0</td>
+      <td>1030.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2013.0</td>
+      <td>746.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2012.0</td>
+      <td>734.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
+    </tr>
+    <tr>
+      <td>2011.0</td>
+      <td>626.0</td>
+      <td>Suomen valtioneuvosto / eduskunta (ks. vuosittainen päätös); Migri julkaisee toteutuman</td>
+      <td>ehdottaa henkilöitä</td>
+      <td>https://migri.fi/kiintiopakolaistilastot</td>
+      <td>2026-11-03</td>
+      <td>poimittu Migri-sivun Yhteensä-riviltä (valitut); tarkista lähteestä</td>
+      <td>NaN</td>
+      <td>tyhjä = Migri-sivulta ei poimittu päätöksen päivämäärää; ei arvioida</td>
     </tr>
   </tbody>
 </table>

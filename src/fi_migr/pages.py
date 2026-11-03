@@ -50,6 +50,7 @@ def aja() -> None:
                 lines.append(f"<p>{html.escape(ln)}</p>")
         body = "\n".join(lines)
 
+    from src.fi_migr.coverage_matrix import MONIVERTAILU
     from src.site import aihe_nav, ristiviittaukset
 
     kuvat = "".join(
@@ -70,11 +71,22 @@ def aja() -> None:
   </div></header>
   <main class="wrap">
     <p class="tutkiva">TUTKIVA (ei esirekisteröity). Ei yhdistetty K1-rikostilastoon.</p>
+    <aside class="kortti" aria-label="Monivertailuvaroitus">
+      <p><strong>Monivertailuvaroitus.</strong> {html.escape(MONIVERTAILU)}</p>
+      <p>Puuttuvaa ei korvata välittäjämuuttujalla. Katkos / tyhjä solu = data puuttuu.</p>
+    </aside>
     {body}
     <h2>Kaaviot</h2>
     {kuvat}
-    <h2>Peitto</h2>
-    {_df_html(TABLES / "fi_migr_peitto.csv")}
+    <h2>Peitto (indikaattori × vuosi)</h2>
+    <p>Yhteenveto ja <a href="FI_MIGR_PEITTO.md">FI_MIGR_PEITTO.md</a>.
+    Laaja matriisi: <a href="fi_migr_peitto_matriisi.csv">fi_migr_peitto_matriisi.csv</a>
+    (1 = peitto, tyhjä = aukko; myös tyhjät indikaattorit mukana).</p>
+    {_df_html(TABLES / "fi_migr_peitto.csv", max_rows=40)}
+    <h2>Kiintiöt: asettaja ja päivämäärä</h2>
+    <p>Asettaja + hakupäivä; <code>paatos_pvm</code> vain jos lähteessä (muuten tyhjä).
+    <a href="fi_migr_kiintio_meta.csv">fi_migr_kiintio_meta.csv</a>.</p>
+    {_df_html(TABLES / "fi_migr_kiintio_meta.csv", max_rows=20)}
     <p>CSV-tiedostot tässä kansiossa. Lähteet: <a href="FI_MIGR_DATA_SOURCES.md">FI_MIGR_DATA_SOURCES.md</a>.</p>
     {ristiviittaukset(aktiivinen="fi_migr", sijainti="fi_migr")}
   </main>
