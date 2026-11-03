@@ -67,7 +67,9 @@ def _kuvat_koodista(text: str) -> str:
             if not tiedostot:
                 tiedostot = sorted(p.name for p in FIGURES_DIR.glob(pre + "*.png"))
             return "\n" + "\n".join(f"@@KUVA:{t}@@" for t in tiedostot) + "\n" if tiedostot else m.group(0)
-        if (FIGURES_DIR / nimi).exists():
+        if (FIGURES_DIR / nimi).exists() or (
+            ROOT / "media" / "output" / "figures" / nimi
+        ).exists():
             return f"\n@@KUVA:{nimi}@@\n"
         return m.group(0)
 
@@ -588,6 +590,19 @@ def kirjoita_aihesivut() -> None:
       {ana_en}
       {kuvat_en}
       {tulk_en}
+    </div>
+"""
+    rap_media = ROOT / "media" / "output" / "RAPORTTI_MEDIA.md"
+    if rap_media.exists():
+        shutil.copy2(rap_media, DOCS_DIR / "media" / "RAPORTTI_MEDIA.md")
+        media = f"""
+    <div class="kieli-fi">
+{md_html(rap_media.read_text(encoding="utf-8"))}
+    </div>
+    <div class="kieli-en" hidden>
+      <h1>Media</h1>
+      <p>The phase-8 report is in Finnish: <a href="RAPORTTI_MEDIA.md">RAPORTTI_MEDIA.md</a>.</p>
+      <p>Preregistration 2026-11-01. Outlets: Iltalehti and Yle. Calendar 2015–2025; missing HTML is empty, not zero. Human coding is missing. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 compares FI convictions with citizenship strings in crime headlines; the units differ. No motives, audience effects, or causal claims.</p>
     </div>
 """
     (DOCS_DIR / "media" / "index.html").write_text(

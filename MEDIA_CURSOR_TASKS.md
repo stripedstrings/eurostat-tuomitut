@@ -43,3 +43,4 @@ Pysähdy jokaisen vaiheen jälkeen, tulosta yhteenveto ja odota hyväksyntää.
 - media/output/RAPORTTI_MEDIA.md: tulokset kuvineen, kaikki mediat, kaikki
   jaksot, epävarmuudet. Erillinen "Tulkinta ja rajat" -osio.
 - Lukijalle: miten toistaa (komennot, data).
+- Ajettu 2026-11-03.
