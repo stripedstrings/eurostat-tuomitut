@@ -111,3 +111,9 @@ Koodikirja: `media/codebook_m4_v1.md`.
 - K1-osuus: `FOR/(NAT+FOR)` yhteisillä vuosilla (`kelpoinen_aste`, HTML).
   Ei otanta-CI. Uutinen: Wilson. D<10 merkitään.
 - Varoitukset: uutiskynnys, laskentayksikkö, otoskoko. Ei syy-yhteyttä.
+
+## TUTKIVA uhkakehys (2026-11-03)
+
+Ei esirekisteröity. Ei muuta H4:ää. Koodikirja `media/codebook_uhkakehys_v1.md`
+lukittu ennen osuuksia. Yksikkö = havaittu otsikko. Kaksi kenttää: terveysuhka
+(aihe) ja uhkakehys (kärjistys). Wilson 95 %, D<10. Puuttuva HTML ei nolla.

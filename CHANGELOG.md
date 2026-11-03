@@ -33,6 +33,12 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (TUTKIVA, uhkakehys). Uusi koodikirja terveysuhka vs. uhkakehys
+  merkkijono-osumina kaikille havaituille otsikoille. Ei korvaa H4:ää eikä
+  koodaus-v1:tä. Avaimet lukittu `codebook_uhkakehys_v1.md`:ään ennen
+  osuuslaskentaa. Perustelu: esirekisteröity sävy ei kata kärjistettyä
+  vaarakieltä. Merkitään tutkivaksi.
+
 - 2026-11-03 (vaihe 8). `media/output/RAPORTTI_MEDIA.md`: tulokset erillään
   osiosta Tulkinta ja rajat. Ei uusia lukuja; ei menetelmän vaihtoa.
 

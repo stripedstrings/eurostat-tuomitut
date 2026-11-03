@@ -178,3 +178,10 @@ Taulut: `m4_media_vs_k1.csv`, `m4_varoitukset.csv`.
 ## Vaihe 8 (raportti, 2026-11-03)
 
 `media/output/RAPORTTI_MEDIA.md`. Ei uutta hakua.
+
+---
+
+## TUTKIVA uhkakehys (2026-11-03)
+
+Ei uutta hakua. Avaimet `media/codebook_uhkakehys_v1.md`. Taulut:
+`uhkakehys_otsikko.csv`, `uhkakehys_osuus.csv`. Kaavio `05_uhkakehys.png`.

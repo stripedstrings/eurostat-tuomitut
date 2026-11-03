@@ -36,7 +36,7 @@
 <p>Esirekisteröinti: <code>MEDIA_PREREGISTRATION.md</code> (2026-11-01).  <br>
 Aineisto: Wayback CDX ja HTML-snapshotit (haettu 2026-11-02); K1-osuus M4:ssä Eurostat <code>crim_just_ctz</code> / <code>migr_pop5ctz</code> (haettu 2026-11-01).  <br>
 Kaikki luvut ovat taulukoista <code>media/output/tables/</code> ja <code>output/tables/asteet.csv</code>. Puuttuva = tyhjä / NaN, ei täyttöä.</p>
-<p><strong>Tämä tulososio ei sisällä tulkintaa.</strong> Tulkinta on osiossa 10.</p>
+<p><strong>Tämä tulososio ei sisällä tulkintaa.</strong> Tulkinta on osiossa 11.</p>
 <p>Mediat (vain vaiheessa 1 vastanneet URL:t): <code>iltalehti_etusivu</code> (<code>www.iltalehti.fi/</code>), <code>yle_uutiset</code> (<code>yle.fi/uutiset</code>). Kalenteri: 2015-01-01 … 2025-12-31 (4018 päivää / media). Muita medioita tai maita ei ole.</p>
 <hr>
 <h2>1. Peitto (vaihe 2)</h2>
@@ -108,11 +108,24 @@ Kaikki luvut ovat taulukoista <code>media/output/tables/</code> ja <code>output/
 <li><code>python -m src.plot_media</code></li>
 <li><code>python -m src.sensitivity_media</code></li>
 <li><code>python -m src.m4_media</code></li>
+<li><code>python -m src.threat_media</code></li>
 <li><code>python -m src.pages</code></li>
 </ol>
-<p>CDX-indeksi: <code>python -m src.fetch_media</code>. Testit: <code>pytest tests/test_wilson.py tests/test_parse_media.py tests/test_code_media.py tests/test_analyze_media.py tests/test_sensitivity_media.py tests/test_m4_media.py tests/test_krippendorff.py</code>.</p>
+<p>CDX-indeksi: <code>python -m src.fetch_media</code>. Testit: <code>pytest tests/test_wilson.py tests/test_parse_media.py tests/test_code_media.py tests/test_analyze_media.py tests/test_sensitivity_media.py tests/test_m4_media.py tests/test_krippendorff.py tests/test_threat_media.py</code>.</p>
 <hr>
-<h2>10. Tulkinta ja rajat</h2>
+<h2>10. TUTKIVA (ei esirekisteröity): terveysuhka ja uhkakehys</h2>
+<p>Koodikirja <code>codebook_uhkakehys_v1.md</code>, lukittu ennen osuuslaskentaa. Yksikkö = havaittu etusivuotsikko. Puuttuva HTML ei ole nolla. Kaksi erillistä kenttää: terveysuhka (aihe) ja uhkakehys (kärjistys, aiheesta riippumatta). Tämä ei ole H4 eikä korvaa koodaus-v1:tä. Ihmiskoodausta ei ole.</p>
+<p>Lähde: <code>uhkakehys_osuus.csv</code>. Wilson 95 %. D&amp;lt;10 merkitty.</p>
+<p>Havaittu jakso</p>
+<div class="taulu-wrap"><table><thead><tr><th>media</th><th>n</th><th>molemmat</th><th>vain terveys</th><th>vain kehys</th><th>ei kumpaakaan</th><th>terveysuhka</th><th>uhkakehys</th></tr></thead><tbody><tr><td>iltalehti_etusivu</td><td>10545</td><td>0/10545 = 0,0 % (0,0–0,04 %), D&amp;lt;10</td><td>20/10545 = 0,19 % (0,12–0,29 %)</td><td>68/10545 = 0,64 % (0,51–0,82 %)</td><td>10457/10545 = 99,17 % (98,97–99,32 %)</td><td>20/10545 = 0,19 % (0,12–0,29 %)</td><td>68/10545 = 0,64 % (0,51–0,82 %)</td></tr><tr><td>yle_uutiset</td><td>3526</td><td>0/3526 = 0,0 % (0,0–0,11 %), D&amp;lt;10</td><td>23/3526 = 0,65 % (0,44–0,98 %)</td><td>24/3526 = 0,68 % (0,46–1,01 %)</td><td>3479/3526 = 98,67 % (98,23–99,00 %)</td><td>23/3526 = 0,65 % (0,44–0,98 %)</td><td>24/3526 = 0,68 % (0,46–1,01 %)</td></tr></tbody></table></div>
+<p>Vuodet, joilla n&amp;gt;0: Iltalehti 2015 (n=3718), 2016 (n=4994), 2023 (n=1833); Yle 2015 (n=102), 2023 (n=3424).</p>
+<p>Iltalehti, vuodet</p>
+<div class="taulu-wrap"><table><thead><tr><th>vuosi</th><th>n</th><th>terveysuhka</th><th>uhkakehys</th></tr></thead><tbody><tr><td>2015</td><td>3718</td><td>7/3718 = 0,19 % (0,09–0,39 %), D&amp;lt;10</td><td>22/3718 = 0,59 % (0,39–0,89 %)</td></tr><tr><td>2016</td><td>4994</td><td>4/4994 = 0,08 % (0,03–0,21 %), D&amp;lt;10</td><td>35/4994 = 0,70 % (0,50–0,97 %)</td></tr><tr><td>2023</td><td>1833</td><td>9/1833 = 0,49 % (0,26–0,93 %), D&amp;lt;10</td><td>11/1833 = 0,60 % (0,34–1,07 %)</td></tr></tbody></table></div>
+<p>Yle, vuodet</p>
+<div class="taulu-wrap"><table><thead><tr><th>vuosi</th><th>n</th><th>terveysuhka</th><th>uhkakehys</th></tr></thead><tbody><tr><td>2015</td><td>102</td><td>1/102 = 0,98 % (0,17–5,35 %), D&amp;lt;10</td><td>0/102 = 0,0 % (0,0–3,63 %), D&amp;lt;10</td></tr><tr><td>2023</td><td>3424</td><td>22/3424 = 0,64 % (0,42–0,97 %)</td><td>24/3424 = 0,70 % (0,47–1,04 %)</td></tr></tbody></table></div>
+<p>Kaavio: <code>output/figures/05_uhkakehys.png</code> (TUTKIVA kuvatekstissä).</p>
+<hr>
+<h2>11. Tulkinta ja rajat</h2>
 <p>Tämä osio on erillään tulosluvuista. Data tukee kuvauksia osuuksista <strong>havaituissa</strong> snapshotissa. Se ei tue motiiveja, lukijavaikutuksia, propaganda-väitettä eikä politiikkajohtopäätöstä.</p>
 <p>Mitä luvut kuvaavat</p>
 <ul>
@@ -121,6 +134,7 @@ Kaikki luvut ovat taulukoista <code>media/output/tables/</code> ja <code>output/
 <li>H5:n korrelaatio on kuuden osuuden välinen, kahdella medialla. Se ei ole maiden vertailu eikä todiste samasta toimituksellisesta linjasta.</li>
 <li>M4: K1:n 12 % on tuomioiden NAT/FOR-jakauma Suomessa kolmelta vuodelta. Median 0/87 on lukittujen merkkijonojen osuma rikosotsikoissa. Nämä eivät ole sama satunnaismuuttuja. Nolla osumaa ei osoita, että kansalaisuutta ei mainita muilla sanoilla, eikä että media “vastaa” tai “ei vastaa” tilastoa.</li>
 <li>Ihmiskoodauksen puute rajaa sävyn, aiheen ja H4/H7-pään.</li>
+<li>TUTKIVA uhkakehys on merkkijono-osuma. Se ei ole validoitu H4. Nolla “molemmat”-luokkaa tarkoittaa, että lukittujen avainten yhteisosumia ei ollut havaituissa otsikoissa. Se ei osoita, että toimitus ei “pelottele tarkoituksella”, eikä motiivia.</li>
 </ul>
 <p>Mitä jää avoimeksi: täysi HTML-peitto, kaksi ihmiskoodaajaa, julkaisijan analytiikka (H3), ulkoiset tapahtumaindikaattorit (P5 ilman M4-yksikköeroa), muut mediat ja maat.</p>
     </div>

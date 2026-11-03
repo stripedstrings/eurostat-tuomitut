@@ -343,6 +343,7 @@ def kirjoita_aihesivut() -> None:
         "codebook_esikasittely_v1.md",
         "codebook_koodaus_v1.md",
         "codebook_m4_v1.md",
+        "codebook_uhkakehys_v1.md",
     ):
         koodikirja = ROOT / "media" / koodikirja_nimi
         if koodikirja.exists():
@@ -487,8 +488,23 @@ def kirjoita_aihesivut() -> None:
         '<a href="m4_varoitukset.csv">warnings</a>, '
         '<a href="codebook_m4_v1.md">codebook</a>.',
     )
-    ana_fi = p1h_fi + h_fi + p4t_fi + s_fi + m4_fi
-    ana_en = p1h_en + h_en + p4t_en + s_en + m4_en
+    uhk_fi, uhk_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "uhkakehys_osuus.csv",
+        "TUTKIVA terveysuhka ja uhkakehys",
+        "Ei esirekisteröity. Ei korvaa H4:ää. Kaksi kenttää: terveysuhka (aihe) ja "
+        "uhkakehys (kärjistys). Wilson 95 %. "
+        '<a href="uhkakehys_osuus.csv">osuudet</a>, '
+        '<a href="uhkakehys_otsikko.csv">otsikkoliput</a>, '
+        '<a href="codebook_uhkakehys_v1.md">koodikirja</a>.',
+        "EXPLORATORY health topic and threat frame",
+        "Not preregistered. Does not replace H4. Two fields: health-threat topic "
+        "and threat frame. Wilson 95%. "
+        '<a href="uhkakehys_osuus.csv">shares</a>, '
+        '<a href="uhkakehys_otsikko.csv">headline flags</a>, '
+        '<a href="codebook_uhkakehys_v1.md">codebook</a>.',
+    )
+    ana_fi = p1h_fi + h_fi + p4t_fi + s_fi + m4_fi + uhk_fi
+    ana_en = p1h_en + h_en + p4t_en + s_en + m4_en + uhk_en
     kuvat_fi = ""
     kuvat_en = ""
     if (ROOT / "media" / "output" / "figures" / "01_entiteetti_osuus.png").exists():
@@ -498,6 +514,7 @@ def kirjoita_aihesivut() -> None:
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 vuosittain"><figcaption>P1: osuudet vuosittain. Katkos = ei HTML:ää.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 ja H2"><figcaption>H1 Iltalehti 2023 Putin; H2 presidentti, Putin, Zelenskyi.</figcaption></figure>
       <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs. rikosotsikon kansalaisuusmaininta. Yksiköt eivät täsmää.</figcaption></figure>
+      <figure><img src="figures/05_uhkakehys.png" alt="TUTKIVA uhkakehys"><figcaption>TUTKIVA: terveysuhka ja uhkakehys. Ei esirekisteröity. Ei H4.</figcaption></figure>
 """
         kuvat_en = """
       <h2>Figures (phase 5)</h2>
@@ -505,14 +522,15 @@ def kirjoita_aihesivut() -> None:
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 by year"><figcaption>P1: shares by year. Gap = no HTML.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 and H2"><figcaption>H1 Iltalehti 2023 Putin; H2 president, Putin, Zelenskyi.</figcaption></figure>
       <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs citizenship strings in crime headlines. Units differ.</figcaption></figure>
+      <figure><img src="figures/05_uhkakehys.png" alt="EXPLORATORY threat frame"><figcaption>EXPLORATORY: health-threat topic and threat frame. Not H4.</figcaption></figure>
 """
     tulk_fi = """
       <h2>Tulkinta ja rajat</h2>
-      <p>Luvut ovat osuuksia havaituissa Wayback-snapshotissa, eivät kaikkien kalenteripäivien osuuksia. Puuttuvaa HTML:ää ei ole täytetty nollaksi. Entiteetti on merkkijono-osuma, ei ihmiskoodaus. H3, H4, H6, H7 (pää), P2 (pää), P3 ja P5 on merkitty ei testattaviksi. M4 vertaa eri yksiköitä (tuomio vs. otsikko); se ei osoita vinoumaa eikä syytä. Pearson-r perustuu kahteen mediaan. Ei motiiveja, ei lukijavaikutusta, ei propaganda-väitettä.</p>
+      <p>Luvut ovat osuuksia havaituissa Wayback-snapshotissa, eivät kaikkien kalenteripäivien osuuksia. Puuttuvaa HTML:ää ei ole täytetty nollaksi. Entiteetti on merkkijono-osuma, ei ihmiskoodaus. H3, H4, H6, H7 (pää), P2 (pää), P3 ja P5 on merkitty ei testattaviksi. M4 vertaa eri yksiköitä (tuomio vs. otsikko); se ei osoita vinoumaa eikä syytä. TUTKIVA uhkakehys ei ole validoitu H4. Pearson-r perustuu kahteen mediaan. Ei motiiveja, ei lukijavaikutusta, ei propaganda-väitettä.</p>
 """
     tulk_en = """
       <h2>Interpretation and limits</h2>
-      <p>Shares are among observed Wayback snapshots, not among all calendar days. Missing HTML is not filled with zero. Entity flags are string matches, not human codes. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 compares different units (conviction vs headline); it does not show bias or cause. Pearson r uses two outlets. No motives, audience effects, or propaganda claims.</p>
+      <p>Shares are among observed Wayback snapshots, not among all calendar days. Missing HTML is not filled with zero. Entity flags are string matches, not human codes. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 compares different units (conviction vs headline); it does not show bias or cause. The exploratory threat-frame flags are not validated H4. Pearson r uses two outlets. No motives, audience effects, or propaganda claims.</p>
 """
     esik_fi, esik_en = _media_taulu_osio(
         ROOT / "media" / "output" / "tables" / "tietueet_yhteenveto.csv",

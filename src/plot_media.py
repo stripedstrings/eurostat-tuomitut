@@ -209,6 +209,41 @@ def kaavio_m4(m4: pd.DataFrame, polku: Path) -> None:
     _tallenna(fig, polku)
 
 
+LUOKKA_UHKA = {
+    "molemmat": "Molemmat",
+    "vain_terveys": "Vain terveysuhka",
+    "vain_kehys": "Vain uhkakehys",
+    "ei_kumpaakaan": "Ei kumpaakaan",
+}
+
+
+def kaavio_uhkakehys(osuus: pd.DataFrame, polku: Path) -> None:
+    d = osuus[(osuus["jakso"] == "havaittu") & (osuus["luokka"].isin(LUOKKA_UHKA))].copy()
+    d["osuus"] = pd.to_numeric(d["osuus"], errors="coerce")
+    d["wilson_ala"] = pd.to_numeric(d["wilson_ala"], errors="coerce")
+    d["wilson_yla"] = pd.to_numeric(d["wilson_yla"], errors="coerce")
+    jarj = list(LUOKKA_UHKA)
+    fig, akselit = plt.subplots(1, 2, figsize=(11, 6), sharey=True)
+    for ax, media in zip(akselit, ["iltalehti_etusivu", "yle_uutiset"]):
+        osat = d[d["media"] == media].set_index("luokka")
+        y = [float(osat.loc[k, "osuus"]) * 100 if k in osat.index else float("nan") for k in jarj]
+        lo = [float(osat.loc[k, "wilson_ala"]) * 100 if k in osat.index else float("nan") for k in jarj]
+        hi = [float(osat.loc[k, "wilson_yla"]) * 100 if k in osat.index else float("nan") for k in jarj]
+        lo_e = [yy - a if pd.notna(yy) and pd.notna(a) else 0 for yy, a in zip(y, lo)]
+        hi_e = [b - yy if pd.notna(yy) and pd.notna(b) else 0 for yy, b in zip(y, hi)]
+        ax.bar(range(len(jarj)), y, yerr=[lo_e, hi_e], capsize=3, color="#6b3fa0")
+        ax.set_xticks(range(len(jarj)))
+        ax.set_xticklabels([LUOKKA_UHKA[k] for k in jarj], rotation=20, ha="right")
+        ax.set_title(NIMET.get(media, media) + " (TUTKIVA)")
+        ax.set_ylabel("Osuus otsikoista (%)")
+        ax.grid(True, axis="y", alpha=0.3)
+        for i, k in enumerate(jarj):
+            if k in osat.index and str(osat.loc[k, "d_lt_10"]) == "1":
+                ax.text(i, (y[i] or 0) + 1, "D<10", ha="center", fontsize=8)
+    fig.suptitle("TUTKIVA: terveysuhka ja uhkakehys (ei esirekisteröity)")
+    _tallenna(fig, polku)
+
+
 def aja() -> None:
     p1 = pd.read_csv(TABLES / "p1_entiteetti_osuus.csv", dtype=str)
     kaavio_p1_palkki(p1, FIG / "01_entiteetti_osuus.png")
@@ -217,6 +252,9 @@ def aja() -> None:
     m4p = TABLES / "m4_media_vs_k1.csv"
     if m4p.exists():
         kaavio_m4(pd.read_csv(m4p, dtype=str), FIG / "04_m4_media_vs_k1.png")
+    uhkp = TABLES / "uhkakehys_osuus.csv"
+    if uhkp.exists():
+        kaavio_uhkakehys(pd.read_csv(uhkp, dtype=str), FIG / "05_uhkakehys.png")
     print("kirjoitettu", FIG / "01_entiteetti_osuus.png", flush=True)
 
 
