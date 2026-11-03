@@ -2,6 +2,11 @@
 Kirjaa tähän jokainen poikkeama PREREGISTRATION.md:stä: pvm, muutos, perustelu,
 tehtiinkö ennen vai jälkeen tulosten näkemisen.
 
+- 2026-11-03. Media: `MEDIA_PREREGISTRATION.md` lisäys (ihmiskoodaus N=500,
+  koodaajat A/B, α-kynnykset 0,67/0,80, mediat HS+MTV perusteluineen).
+  Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
+  kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
+
 - 2026-11-03. Sivustolle `docs/tutkimus/`-hubi ja yhtenäinen navigaatio
   (Tutkimus | K1 | FI | Media) sekä ristiviittauslaatikot. Haaroja ei yhdistetä
   analyysissä; media pysyy agendan mittauksena. Ei menetelmämuutosta.
