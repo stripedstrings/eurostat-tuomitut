@@ -1,0 +1,65 @@
+s,kuvaus,media,ryhma,n_paa,osuus_paa,n_s,osuus_s,ero,paa_ala,paa_yla,s_ala,s_yla,huom
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,putin,10545,0.011949,165,0.503030,0.491081,0.010045,0.014208,0.427544,0.578379,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,zelenskyi,10545,0.001612,165,0.090909,0.089297,0.001007,0.002580,0.055866,0.144567,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,presidentti,10545,0.000095,165,0.006061,0.005966,0.000017,0.000537,0.001071,0.033527,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,maahanmuutto,10545,0.006923,165,0.248485,0.241562,0.005510,0.008695,0.188775,0.319640,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,rikollisuus,10545,0.006259,165,0.272727,0.266468,0.004923,0.007954,0.210522,0.345274,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),iltalehti_etusivu,terveys,10545,0.000474,165,0.030303,0.029829,0.000203,0.001110,0.013012,0.068967,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,putin,3526,0.009075,81,0.333333,0.324258,0.006436,0.012783,0.240288,0.441472,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,zelenskyi,3526,0.005956,81,0.185185,0.179229,0.003899,0.009088,0.115563,0.283316,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,presidentti,3526,0.000000,81,0.000000,0.000000,0.000000,0.001088,0.000000,0.045278,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,maahanmuutto,3526,0.003120,81,0.098765,0.095645,0.001743,0.005578,0.050900,0.182965,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,rikollisuus,3526,0.005956,81,0.209877,0.203921,0.003899,0.009088,0.135372,0.310654,pää = otsikko; S = etusivu (≥1 otsikko)
+S1,etusivupäivä vs. otsikko (pää),yle_uutiset,terveys,3526,0.001134,81,0.049383,0.048249,0.000441,0.002913,0.019369,0.120202,pää = otsikko; S = etusivu (≥1 otsikko)
+S2,Yle vs. IL (pää pitää molemmat),molemmat,putin,10545,0.011949,3526,0.009075,-0.002874,0.010045,0.014208,0.006436,0.012783,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S2,Yle vs. IL (pää pitää molemmat),molemmat,zelenskyi,10545,0.001612,3526,0.005956,0.004344,0.001007,0.002580,0.003899,0.009088,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S2,Yle vs. IL (pää pitää molemmat),molemmat,presidentti,10545,0.000095,3526,0.000000,-0.000095,0.000017,0.000537,0.000000,0.001088,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S2,Yle vs. IL (pää pitää molemmat),molemmat,maahanmuutto,10545,0.006923,3526,0.003120,-0.003803,0.005510,0.008695,0.001743,0.005578,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S2,Yle vs. IL (pää pitää molemmat),molemmat,rikollisuus,10545,0.006259,3526,0.005956,-0.000303,0.004923,0.007954,0.003899,0.009088,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S2,Yle vs. IL (pää pitää molemmat),molemmat,terveys,10545,0.000474,3526,0.001134,0.000660,0.000203,0.001110,0.000441,0.002913,"osuus_paa=IL, osuus_s=Yle; kumpaakaan ei pudoteta päästä"
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,putin,10545,0.011949,1833,0.040371,0.028422,0.010045,0.014208,0.032280,0.050385,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,zelenskyi,10545,0.001612,1833,0.009274,0.007662,0.001007,0.002580,0.005799,0.014803,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,presidentti,10545,0.000095,1833,0.000000,-0.000095,0.000017,0.000537,0.000000,0.002091,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,maahanmuutto,10545,0.006923,1833,0.001091,-0.005832,0.005510,0.008695,0.000299,0.003970,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,rikollisuus,10545,0.006259,1833,0.005456,-0.000803,0.004923,0.007954,0.002966,0.010014,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),iltalehti_etusivu,terveys,10545,0.000474,1833,0.000546,0.000072,0.000203,0.001110,0.000096,0.003084,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,putin,3526,0.009075,3424,0.009346,0.000271,0.006436,0.012783,0.006628,0.013163,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,zelenskyi,3526,0.005956,3424,0.006133,0.000177,0.003899,0.009088,0.004015,0.009358,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,presidentti,3526,0.000000,3424,0.000000,0.000000,0.000000,0.001088,0.000000,0.001121,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,maahanmuutto,3526,0.003120,3424,0.002629,-0.000491,0.001743,0.005578,0.001384,0.004988,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,rikollisuus,3526,0.005956,3424,0.006133,0.000177,0.003899,0.009088,0.004015,0.009358,ei HTML-vuotta ei täytetä
+S3,vain 2023 vs. havaittu jakso (pää),yle_uutiset,terveys,3526,0.001134,3424,0.000876,-0.000258,0.000441,0.002913,0.000298,0.002573,ei HTML-vuotta ei täytetä
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,putin,500,0.014000,500,0.014000,0.000000,0.006798,0.028613,0.006798,0.028613,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,zelenskyi,500,0.004000,500,0.004000,0.000000,0.001098,0.014466,0.001098,0.014466,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,presidentti,500,0.000000,500,0.000000,0.000000,0.000000,0.007624,0.000000,0.007624,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,maahanmuutto,500,0.004000,500,0.004000,0.000000,0.001098,0.014466,0.001098,0.014466,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,rikollisuus,500,0.012000,500,0.012000,0.000000,0.005511,0.025930,0.005511,0.025930,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S4,"sääntöaihe vs. entiteettiosuma, otos 500",otos,terveys,500,0.002000,500,0.002000,0.000000,0.000353,0.011241,0.000353,0.011241,TUTKIVA; ihmisaihe tyhjä; koko ruudukkoa ei koodattu
+S5,tyhjä→neutraali (tutkiva) vs. vain merkitty (pää),otos,savy:uhka,7,0.714286,500,0.010000,-0.704286,0.358934,0.917781,0.004279,0.023193,täyttö ei pääanalyysi; tyhjä ei ole neutraali päässä
+S5,tyhjä→neutraali (tutkiva) vs. vain merkitty (pää),otos,savy:pelko,7,0.285714,500,0.004000,-0.281714,0.082219,0.641066,0.001098,0.014466,täyttö ei pääanalyysi; tyhjä ei ole neutraali päässä
+S5,tyhjä→neutraali (tutkiva) vs. vain merkitty (pää),otos,savy:viha,7,0.000000,500,0.000000,0.000000,0.000000,0.354330,0.000000,0.007624,täyttö ei pääanalyysi; tyhjä ei ole neutraali päässä
+S5,tyhjä→neutraali (tutkiva) vs. vain merkitty (pää),otos,savy:neutraali,,,500,0.986000,,,,0.971387,0.993202,TUTKIVA täyttö; päässä ei neutraali-luokkaa
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,putin,10545,0.011949,8905,0.012802,0.000853,0.010045,0.014208,0.010668,0.015356,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,zelenskyi,10545,0.001612,8905,0.001572,-0.000040,0.001007,0.002580,0.000937,0.002637,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,presidentti,10545,0.000095,8905,0.000112,0.000017,0.000017,0.000537,0.000020,0.000636,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,maahanmuutto,10545,0.006923,8905,0.007187,0.000264,0.005510,0.008695,0.005633,0.009166,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,rikollisuus,10545,0.006259,8905,0.007187,0.000928,0.004923,0.007954,0.005633,0.009166,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",iltalehti_etusivu,terveys,10545,0.000474,8905,0.000561,0.000087,0.000203,0.001110,0.000240,0.001314,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,putin,3526,0.009075,3397,0.009420,0.000345,0.006436,0.012783,0.006681,0.013268,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,zelenskyi,3526,0.005956,3397,0.006182,0.000226,0.003899,0.009088,0.004047,0.009432,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,presidentti,3526,0.000000,3397,0.000000,0.000000,0.000000,0.001088,0.000000,0.001130,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,maahanmuutto,3526,0.003120,3397,0.003238,0.000118,0.001743,0.005578,0.001809,0.005789,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,rikollisuus,3526,0.005956,3397,0.006182,0.000226,0.003899,0.009088,0.004047,0.009432,puuttuvaa otsikkoa ei keksitä
+S6,"pituus ≥40 vs. ≥18 (pää, poiminta)",yle_uutiset,terveys,3526,0.001134,3397,0.001178,0.000044,0.000441,0.002913,0.000458,0.003024,puuttuvaa otsikkoa ei keksitä
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,putin,10545,0.011949,10545,0.011949,-0.000000,0.010045,0.014208,0.009963,0.014210,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,zelenskyi,10545,0.001612,10545,0.001612,0.000000,0.001007,0.002580,0.000939,0.002580,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,presidentti,10545,0.000095,10545,0.000095,-0.000000,0.000017,0.000537,0.000002,0.000528,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,maahanmuutto,10545,0.006923,10545,0.006923,-0.000000,0.005510,0.008695,0.005430,0.008697,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,rikollisuus,10545,0.006259,10545,0.006259,-0.000000,0.004923,0.007954,0.004844,0.007956,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),iltalehti_etusivu,terveys,10545,0.000474,10545,0.000474,0.000000,0.000203,0.001110,0.000154,0.001106,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,putin,3526,0.009075,3526,0.009075,0.000000,0.006436,0.012783,0.006216,0.012788,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,zelenskyi,3526,0.005956,3526,0.005956,-0.000000,0.003899,0.009088,0.003690,0.009090,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,presidentti,3526,0.000000,3526,0.000000,0.000000,0.000000,0.001088,0.000000,0.001046,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,maahanmuutto,3526,0.003120,3526,0.003120,-0.000000,0.001743,0.005578,0.001558,0.005575,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,rikollisuus,3526,0.005956,3526,0.005956,-0.000000,0.003899,0.009088,0.003690,0.009090,osuus sama; vaihtuu väli
+S7,Clopper–Pearson 95 % vs. Wilson 95 % (pää),yle_uutiset,terveys,3526,0.001134,3526,0.001134,0.000000,0.000441,0.002913,0.000309,0.002902,osuus sama; vaihtuu väli

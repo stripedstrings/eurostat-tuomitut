@@ -3,7 +3,7 @@
 import math
 
 from src.rates import Z_95
-from src.wilson import osuus, wilson_ci
+from src.wilson import clopper_pearson_ci, osuus, wilson_ci
 
 
 def test_osuus_nan_kun_n_nolla():
@@ -29,3 +29,14 @@ def test_wilson_nolla_osuma():
     lo, hi = wilson_ci(0, 20)
     assert lo >= 0
     assert hi > lo
+
+
+def test_clopper_pearson_nolla():
+    lo, hi = clopper_pearson_ci(0, 10)
+    assert lo == 0.0
+    assert abs(hi - (1.0 - 0.025 ** (1.0 / 10.0))) < 1e-9
+
+
+def test_clopper_pearson_nan_kun_n_nolla():
+    lo, hi = clopper_pearson_ci(0, 0)
+    assert math.isnan(lo) and math.isnan(hi)

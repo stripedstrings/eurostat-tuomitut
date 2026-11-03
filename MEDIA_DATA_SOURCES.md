@@ -159,3 +159,9 @@ Yhteenveto: `koodaus_yhteenveto.csv`. F1 (sääntö vs. sääntö): `koodaus_f1.
 
 Ei uutta hakua. Taulut: `p1_entiteetti_osuus.csv`, `h1_h7.csv`,
 `p4_mediavertailu.csv`, `p3_p5_tila.csv`. Ulkoisia indikaattoreita ei.
+
+---
+
+## Vaihe 6 (herkkyys, 2026-11-03)
+
+Ei uutta hakua. `herkkyys_media_S1_S7.csv`, `herkkyys_media_yhteenveto.csv`.

@@ -2,7 +2,7 @@
 
 Vaihe 1 (saatavuus) 2026-11-01. Vaihe 2 (CDX-indeksi) 2026-11-02.
 Vaihe 3 (HTML-otsikot) 2026-11-02. Vaihe 4 (koodausotos) 2026-11-03.
-Vaihe 5 (P1–P5, H1–H7) 2026-11-03.
+Vaihe 5 (P1–P5, H1–H7) 2026-11-03. Vaihe 6 (S1–S7) 2026-11-03.
 Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 
 ## Yksikkö ja jakso (vaihe 2)
@@ -89,7 +89,8 @@ D<10 merkitään. Molemmat mediat, kaikki vuodet joissa n>0.
 
 ## Herkkyydet S1–S7 (lukittu ennen vaihetta 5)
 
-Taulukko vaiheessa 6. Määritelmät eivät riipu P1–P5-luvuista.
+Taulukko vaiheessa 6 (ajo 2026-11-03). Määritelmät eivät riipu P1–P5-luvuista.
+Päävertailu = P1 otsikko, jakso havaittu, Wilson, molemmat mediat.
 
 - **S1:** otsikkoyksikkö (pää) vs. etusivupäivä (≥1 koodattu otsikko).
 - **S2:** IL ja Yle erikseen (pääanalyysi pitää molemmat).

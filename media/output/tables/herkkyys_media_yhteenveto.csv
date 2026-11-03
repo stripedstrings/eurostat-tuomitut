@@ -1,0 +1,8 @@
+s,n_rivia,ero_min,ero_max,kuvaus
+S1,12,0.000000,0.491081,etusivupäivä vs. otsikko (pää)
+S2,6,-0.003803,0.004344,Yle vs. IL (pää pitää molemmat)
+S3,12,-0.005832,0.028422,vain 2023 vs. havaittu jakso (pää)
+S4,6,0.000000,0.000000,"sääntöaihe vs. entiteettiosuma, otos 500"
+S5,4,-0.704286,0.000000,tyhjä→neutraali (tutkiva) vs. vain merkitty (pää)
+S6,12,-0.000040,0.000928,"pituus ≥40 vs. ≥18 (pää, poiminta)"
+S7,12,-0.000000,-0.000000,Clopper–Pearson 95 % vs. Wilson 95 % (pää)

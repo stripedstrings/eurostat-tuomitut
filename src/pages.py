@@ -455,8 +455,19 @@ def kirjoita_aihesivut() -> None:
         "P4 outlet comparison",
         "Pearson r across six entity shares (two outlets).",
     )
-    ana_fi = p1h_fi + h_fi + p4t_fi
-    ana_en = p1h_en + h_en + p4t_en
+    s_fi, s_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "herkkyys_media_yhteenveto.csv",
+        "Herkkyys S1–S7 (vaihe 6)",
+        "Pää = P1 otsikko, havaittu jakso. Taulukko: pää vs. kukin S. "
+        '<a href="herkkyys_media_yhteenveto.csv">yhteenveto</a>, '
+        '<a href="herkkyys_media_S1_S7.csv">kaikki rivit</a>.',
+        "Sensitivity S1–S7 (phase 6)",
+        "Main = P1 headline, observed period. Table: main vs each S. "
+        '<a href="herkkyys_media_yhteenveto.csv">summary</a>, '
+        '<a href="herkkyys_media_S1_S7.csv">all rows</a>.',
+    )
+    ana_fi = p1h_fi + h_fi + p4t_fi + s_fi
+    ana_en = p1h_en + h_en + p4t_en + s_en
     kuvat_fi = ""
     kuvat_en = ""
     if (ROOT / "media" / "output" / "figures" / "01_entiteetti_osuus.png").exists():
@@ -501,7 +512,7 @@ def kirjoita_aihesivut() -> None:
     media = f"""
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Vaihe 5 ajettu 2026-11-03.</strong> Esirekisteröinti: 2026-11-01. P1 entiteettiosuudet Wilson-väleineen. P2/P3/P5 ja H3/H4/H6/H7 (pää) = ei testattavissa. M4 = vaihe 7. Ihmiskoodaus puuttuu.</p>
+      <p><strong>Vaiheet 5–6 ajettu 2026-11-03.</strong> Esirekisteröinti: 2026-11-01. P1 Wilson-väleineen. S1–S7 vs. pää (otsikko). P2/P3/P5 ja H3/H4/H6/H7 (pää) = ei testattavissa. M4 = vaihe 7.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -530,7 +541,7 @@ def kirjoita_aihesivut() -> None:
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>Phase 5 run 2026-11-03.</strong> Preregistration: 2026-11-01. P1 entity shares with Wilson intervals. P2/P3/P5 and H3/H4/H6/H7 (main) = not testable. M4 = phase 7. Human coding missing.</p>
+      <p><strong>Phases 5–6 run 2026-11-03.</strong> Preregistration: 2026-11-01. P1 with Wilson intervals. S1–S7 vs main (headline). P2/P3/P5 and H3/H4/H6/H7 (main) = not testable. M4 = phase 7.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>

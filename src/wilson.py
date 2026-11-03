@@ -1,10 +1,12 @@
-"""Wilson-osuusväli. n<=0 → NaN, ei täyttöä."""
+"""Wilson- ja Clopper–Pearson-osuusvälit. n<=0 → NaN, ei täyttöä."""
 
 from __future__ import annotations
 
 import math
 
-from src.rates import Z_95
+from scipy.stats import binomtest
+
+from src.rates import ALPHA, Z_95
 
 
 def wilson_ci(x: int | float, n: int | float, z: float = Z_95) -> tuple[float, float]:
@@ -20,6 +22,23 @@ def wilson_ci(x: int | float, n: int | float, z: float = Z_95) -> tuple[float, f
     keski = (p + z2 / (2.0 * nn)) / den
     puoli = z * math.sqrt(p * (1.0 - p) / nn + z2 / (4.0 * nn * nn)) / den
     return keski - puoli, keski + puoli
+
+
+def clopper_pearson_ci(
+    x: int | float, n: int | float, alpha: float = ALPHA
+) -> tuple[float, float]:
+    if n is None or x is None:
+        return float("nan"), float("nan")
+    nn = float(n)
+    xx = float(x)
+    if not math.isfinite(nn) or not math.isfinite(xx) or nn <= 0 or xx < 0 or xx > nn:
+        return float("nan"), float("nan")
+    if abs(xx - round(xx)) > 1e-9 or abs(nn - round(nn)) > 1e-9:
+        return float("nan"), float("nan")
+    vali = binomtest(int(round(xx)), int(round(nn))).proportion_ci(
+        confidence_level=1.0 - alpha, method="exact"
+    )
+    return float(vali.low), float(vali.high)
 
 
 def osuus(x: int | float, n: int | float) -> float:
