@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutkimuksen tila</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      <nav class="aiheet" aria-label="Aiheet">
+  <a href="index.html" class="aktiivinen">Tutkimus</a>
+  <a href="../index.html" data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="../maahanmuutto-fi/index.html">Maahanmuutto FI (TUTKIVA)</a>
+  <a href="../media/index.html" data-i18n="nav_media">Media</a>
+</nav>
+
+      <h1>Tutkimuksen tila</h1>
+      <p class="lead">Commit, esirekisteröinti, datan haku, kattavuus, testitulos
+      ja ei-testattavat kohdat. <strong>Ei tulkintaa tai yhteisjohtopäätöstä.</strong></p>
+    </div>
+  </header>
+  <main class="wrap">
+    <p>CSV: <a href="tila_yhteenveto.csv">tila_yhteenveto.csv</a>
+    (kopio generoinnissa) · <a href="TILA.md">TILA.md</a> ·
+    <a href="index.html">← Tutkimus-hubi</a></p>
+    <h2>Commit ja päivitys</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sivu_paivitetty</td>
+      <td>2026-11-03</td>
+      <td>tila-sivun generointi</td>
+    </tr>
+    <tr>
+      <td>git_commit</td>
+      <td>077c40a</td>
+      <td>HEAD lyhyt hash generointihetkellä</td>
+    </tr>
+  </tbody>
+</table><h2>Esirekisteröintipäivämäärät</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K1_PREREGISTRATION</td>
+      <td>2026-11-01</td>
+      <td>PREREGISTRATION.md; ei sokko (tutkiva visualisointi ennen)</td>
+    </tr>
+    <tr>
+      <td>MEDIA_PREREGISTRATION</td>
+      <td>2026-11-01</td>
+      <td>lisäys ihmiskoodaus/mediat 2026-11-03 ennen täyttöä</td>
+    </tr>
+  </tbody>
+</table><h2>Datan hakupäivämäärät</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>eurostat_MANIFEST_hakupaivat</td>
+      <td>2026-11-01</td>
+      <td>K1/K2 Eurostat-välimuisti</td>
+    </tr>
+    <tr>
+      <td>FI_migr_HAETTU</td>
+      <td>2026-11-03</td>
+      <td>src/fi_migr/paths.py HAETTU; StatFin/Migri</td>
+    </tr>
+    <tr>
+      <td>media_vaiheet</td>
+      <td>2026-11-01…2026-11-03</td>
+      <td>CDX/HTML/koodaus/analyysi; ks. MEDIA_DATA_SOURCES.md</td>
+    </tr>
+  </tbody>
+</table><h2>Kattavuus (peittomatriisit)</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K1_coverage_matrix</td>
+      <td>output/tables/coverage_matrix.csv</td>
+      <td>maa × vuosi × muuttuja</td>
+    </tr>
+    <tr>
+      <td>FI_peitto_matriisi</td>
+      <td>output/tables/fi_migr/fi_migr_peitto_matriisi.csv</td>
+      <td>indikaattori × vuosi; tyhjät mukana</td>
+    </tr>
+    <tr>
+      <td>media_coverage_vuosi_aukot</td>
+      <td>media/output/tables/coverage_media_vuosi_aukot.csv</td>
+      <td>CDX vs HTML; ei täyttöä</td>
+    </tr>
+  </tbody>
+</table><h2>Testitulos (pytest)</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pytest</td>
+      <td>ok</td>
+      <td>57 passed in 3.35s</td>
+    </tr>
+  </tbody>
+</table><h2>Ei testattavat / ei dataa</h2><table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>avain</th>
+      <th>arvo</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K1_S2</td>
+      <td>ei_dataa</td>
+      <td>citizen vain FOR,NAT,TOTAL — s2_s7_tila.csv</td>
+    </tr>
+    <tr>
+      <td>K1_S7</td>
+      <td>ei_dataa</td>
+      <td>ei naturalisaatiota rikosaineistossa</td>
+    </tr>
+    <tr>
+      <td>K1_S4</td>
+      <td>ei_dataa</td>
+      <td>unit=NR,P_HTHAB; henkilö vs tapaus ei dimensiossa</td>
+    </tr>
+    <tr>
+      <td>Media_H3</td>
+      <td>ei_testattavissa</td>
+      <td>ei julkaisijan klikkianalytiikkaa</td>
+    </tr>
+    <tr>
+      <td>Media_H4</td>
+      <td>ei_testattavissa</td>
+      <td>odottaa ihmis-sävyn kaksoiskoodausta</td>
+    </tr>
+    <tr>
+      <td>Media_H6</td>
+      <td>ei_testattavissa</td>
+      <td>ei tuho/tuhoutuminen-luokkia + odottaa koodausta</td>
+    </tr>
+    <tr>
+      <td>Media_H7_paa</td>
+      <td>ei_testattavissa</td>
+      <td>ei aihekoodia 2015–2025; entropia TUTKIVA erillään</td>
+    </tr>
+    <tr>
+      <td>Media_ihmis_koodaus</td>
+      <td>kesken</td>
+      <td>lomakkeet A/B valmiina; n_ihminen=0</td>
+    </tr>
+    <tr>
+      <td>Brå_CSV</td>
+      <td>ei</td>
+      <td>määritelmä syntymämaa/bakgrund; CSV puuttuu</td>
+    </tr>
+  </tbody>
+</table>
+    <aside class="ristiviittaukset kortti" aria-label="Ristiviittaukset">
+  <h2>Muut tutkimushaarat</h2>
+  <ul>
+    <li><a href="../index.html"><strong>K1: EU tuomitut (esirekisteröity)</strong></a> — Tuomitsemisasteet kansalaisuuden mukaan.</li><li><a href="../maahanmuutto-fi/index.html"><strong>Maahanmuutto FI (TUTKIVA)</strong></a> — Tulot, kiintiöt, työllisyys ym. vain Suomi. Ei yhdistetty K1:een.</li><li><a href="../media/index.html"><strong>Media-agenda (TUTKIVA / esirek.)</strong></a> — Näkyvyys ja kehykset; ei motiivi- tai kontrolliväitettä. M4 ≠ K1-yksikkö.</li>
+  </ul>
+  <p>Haarat ovat erillisiä. FI-paneelia ei yhdistetä K1:een. Media ei ole K1:n
+  selittäjä; M4 vertaa eri yksiköitä. Motiiveja tai “agendan kontrollia” ei päätellä datasta.</p>
+</aside>
+
+  </main>
+  <script src="../sivu.js"></script>
+</body>
+</html>

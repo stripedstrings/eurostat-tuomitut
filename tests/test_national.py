@@ -54,7 +54,10 @@ def test_national_ei_tuo_eu_aggregaattia():
 
 
 def test_se_puuttuva(tmp_path, monkeypatch):
+    import src.national.bra as bra
     import src.national.se as se
 
+    monkeypatch.setattr(bra, "NATIONAL_DIR", tmp_path)
     monkeypatch.setattr(se, "NATIONAL_DIR", tmp_path)
     assert se.loyda_tiedosto() is None
+    assert bra.loyda_tiedosto() is None

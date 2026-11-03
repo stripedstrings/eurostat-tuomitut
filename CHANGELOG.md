@@ -7,6 +7,9 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
   kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
 
+- 2026-11-03. Hub: `docs/tutkimus/tila.html` — commit, esirekisteröinti,
+  hakupäivä, peitto, pytest, ei-testattavat (`tila_yhteenveto.csv`). Ei tulkintaa.
+
 - 2026-11-03. K1: K2 kuvaileva sivu `docs/k2/`; S2/S7 dokumentoitu
   `s2_s7_tila.csv` (tila=ei_dataa + syy); Brå erilliseksi moduuliksi
   (`src/national/bra.py`, määritelmä syntymämaa/bakgrund ≠ kansalaisuus).
