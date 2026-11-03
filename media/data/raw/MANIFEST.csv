@@ -15,4 +15,4 @@ rss_iltalehti_etusivu_2026-11-02.xml,RSS,https://www.iltalehti.fi/rss.xml,2026-1
 cdx_yle_uutiset_all_2015_2025.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=yle.fi%2Fuutiset&from=20150101&to=20251231&output=json&collapse=timestamp%3A8&limit=20000&fl=original%2Ctimestamp%2Cstatuscode%2Cmimetype%2Clength,2026-11-02,päiväkollapsi yle_uutiset,HTTP 200; koko_tavua=263781
 cdx_yle_uutiset_200_2015_2025.json,Wayback CDX,https://web.archive.org/cdx/search/cdx?url=yle.fi%2Fuutiset&from=20150101&to=20251231&output=json&collapse=timestamp%3A8&limit=20000&fl=original%2Ctimestamp%2Cstatuscode%2Cmimetype%2Clength&filter=statuscode:200,2026-11-02,päiväkollapsi yle_uutiset,HTTP 200; koko_tavua=263248
 rss_yle_uutiset_2026-11-02.xml,RSS,https://feeds.yle.fi/uutiset/v1/majorHeadlines/YLE_UUTISET.rss,2026-11-02,tuoreet otsikot yle_uutiset,HTTP 200; item=13; ei historiallinen arkisto
-snapshots/,Wayback HTML,https://web.archive.org/web/,2026-11-02,etusivusnapshotit,n_tiedosto=246; git-ignorissa; ei täyttöä
+snapshots/,Wayback HTML,https://web.archive.org/web/,2026-11-03,etusivusnapshotit,n_tiedosto=1846; git-ignorissa; ei täyttöä

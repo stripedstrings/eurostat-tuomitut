@@ -1,21 +1,21 @@
 h,tila,media,yksikko,ryhma,jakso,n,x,osuus,wilson_ala,wilson_yla,d_lt_10,huom
 H1,laskettu,iltalehti_etusivu,etusivu,putin,2023,84,47,0.559524,0.453071,0.660770,0,
-H2,laskettu,iltalehti_etusivu,etusivu,presidentti,havaittu,165,1,0.006061,0.001071,0.033527,1,
-H2,laskettu,yle_uutiset,etusivu,presidentti,havaittu,81,0,0.000000,0.000000,0.045278,1,
-H2,laskettu,iltalehti_etusivu,etusivu,putin,havaittu,165,83,0.503030,0.427544,0.578379,0,
-H2,laskettu,yle_uutiset,etusivu,putin,havaittu,81,27,0.333333,0.240288,0.441472,0,
-H2,laskettu,iltalehti_etusivu,etusivu,zelenskyi,havaittu,165,15,0.090909,0.055866,0.144567,0,
-H2,laskettu,yle_uutiset,etusivu,zelenskyi,havaittu,81,15,0.185185,0.115563,0.283316,0,
+H2,laskettu,iltalehti_etusivu,etusivu,presidentti,havaittu,913,6,0.006572,0.003015,0.014263,1,
+H2,laskettu,yle_uutiset,etusivu,presidentti,havaittu,933,9,0.009646,0.005083,0.018231,1,
+H2,laskettu,iltalehti_etusivu,etusivu,putin,havaittu,913,369,0.404162,0.372797,0.436331,0,
+H2,laskettu,yle_uutiset,etusivu,putin,havaittu,933,147,0.157556,0.135589,0.182332,0,
+H2,laskettu,iltalehti_etusivu,etusivu,zelenskyi,havaittu,913,102,0.111720,0.092891,0.133802,0,
+H2,laskettu,yle_uutiset,etusivu,zelenskyi,havaittu,933,61,0.065380,0.051234,0.083092,0,
 H1,laskettu,iltalehti_etusivu,otsikko,putin,2023,1833,74,0.040371,0.032280,0.050385,0,
-H2,laskettu,iltalehti_etusivu,otsikko,presidentti,havaittu,10545,1,0.000095,0.000017,0.000537,1,
-H2,laskettu,yle_uutiset,otsikko,presidentti,havaittu,3526,0,0.000000,0.000000,0.001088,1,
-H2,laskettu,iltalehti_etusivu,otsikko,putin,havaittu,10545,126,0.011949,0.010045,0.014208,0,
-H2,laskettu,yle_uutiset,otsikko,putin,havaittu,3526,32,0.009075,0.006436,0.012783,0,
-H2,laskettu,iltalehti_etusivu,otsikko,zelenskyi,havaittu,10545,17,0.001612,0.001007,0.002580,0,
-H2,laskettu,yle_uutiset,otsikko,zelenskyi,havaittu,3526,21,0.005956,0.003899,0.009088,0,
+H2,laskettu,iltalehti_etusivu,otsikko,presidentti,havaittu,61914,6,0.000097,0.000044,0.000211,1,
+H2,laskettu,yle_uutiset,otsikko,presidentti,havaittu,15944,10,0.000627,0.000341,0.001154,0,
+H2,laskettu,iltalehti_etusivu,otsikko,putin,havaittu,61914,686,0.011080,0.010285,0.011935,0,
+H2,laskettu,yle_uutiset,otsikko,putin,havaittu,15944,198,0.012418,0.010813,0.014259,0,
+H2,laskettu,iltalehti_etusivu,otsikko,zelenskyi,havaittu,61914,213,0.003440,0.003009,0.003933,0,
+H2,laskettu,yle_uutiset,otsikko,zelenskyi,havaittu,15944,82,0.005143,0.004146,0.006379,0,
 H3,ei_testattavissa,,,,,,,,,,,ei julkaisijan analytiikkaa
 H4,ei_testattavissa,,,,,,,,,,,ei ihmis-sävyn aikasarjaa
-H5,laskettu,,etusivu,,,6,,0.871418,,,,Pearson-r entiteettiosuuksista; kaksi mediaa; ei maiden vertailua
-H5,laskettu,,otsikko,,,6,,0.788040,,,,Pearson-r entiteettiosuuksista; kaksi mediaa; ei maiden vertailua
+H5,laskettu,,etusivu,,,6,,0.951231,,,,Pearson-r entiteettiosuuksista; kaksi mediaa; ei maiden vertailua
+H5,laskettu,,otsikko,,,6,,0.960506,,,,Pearson-r entiteettiosuuksista; kaksi mediaa; ei maiden vertailua
 H6,ei_testattavissa,,,,,,,,,,,ei tuho/tuhoutuminen-luokkia
 H7,ei_testattavissa,,,,,,,,,,,ei aihekoodia 2015–2025; entropia tutkiva erillistaulussa

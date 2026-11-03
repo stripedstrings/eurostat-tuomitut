@@ -1,10 +1,10 @@
 # Raportti: mediahaara (Iltalehti, Yle), 2015–2025
 
 Esirekisteröinti: `MEDIA_PREREGISTRATION.md` (2026-11-01).  
-Aineisto: Wayback CDX ja HTML-snapshotit (haettu 2026-11-02); K1-osuus M4:ssä Eurostat `crim_just_ctz` / `migr_pop5ctz` (haettu 2026-11-01).  
+Aineisto: Wayback CDX (haettu 2026-11-02); HTML-snapshotteja tihennetty 2026-11-03 (TUTKIVA); K1-osuus M4:ssä Eurostat `crim_just_ctz` / `migr_pop5ctz` (haettu 2026-11-01).  
 Kaikki luvut ovat taulukoista `media/output/tables/` ja `output/tables/asteet.csv`. Puuttuva = tyhjä / NaN, ei täyttöä.
 
-**Tämä tulososio ei sisällä tulkintaa.** Tulkinta on osiossa 11.
+**Tämä tulososio ei sisällä tulkintaa.** Tulkinta on osiossa 12.
 
 Mediat (vain vaiheessa 1 vastanneet URL:t): `iltalehti_etusivu` (`www.iltalehti.fi/`), `yle_uutiset` (`yle.fi/uutiset`). Kalenteri: 2015-01-01 … 2025-12-31 (4018 päivää / media). Muita medioita tai maita ei ole.
 
@@ -29,10 +29,10 @@ Lähde: `tietueet_yhteenveto.csv`. HTML Wayback-snapshotit; otsikot etusivun mer
 
 | media | n_paivaa | n_tiedosto | n_otsikko_paiva | n_otsikkoa | n_ilman_otsikkoa |
 |---|---:|---:|---:|---:|---:|
-| iltalehti_etusivu | 4018 | 165 | 165 | 10545 | 0 |
-| yle_uutiset | 4018 | 81 | 81 | 3526 | 0 |
+| iltalehti_etusivu | 4018 | 913 | 913 | 61914 | 0 |
+| yle_uutiset | 4018 | 933 | 933 | 15944 | 0 |
 
-HTML-vuodet, joissa on otsikoita: Iltalehti 2015, 2016, 2023; Yle 2015, 2023. Muut kalenterivuodet: ei HTML:ää, ei nollaosuutta.
+TUTKIVA HTML-tihennys (2026-11-03): prioriteettivuodet 2017–2022 ja 2024–2025 vuorotellen; CDX `status=200` -päivät. Peitto media×vuosi: `coverage_media_vuosi.csv`. Yle 2016: n_html=0 (ei vielä haettu; ei nollaosuutta). HTML ≪ CDX edelleen useina vuosina.
 
 Entiteetti = merkkijono-osuma M1-avaimista. `aihe` ja `savy` koko ruudukossa tyhjiä.
 
@@ -194,51 +194,121 @@ CDX-indeksi: `python -m src.fetch_media`. Testit: `pytest tests/test_wilson.py t
 
 ---
 
-## 10. TUTKIVA (ei esirekisteröity): terveysuhka ja uhkakehys
+## 10. TUTKIVA (ei esirekisteröity): peitto media × vuosi ja entiteetit vuodittain
+
+Lähde: `coverage_media_vuosi.csv`, `p1_entiteetti_osuus.csv` (yksikkö = otsikko). Wilson 95 %. Puuttuva HTML ≠ nolla. HTML-päivät ovat osajoukko CDX-200-päivistä.
+
+| media | vuosi | n_cdx_200 | n_html | n_otsikko_paiva | n_otsikkoa |
+|---|---:|---:|---:|---:|---:|
+| iltalehti_etusivu | 2015 | 113 | 41 | 41 | 3718 |
+| iltalehti_etusivu | 2016 | 288 | 40 | 40 | 4994 |
+| iltalehti_etusivu | 2017 | 277 | 171 | 171 | 20764 |
+| iltalehti_etusivu | 2018 | 257 | 81 | 81 | 9396 |
+| iltalehti_etusivu | 2019 | 290 | 88 | 88 | 2946 |
+| iltalehti_etusivu | 2020 | 257 | 82 | 82 | 2976 |
+| iltalehti_etusivu | 2021 | 221 | 65 | 65 | 1737 |
+| iltalehti_etusivu | 2022 | 363 | 85 | 85 | 2388 |
+| iltalehti_etusivu | 2023 | 363 | 84 | 84 | 1833 |
+| iltalehti_etusivu | 2024 | 365 | 86 | 86 | 5730 |
+| iltalehti_etusivu | 2025 | 365 | 90 | 90 | 5432 |
+| yle_uutiset | 2015 | 276 | 1 | 1 | 102 |
+| yle_uutiset | 2016 | 334 | 0 | 0 | 0 |
+| yle_uutiset | 2017 | 341 | 229 | 229 | 2744 |
+| yle_uutiset | 2018 | 339 | 91 | 91 | 946 |
+| yle_uutiset | 2019 | 329 | 84 | 84 | 882 |
+| yle_uutiset | 2020 | 298 | 90 | 90 | 1346 |
+| yle_uutiset | 2021 | 334 | 106 | 106 | 306 |
+| yle_uutiset | 2022 | 365 | 86 | 86 | 1000 |
+| yle_uutiset | 2023 | 360 | 80 | 80 | 3424 |
+| yle_uutiset | 2024 | 356 | 85 | 85 | 3698 |
+| yle_uutiset | 2025 | 354 | 81 | 81 | 1496 |
+
+Putin-merkkijono otsikoissa (P1, avain `putin`), vuodet joilla n&gt;0:
+
+| media | vuosi | osuus (Wilson 95 %) |
+|---|---|---|
+| iltalehti_etusivu | 2015 | 27/3718 = 0,73 % (0,50–1,05 %) |
+| iltalehti_etusivu | 2016 | 25/4994 = 0,50 % (0,34–0,74 %) |
+| iltalehti_etusivu | 2017 | 134/20764 = 0,65 % (0,55–0,76 %) |
+| iltalehti_etusivu | 2018 | 48/9396 = 0,51 % (0,39–0,68 %) |
+| iltalehti_etusivu | 2019 | 9/2946 = 0,31 % (0,16–0,58 %), D&lt;10 |
+| iltalehti_etusivu | 2020 | 8/2976 = 0,27 % (0,14–0,53 %), D&lt;10 |
+| iltalehti_etusivu | 2021 | 9/1737 = 0,52 % (0,27–0,98 %), D&lt;10 |
+| iltalehti_etusivu | 2022 | 135/2388 = 5,65 % (4,80–6,65 %) |
+| iltalehti_etusivu | 2023 | 74/1833 = 4,04 % (3,23–5,04 %) |
+| iltalehti_etusivu | 2024 | 121/5730 = 2,11 % (1,77–2,52 %) |
+| iltalehti_etusivu | 2025 | 96/5432 = 1,77 % (1,45–2,15 %) |
+| yle_uutiset | 2015 | 0/102 = 0,00 % (0,00–3,63 %), D&lt;10 |
+| yle_uutiset | 2017 | 26/2744 = 0,95 % (0,65–1,38 %) |
+| yle_uutiset | 2018 | 11/946 = 1,16 % (0,65–2,07 %) |
+| yle_uutiset | 2019 | 3/882 = 0,34 % (0,12–1,00 %), D&lt;10 |
+| yle_uutiset | 2020 | 7/1346 = 0,52 % (0,25–1,07 %), D&lt;10 |
+| yle_uutiset | 2021 | 5/306 = 1,63 % (0,70–3,77 %), D&lt;10 |
+| yle_uutiset | 2022 | 57/1000 = 5,70 % (4,43–7,31 %) |
+| yle_uutiset | 2023 | 32/3424 = 0,93 % (0,66–1,32 %) |
+| yle_uutiset | 2024 | 36/3698 = 0,97 % (0,70–1,34 %) |
+| yle_uutiset | 2025 | 21/1496 = 1,40 % (0,92–2,14 %) |
+
+Kaaviot: `06_entiteetti_vuosi.png` (kaikki P1-ryhmät paneeleina). Kuukausijaksot (`YYYY-MM`) ovat `p1_entiteetti_osuus.csv`:ssä; peitto kuukausittain on harvaa.
+
+---
+
+## 11. TUTKIVA (ei esirekisteröity): terveysuhka ja uhkakehys
 
 Koodikirja `codebook_uhkakehys_v1.md`, lukittu ennen osuuslaskentaa. Yksikkö = havaittu etusivuotsikko. Puuttuva HTML ei ole nolla. Kaksi erillistä kenttää: terveysuhka (aihe) ja uhkakehys (kärjistys, aiheesta riippumatta). Tämä ei ole H4 eikä korvaa koodaus-v1:tä. Ihmiskoodausta ei ole.
 
 Lähde: `uhkakehys_osuus.csv`. Wilson 95 %. D&lt;10 merkitty.
 
-Havaittu jakso:
+Havaittu jakso (tihennetty HTML):
 
-| media | n | molemmat | vain terveys | vain kehys | ei kumpaakaan | terveysuhka | uhkakehys |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| iltalehti_etusivu | 10545 | 0/10545 = 0,0 % (0,0–0,04 %), D&lt;10 | 20/10545 = 0,19 % (0,12–0,29 %) | 68/10545 = 0,64 % (0,51–0,82 %) | 10457/10545 = 99,17 % (98,97–99,32 %) | 20/10545 = 0,19 % (0,12–0,29 %) | 68/10545 = 0,64 % (0,51–0,82 %) |
-| yle_uutiset | 3526 | 0/3526 = 0,0 % (0,0–0,11 %), D&lt;10 | 23/3526 = 0,65 % (0,44–0,98 %) | 24/3526 = 0,68 % (0,46–1,01 %) | 3479/3526 = 98,67 % (98,23–99,00 %) | 23/3526 = 0,65 % (0,44–0,98 %) | 24/3526 = 0,68 % (0,46–1,01 %) |
+| media | n | terveysuhka | uhkakehys |
+|---|---:|---|---|
+| iltalehti_etusivu | 61914 | 965/61914 = 1,56 % (1,46–1,66 %) | 534/61914 = 0,86 % (0,79–0,94 %) |
+| yle_uutiset | 15944 | 557/15944 = 3,49 % (3,22–3,79 %) | 90/15944 = 0,56 % (0,46–0,69 %) |
 
-Vuodet, joilla n&gt;0: Iltalehti 2015 (n=3718), 2016 (n=4994), 2023 (n=1833); Yle 2015 (n=102), 2023 (n=3424).
+Vuodet (terveysuhka | uhkakehys):
 
-Iltalehti, vuodet:
+| media | vuosi | n | terveysuhka | uhkakehys |
+|---|---|---:|---|---|
+| iltalehti_etusivu | 2015 | 3718 | 7/3718 = 0,19 % (0,09–0,39 %), D&lt;10 | 22/3718 = 0,59 % (0,39–0,89 %) |
+| iltalehti_etusivu | 2016 | 4994 | 4/4994 = 0,08 % (0,03–0,21 %), D&lt;10 | 35/4994 = 0,70 % (0,50–0,97 %) |
+| iltalehti_etusivu | 2017 | 20764 | 20/20764 = 0,10 % (0,06–0,15 %) | 151/20764 = 0,73 % (0,62–0,85 %) |
+| iltalehti_etusivu | 2018 | 9396 | 21/9396 = 0,22 % (0,15–0,34 %) | 108/9396 = 1,15 % (0,95–1,39 %) |
+| iltalehti_etusivu | 2019 | 2946 | 2/2946 = 0,07 % (0,02–0,25 %), D&lt;10 | 42/2946 = 1,43 % (1,06–1,92 %) |
+| iltalehti_etusivu | 2020 | 2976 | 537/2976 = 18,04 % (16,70–19,47 %) | 37/2976 = 1,24 % (0,90–1,71 %) |
+| iltalehti_etusivu | 2021 | 1737 | 243/1737 = 13,99 % (12,44–15,70 %) | 23/1737 = 1,32 % (0,88–1,98 %) |
+| iltalehti_etusivu | 2022 | 2388 | 103/2388 = 4,31 % (3,57–5,20 %) | 25/2388 = 1,05 % (0,71–1,54 %) |
+| iltalehti_etusivu | 2023 | 1833 | 9/1833 = 0,49 % (0,26–0,93 %), D&lt;10 | 11/1833 = 0,60 % (0,34–1,07 %) |
+| iltalehti_etusivu | 2024 | 5730 | 9/5730 = 0,16 % (0,08–0,30 %), D&lt;10 | 43/5730 = 0,75 % (0,56–1,01 %) |
+| iltalehti_etusivu | 2025 | 5432 | 10/5432 = 0,18 % (0,10–0,34 %) | 37/5432 = 0,68 % (0,49–0,94 %) |
+| yle_uutiset | 2015 | 102 | 1/102 = 0,98 % (0,17–5,35 %), D&lt;10 | 0/102 = 0,00 % (0,00–3,63 %), D&lt;10 |
+| yle_uutiset | 2017 | 2744 | 4/2744 = 0,15 % (0,06–0,37 %), D&lt;10 | 16/2744 = 0,58 % (0,36–0,95 %) |
+| yle_uutiset | 2018 | 946 | 4/946 = 0,42 % (0,16–1,08 %), D&lt;10 | 9/946 = 0,95 % (0,50–1,80 %), D&lt;10 |
+| yle_uutiset | 2019 | 882 | 2/882 = 0,23 % (0,06–0,82 %), D&lt;10 | 2/882 = 0,23 % (0,06–0,82 %), D&lt;10 |
+| yle_uutiset | 2020 | 1346 | 429/1346 = 31,87 % (29,44–34,41 %) | 13/1346 = 0,97 % (0,57–1,65 %) |
+| yle_uutiset | 2021 | 306 | 47/306 = 15,36 % (11,75–19,83 %) | 1/306 = 0,33 % (0,06–1,83 %), D&lt;10 |
+| yle_uutiset | 2022 | 1000 | 36/1000 = 3,60 % (2,61–4,94 %) | 3/1000 = 0,30 % (0,10–0,88 %), D&lt;10 |
+| yle_uutiset | 2023 | 3424 | 22/3424 = 0,64 % (0,42–0,97 %) | 24/3424 = 0,70 % (0,47–1,04 %) |
+| yle_uutiset | 2024 | 3698 | 7/3698 = 0,19 % (0,09–0,39 %), D&lt;10 | 18/3698 = 0,49 % (0,31–0,77 %) |
+| yle_uutiset | 2025 | 1496 | 5/1496 = 0,33 % (0,14–0,78 %), D&lt;10 | 4/1496 = 0,27 % (0,10–0,69 %), D&lt;10 |
 
-| vuosi | n | terveysuhka | uhkakehys |
-|---|---:|---:|---:|
-| 2015 | 3718 | 7/3718 = 0,19 % (0,09–0,39 %), D&lt;10 | 22/3718 = 0,59 % (0,39–0,89 %) |
-| 2016 | 4994 | 4/4994 = 0,08 % (0,03–0,21 %), D&lt;10 | 35/4994 = 0,70 % (0,50–0,97 %) |
-| 2023 | 1833 | 9/1833 = 0,49 % (0,26–0,93 %), D&lt;10 | 11/1833 = 0,60 % (0,34–1,07 %) |
-
-Yle, vuodet:
-
-| vuosi | n | terveysuhka | uhkakehys |
-|---|---:|---:|---:|
-| 2015 | 102 | 1/102 = 0,98 % (0,17–5,35 %), D&lt;10 | 0/102 = 0,0 % (0,0–3,63 %), D&lt;10 |
-| 2023 | 3424 | 22/3424 = 0,64 % (0,42–0,97 %) | 24/3424 = 0,70 % (0,47–1,04 %) |
-
-Kaavio: `output/figures/05_uhkakehys.png` (TUTKIVA kuvatekstissä).
+Kaaviot: `05_uhkakehys.png`, `07_uhkakehys_vuosi.png`, `08_uhkakehys_kuukausi.png` (TUTKIVA; kuukausissa vain n&gt;0).
 
 ---
 
-## 11. Tulkinta ja rajat
+## 12. Tulkinta ja rajat
 
 Tämä osio on erillään tulosluvuista. Data tukee kuvauksia osuuksista **havaituissa** snapshotissa. Se ei tue motiiveja, lukijavaikutuksia, propaganda-väitettä eikä politiikkajohtopäätöstä.
 
 Mitä luvut kuvaavat:
 
-- Etusivupäivän Putin-osuus (50 % / 33 %) tarkoittaa, että kyseisenä arkistopäivänä vähintään yksi poimittu otsikko sisälsi avaimen `putin`. Otsikko-osuus (noin 1 %) on eri yksikkö (S1).
+- Etusivupäivän Putin-osuus tarkoittaa, että kyseisenä arkistopäivänä vähintään yksi poimittu otsikko sisälsi avaimen `putin`. Otsikko-osuus on eri yksikkö (S1).
 - H1:n 56 % on 47 päivää 84:stä Iltalehden 2023-snapshotista, ei osuus kaikista vuoden 2023 päivistä.
 - H5:n korrelaatio on kuuden osuuden välinen, kahdella medialla. Se ei ole maiden vertailu eikä todiste samasta toimituksellisesta linjasta.
-- M4: K1:n 12 % on tuomioiden NAT/FOR-jakauma Suomessa kolmelta vuodelta. Median 0/87 on lukittujen merkkijonojen osuma rikosotsikoissa. Nämä eivät ole sama satunnaismuuttuja. Nolla osumaa ei osoita, että kansalaisuutta ei mainita muilla sanoilla, eikä että media “vastaa” tai “ei vastaa” tilastoa.
+- M4: K1:n 12 % on tuomioiden NAT/FOR-jakauma Suomessa kolmelta vuodelta. Median 0/87 on lukittujen merkkijonojen osuma rikosotsikoissa. Nämä eivät ole sama satunnaismuuttuja.
 - Ihmiskoodauksen puute rajaa sävyn, aiheen ja H4/H7-pään.
-- TUTKIVA uhkakehys on merkkijono-osuma. Se ei ole validoitu H4. Nolla “molemmat”-luokkaa tarkoittaa, että lukittujen avainten yhteisosumia ei ollut havaituissa otsikoissa. Se ei osoita, että toimitus ei “pelottele tarkoituksella”, eikä motiivia.
+- TUTKIVA uhkakehys on merkkijono-osuma. Se ei ole validoitu H4. Se ei osoita “pelon lietsontaa tarkoituksella”.
+- Ennakkohypoteesi “Putin ei trendannut 2019–2021”: havaituissa Iltalehti-otsikoissa Putin-osuus oli 2019–2021 noin 0,3–0,5 % (D&lt;10 osumissa) ja 2022–2023 noin 4–6 %. Ylellä 2022 oli korkea (~5,7 %), 2019–2020 matala; 2021:n n on pieni. Tämä on osittaista peittoa (HTML ≪ CDX), ei kalenterivuoden täysi otos. Ei syy-yhteyttä tapahtumiin ilman erillistä indikaattoria (P5).
+- Terveysuhka-avaimet nousivat 2020–2021 (korona-sanat lukitussa listassa). Uhkakehys-osuus pysyi matalana (~0,5–1,5 %) useimpina vuosina havaituissa otsikoissa; kuukausipeitto on edelleen harvaa, joten “joka kuukausi samanlaista” ei ole testattavissa täytenä kausivaihteluna.
 
-Mitä jää avoimeksi: täysi HTML-peitto, kaksi ihmiskoodaajaa, julkaisijan analytiikka (H3), ulkoiset tapahtumaindikaattorit (P5 ilman M4-yksikköeroa), muut mediat ja maat.
+Mitä jää avoimeksi: täysi HTML-peitto (erityisesti Yle 2016 ja loput CDX-200-päivät), kaksi ihmiskoodaajaa, julkaisijan analytiikka (H3), ulkoiset tapahtumaindikaattorit, muut mediat ja 2000–2014.

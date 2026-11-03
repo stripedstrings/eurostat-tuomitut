@@ -117,3 +117,9 @@ Koodikirja: `media/codebook_m4_v1.md`.
 Ei esirekisteröity. Ei muuta H4:ää. Koodikirja `media/codebook_uhkakehys_v1.md`
 lukittu ennen osuuksia. Yksikkö = havaittu otsikko. Kaksi kenttää: terveysuhka
 (aihe) ja uhkakehys (kärjistys). Wilson 95 %, D<10. Puuttuva HTML ei nolla.
+
+## TUTKIVA HTML-tihennys ja aikasarjat (2026-11-03)
+
+IL + Yle, 2015–2025. HTML-haku prioriteetilla 2017–2022, 2024–2025.
+P1- ja uhkakehys-osuudet jaksoissa `havaittu`, `YYYY`, `YYYY-MM` (vain
+havaitut otsikot). Peitto `coverage_media_vuosi.csv`. Ei täyttöä.

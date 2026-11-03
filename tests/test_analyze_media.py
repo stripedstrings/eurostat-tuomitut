@@ -14,6 +14,31 @@ def test_ensimmainen_jarjestys():
     assert _ensimmainen(set()) == "muu"
 
 
+def test_p1_kuukausijakso():
+    etu = [
+        {
+            "media": "yle_uutiset",
+            "paiva": "2019-03-15",
+            "http_tiedosto": "9",
+            "n_otsikkoa": "1",
+            "entiteetti": "putin",
+        }
+    ]
+    ots = [
+        {
+            "media": "yle_uutiset",
+            "paiva": "2019-03-15",
+            "otsikko": "Putin vieraili",
+            "entiteetti": "putin",
+        }
+    ]
+    rivit = p1_osuudet(etu, ots)
+    kk = [r for r in rivit if r["jakso"] == "2019-03" and r["ryhma"] == "putin" and r["yksikko"] == "otsikko"]
+    assert len(kk) == 1
+    assert kk[0]["x"] == "1"
+    assert kk[0]["n"] == "1"
+
+
 def test_p1_ei_tayta_puuttuvaa_html():
     etu = [
         {

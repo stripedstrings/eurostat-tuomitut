@@ -117,6 +117,9 @@ def aja() -> None:
         vuodet = sorted({r["paiva"][:4] for r in osat})
         for vuosi in vuodet:
             jaksot.append((vuosi, [r for r in osat if r["paiva"].startswith(vuosi)]))
+        kuukaudet = sorted({r["paiva"][:7] for r in osat if len(r.get("paiva", "")) >= 7})
+        for kk in kuukaudet:
+            jaksot.append((kk, [r for r in osat if r["paiva"].startswith(kk)]))
         for jakso, joukko in jaksot:
             n = len(joukko)
             for luokka in RISTI:

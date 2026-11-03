@@ -119,6 +119,27 @@ def p1_osuudet(
                             jakso=vuosi,
                         )
                     )
+            kuukaudet = sorted({r["paiva"][:7] for r in osat if len(r.get("paiva", "")) >= 7})
+            for kk in kuukaudet:
+                k_osat = [r for r in osat if r["paiva"].startswith(kk)]
+                nk = len(k_osat)
+                for ryhma in RYHMA_JARJESTYS:
+                    x = sum(
+                        1
+                        for r in k_osat
+                        if _osuma(_avaimet(r.get("entiteetti", "")), ryhma)
+                    )
+                    rivit.append(
+                        _rivi_osuus(
+                            x,
+                            nk,
+                            analyysi="P1",
+                            yksikko=yksikko,
+                            media=media,
+                            ryhma=ryhma,
+                            jakso=kk,
+                        )
+                    )
     return rivit
 
 

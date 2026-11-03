@@ -406,10 +406,12 @@ def kirjoita_aihesivut() -> None:
         "Peitto (vaihe 2, CDX, 2015–2025)",
         "Kalenteriruudukko, puuttuva päivä tyhjä. "
         '<a href="coverage_media_yhteenveto.csv">yhteenveto</a>, '
+        '<a href="coverage_media_vuosi.csv">media×vuosi (TUTKIVA)</a>, '
         '<a href="coverage_media_paiva.csv">päivittäin</a>.',
         "Coverage (phase 2, CDX, 2015–2025)",
         "Full calendar; missing days left empty. "
         '<a href="coverage_media_yhteenveto.csv">summary</a>, '
+        '<a href="coverage_media_vuosi.csv">media×year (EXPLORATORY)</a>, '
         '<a href="coverage_media_paiva.csv">by day</a>.',
     )
     kood_fi, kood_en = _media_taulu_osio(
@@ -514,7 +516,10 @@ def kirjoita_aihesivut() -> None:
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 vuosittain"><figcaption>P1: osuudet vuosittain. Katkos = ei HTML:ää.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 ja H2"><figcaption>H1 Iltalehti 2023 Putin; H2 presidentti, Putin, Zelenskyi.</figcaption></figure>
       <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs. rikosotsikon kansalaisuusmaininta. Yksiköt eivät täsmää.</figcaption></figure>
-      <figure><img src="figures/05_uhkakehys.png" alt="TUTKIVA uhkakehys"><figcaption>TUTKIVA: terveysuhka ja uhkakehys. Ei esirekisteröity. Ei H4.</figcaption></figure>
+      <figure><img src="figures/05_uhkakehys.png" alt="TUTKIVA uhkakehys"><figcaption>TUTKIVA: terveysuhka ja uhkakehys (tiivis asteikko). Ei H4.</figcaption></figure>
+      <figure><img src="figures/06_entiteetti_vuosi.png" alt="Entiteetit vuodittain"><figcaption>TUTKIVA: entiteettiosuudet vuodittain (vain vuodet joilla n&gt;0), Wilson 95 %.</figcaption></figure>
+      <figure><img src="figures/07_uhkakehys_vuosi.png" alt="Uhkakehys vuodittain"><figcaption>TUTKIVA: terveysuhka ja uhkakehys vuodittain.</figcaption></figure>
+      <figure><img src="figures/08_uhkakehys_kuukausi.png" alt="Uhkakehys kuukausittain"><figcaption>TUTKIVA: kuukausittain; puuttuvaa ei täytetä nollaksi.</figcaption></figure>
 """
         kuvat_en = """
       <h2>Figures (phase 5)</h2>
@@ -522,7 +527,10 @@ def kirjoita_aihesivut() -> None:
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 by year"><figcaption>P1: shares by year. Gap = no HTML.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 and H2"><figcaption>H1 Iltalehti 2023 Putin; H2 president, Putin, Zelenskyi.</figcaption></figure>
       <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs citizenship strings in crime headlines. Units differ.</figcaption></figure>
-      <figure><img src="figures/05_uhkakehys.png" alt="EXPLORATORY threat frame"><figcaption>EXPLORATORY: health-threat topic and threat frame. Not H4.</figcaption></figure>
+      <figure><img src="figures/05_uhkakehys.png" alt="EXPLORATORY threat frame"><figcaption>EXPLORATORY: health-threat and threat frame (tight scale). Not H4.</figcaption></figure>
+      <figure><img src="figures/06_entiteetti_vuosi.png" alt="Entities by year"><figcaption>EXPLORATORY: entity shares by year (years with n&gt;0 only), Wilson 95%.</figcaption></figure>
+      <figure><img src="figures/07_uhkakehys_vuosi.png" alt="Threat frame by year"><figcaption>EXPLORATORY: health-threat and threat frame by year.</figcaption></figure>
+      <figure><img src="figures/08_uhkakehys_kuukausi.png" alt="Threat frame by month"><figcaption>EXPLORATORY: by month; missing months not filled with zero.</figcaption></figure>
 """
     tulk_fi = """
       <h2>Tulkinta ja rajat</h2>

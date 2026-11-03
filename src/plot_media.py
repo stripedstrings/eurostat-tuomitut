@@ -1,4 +1,4 @@
-"""Vaihe 5 -kaaviot suomeksi, 200 dpi. Ei täyttöä."""
+"""Mediahaaran kaaviot suomeksi, 200 dpi. Ei täyttöä."""
 
 from __future__ import annotations
 
@@ -18,30 +18,44 @@ NIMET = {
     "presidentti": "Suomen presidentti",
     "maahanmuutto": "Maahanmuutto",
     "rikollisuus": "Rikollisuus",
-    "terveys": "Terveysuhka",
+    "terveys": "Terveys (P1)",
     "iltalehti_etusivu": "Iltalehti",
     "yle_uutiset": "Yle",
+    "terveysuhka": "Terveysuhka",
+    "uhkakehys": "Uhkakehys",
 }
 
 
-def alaviitteet() -> str:
-    return (
-        "Lähde: Wayback-snapshotit (Iltalehti, Yle), haettu 2026-11-02. "
-        "Ei ikä- ja sukupuolivakioitu. "
-        "Kansalaisuus ei kuvaa maahanmuuttotaustaa tai pakolaisuutta. "
-        "Laskentayksikkö vaihtelee maittain; maiden välinen vertailu on rajallinen. "
-        "Katkos viivassa = data puuttuu. "
-        "Epäluotettavat (D<10) merkitään. "
-        "Nimittäjä = HTML-etusivut tai otsikot; puuttuva päivä ei ole nolla."
-    )
+def alaviitteet(*, tutkiva: bool = False) -> str:
+    osat = [
+        "Lähde: Wayback-snapshotit (Iltalehti, Yle), haettu 2026-11-02…2026-11-03.",
+        "Yksikkö = havaittu etusivuotsikko (tai etusivupäivä, jos merkitty).",
+        "Wilson 95 %. Epäluotettavat (D<10) merkitään.",
+        "Katkos / puuttuva piste = data puuttuu; puuttuvaa ei täytetä nollaksi.",
+    ]
+    if tutkiva:
+        osat.append("TUTKIVA (ei esirekisteröity).")
+    return " ".join(osat)
 
 
-def _tallenna(fig: plt.Figure, polku: Path) -> None:
-    fig.text(0.5, 0.01, alaviitteet(), ha="center", va="bottom", fontsize=7, wrap=True)
+def _tallenna(fig: plt.Figure, polku: Path, *, tutkiva: bool = False) -> None:
+    fig.text(0.5, 0.01, alaviitteet(tutkiva=tutkiva), ha="center", va="bottom", fontsize=7, wrap=True)
     fig.tight_layout(rect=[0.03, 0.12, 0.99, 0.96])
     FIG.mkdir(parents=True, exist_ok=True)
     fig.savefig(polku, dpi=DPI_KUVA)
     plt.close(fig)
+
+
+def _wilson_err(
+    y: pd.Series, lo: pd.Series, hi: pd.Series
+) -> tuple[list[float], list[float]]:
+    lo_e = [
+        float(yy - a) if pd.notna(yy) and pd.notna(a) else 0.0 for yy, a in zip(y, lo)
+    ]
+    hi_e = [
+        float(b - yy) if pd.notna(yy) and pd.notna(b) else 0.0 for yy, b in zip(y, hi)
+    ]
+    return lo_e, hi_e
 
 
 def kaavio_p1_palkki(p1: pd.DataFrame, polku: Path) -> None:
@@ -59,12 +73,13 @@ def kaavio_p1_palkki(p1: pd.DataFrame, polku: Path) -> None:
             y = pd.to_numeric(m["osuus"], errors="coerce") * 100
             lo = pd.to_numeric(m["wilson_ala"], errors="coerce") * 100
             hi = pd.to_numeric(m["wilson_yla"], errors="coerce") * 100
-            yerr = [y - lo, hi - y]
+            lo_e, hi_e = _wilson_err(y, lo, hi)
+            y_piirto = [float(v) if pd.notna(v) else 0.0 for v in y]
             ax.bar(
                 pos,
-                y.fillna(0),
+                y_piirto,
                 width=leveys,
-                yerr=yerr,
+                yerr=[lo_e, hi_e],
                 capsize=3,
                 label=NIMET[media],
                 color=("#c45c26", "#2c5aa0")[i],
@@ -83,29 +98,70 @@ def kaavio_p1_palkki(p1: pd.DataFrame, polku: Path) -> None:
 
 
 def kaavio_vuosi(p1: pd.DataFrame, polku: Path) -> None:
+    """Vanha yhteenveto; säilytetään. Preferoi 06-paneelia."""
     d = p1[(p1["yksikko"] == "otsikko") & (p1["jakso"].str.fullmatch(r"\d{4}", na=False))].copy()
-    d["vuosi"] = pd.to_numeric(d["jakso"], errors="coerce")
-    vuodet = list(range(2015, 2026))
-    fig, akselit = plt.subplots(2, 1, figsize=(11, 8), sharex=True)
+    d["vuosi"] = d["jakso"]
+    fig, akselit = plt.subplots(2, 1, figsize=(11, 8), sharex=False)
     for ax, media in zip(akselit, ["iltalehti_etusivu", "yle_uutiset"]):
+        osat = d[d["media"] == media]
+        vuodet = sorted(osat["vuosi"].unique())
+        if not vuodet:
+            ax.set_title(NIMET[media] + " (ei vuosidataa)")
+            continue
         for ryhma, vari in zip(
             RYHMA_JARJESTYS,
             ["#c45c26", "#2c5aa0", "#4d7c0f", "#7c3aed", "#b45309", "#0f766e"],
         ):
-            m = (
-                d[(d["media"] == media) & (d["ryhma"] == ryhma)]
-                .set_index("vuosi")
-                .reindex(vuodet)
-            )
+            m = osat[osat["ryhma"] == ryhma].set_index("vuosi").reindex(vuodet)
             y = pd.to_numeric(m["osuus"], errors="coerce") * 100
-            ax.plot(vuodet, y, marker="o", label=NIMET[ryhma], color=vari)
+            ax.plot(range(len(vuodet)), y, marker="o", label=NIMET[ryhma], color=vari)
+        ax.set_xticks(range(len(vuodet)))
+        ax.set_xticklabels(vuodet)
         ax.set_title(NIMET[media])
         ax.set_ylabel("Osuus otsikoista (%)")
         ax.grid(True, alpha=0.3)
         ax.legend(ncol=3, fontsize=8)
-    akselit[-1].set_xlabel("Vuosi")
+    akselit[-1].set_xlabel("Vuosi (vain n>0)")
     fig.suptitle("P1: entiteettiosuudet vuosittain (katkos = ei HTML:ää)")
-    _tallenna(fig, polku)
+    _tallenna(fig, polku, tutkiva=True)
+
+
+def kaavio_entiteetti_vuosi_paneeli(p1: pd.DataFrame, polku: Path) -> None:
+    d = p1[(p1["yksikko"] == "otsikko") & (p1["jakso"].str.fullmatch(r"\d{4}", na=False))].copy()
+    fig, akselit = plt.subplots(3, 2, figsize=(11, 10), sharex=False)
+    for ax, ryhma in zip(akselit.ravel(), RYHMA_JARJESTYS):
+        for media, vari in zip(
+            ["iltalehti_etusivu", "yle_uutiset"], ["#c45c26", "#2c5aa0"]
+        ):
+            osat = d[(d["media"] == media) & (d["ryhma"] == ryhma)].copy()
+            if osat.empty:
+                continue
+            osat = osat.sort_values("jakso")
+            x = list(range(len(osat)))
+            y = pd.to_numeric(osat["osuus"], errors="coerce") * 100
+            lo = pd.to_numeric(osat["wilson_ala"], errors="coerce") * 100
+            hi = pd.to_numeric(osat["wilson_yla"], errors="coerce") * 100
+            lo_e, hi_e = _wilson_err(y, lo, hi)
+            ax.errorbar(
+                x,
+                y,
+                yerr=[lo_e, hi_e],
+                fmt="o-",
+                color=vari,
+                label=NIMET[media],
+                capsize=3,
+            )
+            for i, (_, rivi) in enumerate(osat.iterrows()):
+                if str(rivi.get("d_lt_10", "0")) == "1" and pd.notna(y.iloc[i]):
+                    ax.text(i, float(y.iloc[i]) + 0.3, "D<10", ha="center", fontsize=6)
+            ax.set_xticks(x)
+            ax.set_xticklabels(list(osat["jakso"]), rotation=0)
+        ax.set_title(NIMET[ryhma])
+        ax.set_ylabel("%")
+        ax.grid(True, alpha=0.3)
+        ax.legend(fontsize=7)
+    fig.suptitle("TUTKIVA: entiteettiosuudet vuodittain (vain vuodet joilla n>0)")
+    _tallenna(fig, polku, tutkiva=True)
 
 
 def kaavio_h1_h2(p1: pd.DataFrame, polku: Path) -> None:
@@ -115,11 +171,7 @@ def kaavio_h1_h2(p1: pd.DataFrame, polku: Path) -> None:
         & (p1["ryhma"] == "putin")
         & (p1["jakso"] == "2023")
     ]
-    nimet = []
-    y = []
-    lo_l = []
-    hi_l = []
-    liput = []
+    nimet, y, lo_l, hi_l, liput = [], [], [], [], []
     for _, r in h1.iterrows():
         nimet.append(r["yksikko"])
         yy = float(r["osuus"]) * 100 if r["osuus"] else float("nan")
@@ -151,11 +203,12 @@ def kaavio_h1_h2(p1: pd.DataFrame, polku: Path) -> None:
         yy = pd.to_numeric(m["osuus"], errors="coerce") * 100
         lo = pd.to_numeric(m["wilson_ala"], errors="coerce") * 100
         hi = pd.to_numeric(m["wilson_yla"], errors="coerce") * 100
+        lo_e, hi_e = _wilson_err(yy, lo, hi)
         ax2.bar(
             pos,
-            yy,
+            [float(v) if pd.notna(v) else 0.0 for v in yy],
             width=leveys,
-            yerr=[yy - lo, hi - yy],
+            yerr=[lo_e, hi_e],
             capsize=3,
             label=NIMET[media],
             color=("#c45c26", "#2c5aa0")[i],
@@ -197,7 +250,13 @@ def kaavio_m4(m4: pd.DataFrame, polku: Path) -> None:
             hi_e.append(float(row["wilson_yla"]) * 100 - y[-1])
         liput.append(str(row.get("d_lt_10", "0")))
     fig, ax = plt.subplots(figsize=(10, 5.5))
-    ax.bar(range(len(nimet)), y, yerr=[lo_e, hi_e], capsize=4, color=["#2c5aa0", "#c45c26", "#b45309"][: len(nimet)])
+    ax.bar(
+        range(len(nimet)),
+        y,
+        yerr=[lo_e, hi_e],
+        capsize=4,
+        color=["#2c5aa0", "#c45c26", "#b45309"][: len(nimet)],
+    )
     ax.set_xticks(range(len(nimet)))
     ax.set_xticklabels(nimet, rotation=18, ha="right")
     ax.set_ylabel("FOR-osuus (%)")
@@ -209,39 +268,127 @@ def kaavio_m4(m4: pd.DataFrame, polku: Path) -> None:
     _tallenna(fig, polku)
 
 
-LUOKKA_UHKA = {
-    "molemmat": "Molemmat",
-    "vain_terveys": "Vain terveysuhka",
-    "vain_kehys": "Vain uhkakehys",
-    "ei_kumpaakaan": "Ei kumpaakaan",
-}
-
-
 def kaavio_uhkakehys(osuus: pd.DataFrame, polku: Path) -> None:
-    d = osuus[(osuus["jakso"] == "havaittu") & (osuus["luokka"].isin(LUOKKA_UHKA))].copy()
-    d["osuus"] = pd.to_numeric(d["osuus"], errors="coerce")
-    d["wilson_ala"] = pd.to_numeric(d["wilson_ala"], errors="coerce")
-    d["wilson_yla"] = pd.to_numeric(d["wilson_yla"], errors="coerce")
-    jarj = list(LUOKKA_UHKA)
+    """Harvinaiset luokat tiiviillä asteikolla; ei_kumpaakaan vain tekstinä."""
+    harvinaiset = ("molemmat", "vain_terveys", "vain_kehys", "terveysuhka", "uhkakehys")
+    d = osuus[(osuus["jakso"] == "havaittu") & (osuus["luokka"].isin(harvinaiset))].copy()
+    nimet = {
+        "molemmat": "Molemmat",
+        "vain_terveys": "Vain terveys",
+        "vain_kehys": "Vain kehys",
+        "terveysuhka": "Terveysuhka",
+        "uhkakehys": "Uhkakehys",
+    }
+    jarj = list(harvinaiset)
     fig, akselit = plt.subplots(1, 2, figsize=(11, 6), sharey=True)
     for ax, media in zip(akselit, ["iltalehti_etusivu", "yle_uutiset"]):
         osat = d[d["media"] == media].set_index("luokka")
-        y = [float(osat.loc[k, "osuus"]) * 100 if k in osat.index else float("nan") for k in jarj]
-        lo = [float(osat.loc[k, "wilson_ala"]) * 100 if k in osat.index else float("nan") for k in jarj]
-        hi = [float(osat.loc[k, "wilson_yla"]) * 100 if k in osat.index else float("nan") for k in jarj]
-        lo_e = [yy - a if pd.notna(yy) and pd.notna(a) else 0 for yy, a in zip(y, lo)]
-        hi_e = [b - yy if pd.notna(yy) and pd.notna(b) else 0 for yy, b in zip(y, hi)]
-        ax.bar(range(len(jarj)), y, yerr=[lo_e, hi_e], capsize=3, color="#6b3fa0")
+        y = [
+            float(osat.loc[k, "osuus"]) * 100 if k in osat.index else float("nan")
+            for k in jarj
+        ]
+        lo = [
+            float(osat.loc[k, "wilson_ala"]) * 100 if k in osat.index else float("nan")
+            for k in jarj
+        ]
+        hi = [
+            float(osat.loc[k, "wilson_yla"]) * 100 if k in osat.index else float("nan")
+            for k in jarj
+        ]
+        lo_e, hi_e = _wilson_err(pd.Series(y), pd.Series(lo), pd.Series(hi))
+        ax.bar(range(len(jarj)), [v if v == v else 0 for v in y], yerr=[lo_e, hi_e], capsize=3, color="#6b3fa0")
         ax.set_xticks(range(len(jarj)))
-        ax.set_xticklabels([LUOKKA_UHKA[k] for k in jarj], rotation=20, ha="right")
+        ax.set_xticklabels([nimet[k] for k in jarj], rotation=25, ha="right")
         ax.set_title(NIMET.get(media, media) + " (TUTKIVA)")
         ax.set_ylabel("Osuus otsikoista (%)")
         ax.grid(True, axis="y", alpha=0.3)
+        ei = osuus[
+            (osuus["media"] == media)
+            & (osuus["jakso"] == "havaittu")
+            & (osuus["luokka"] == "ei_kumpaakaan")
+        ]
+        if not ei.empty:
+            p = float(ei.iloc[0]["osuus"]) * 100
+            ax.text(
+                0.02,
+                0.98,
+                f"Ei kumpaakaan: {p:.1f} %",
+                transform=ax.transAxes,
+                va="top",
+                fontsize=8,
+            )
         for i, k in enumerate(jarj):
             if k in osat.index and str(osat.loc[k, "d_lt_10"]) == "1":
-                ax.text(i, (y[i] or 0) + 1, "D<10", ha="center", fontsize=8)
-    fig.suptitle("TUTKIVA: terveysuhka ja uhkakehys (ei esirekisteröity)")
-    _tallenna(fig, polku)
+                ax.text(i, (y[i] or 0) + 0.05, "D<10", ha="center", fontsize=7)
+    fig.suptitle("TUTKIVA: terveysuhka ja uhkakehys (tiivis asteikko)")
+    _tallenna(fig, polku, tutkiva=True)
+
+
+def kaavio_uhkakehys_vuosi(osuus: pd.DataFrame, polku: Path) -> None:
+    d = osuus[
+        osuus["jakso"].str.fullmatch(r"\d{4}", na=False)
+        & osuus["luokka"].isin(["terveysuhka", "uhkakehys"])
+    ].copy()
+    fig, akselit = plt.subplots(1, 2, figsize=(11, 5.5), sharey=True)
+    for ax, media in zip(akselit, ["iltalehti_etusivu", "yle_uutiset"]):
+        osat = d[d["media"] == media]
+        vuodet = sorted(osat["jakso"].unique())
+        if not vuodet:
+            ax.set_title(NIMET[media] + " (ei vuosidataa)")
+            continue
+        x = list(range(len(vuodet)))
+        for luokka, vari in zip(["terveysuhka", "uhkakehys"], ["#0f766e", "#6b3fa0"]):
+            m = osat[osat["luokka"] == luokka].set_index("jakso").reindex(vuodet)
+            y = pd.to_numeric(m["osuus"], errors="coerce") * 100
+            lo = pd.to_numeric(m["wilson_ala"], errors="coerce") * 100
+            hi = pd.to_numeric(m["wilson_yla"], errors="coerce") * 100
+            lo_e, hi_e = _wilson_err(y, lo, hi)
+            ax.errorbar(
+                x, y, yerr=[lo_e, hi_e], fmt="o-", color=vari, label=NIMET[luokka], capsize=3
+            )
+            for i, lip in enumerate(m["d_lt_10"]):
+                if str(lip) == "1" and pd.notna(y.iloc[i]):
+                    ax.text(i, float(y.iloc[i]) + 0.05, "D<10", ha="center", fontsize=6)
+        ax.set_xticks(x)
+        ax.set_xticklabels(vuodet)
+        ax.set_title(NIMET[media])
+        ax.set_ylabel("Osuus otsikoista (%)")
+        ax.grid(True, alpha=0.3)
+        ax.legend(fontsize=8)
+    fig.suptitle("TUTKIVA: terveysuhka ja uhkakehys vuodittain")
+    _tallenna(fig, polku, tutkiva=True)
+
+
+def kaavio_uhkakehys_kuukausi(osuus: pd.DataFrame, polku: Path) -> None:
+    d = osuus[
+        osuus["jakso"].str.fullmatch(r"\d{4}-\d{2}", na=False)
+        & osuus["luokka"].isin(["terveysuhka", "uhkakehys"])
+    ].copy()
+    fig, akselit = plt.subplots(2, 1, figsize=(12, 8), sharex=False)
+    for ax, media in zip(akselit, ["iltalehti_etusivu", "yle_uutiset"]):
+        osat = d[d["media"] == media]
+        kuukaudet = sorted(osat["jakso"].unique())
+        if not kuukaudet:
+            ax.set_title(NIMET[media] + " (ei kuukausidataa)")
+            continue
+        x = list(range(len(kuukaudet)))
+        for luokka, vari in zip(["terveysuhka", "uhkakehys"], ["#0f766e", "#6b3fa0"]):
+            m = osat[osat["luokka"] == luokka].set_index("jakso").reindex(kuukaudet)
+            y = pd.to_numeric(m["osuus"], errors="coerce") * 100
+            lo = pd.to_numeric(m["wilson_ala"], errors="coerce") * 100
+            hi = pd.to_numeric(m["wilson_yla"], errors="coerce") * 100
+            lo_e, hi_e = _wilson_err(y, lo, hi)
+            ax.errorbar(
+                x, y, yerr=[lo_e, hi_e], fmt="o-", color=vari, label=NIMET[luokka], capsize=2
+            )
+        ax.set_xticks(x)
+        ax.set_xticklabels(kuukaudet, rotation=45, ha="right", fontsize=7)
+        ax.set_title(NIMET[media] + " (vain kuukaudet joilla n>0)")
+        ax.set_ylabel("Osuus (%)")
+        ax.grid(True, alpha=0.3)
+        ax.legend(fontsize=8)
+    fig.suptitle("TUTKIVA: terveysuhka ja uhkakehys kuukausittain (ei nollatäyttöä)")
+    _tallenna(fig, polku, tutkiva=True)
 
 
 def aja() -> None:
@@ -254,7 +401,11 @@ def aja() -> None:
         kaavio_m4(pd.read_csv(m4p, dtype=str), FIG / "04_m4_media_vs_k1.png")
     uhkp = TABLES / "uhkakehys_osuus.csv"
     if uhkp.exists():
-        kaavio_uhkakehys(pd.read_csv(uhkp, dtype=str), FIG / "05_uhkakehys.png")
+        uhk = pd.read_csv(uhkp, dtype=str)
+        kaavio_uhkakehys(uhk, FIG / "05_uhkakehys.png")
+        kaavio_uhkakehys_vuosi(uhk, FIG / "07_uhkakehys_vuosi.png")
+        kaavio_uhkakehys_kuukausi(uhk, FIG / "08_uhkakehys_kuukausi.png")
+    kaavio_entiteetti_vuosi_paneeli(p1, FIG / "06_entiteetti_vuosi.png")
     print("kirjoitettu", FIG / "01_entiteetti_osuus.png", flush=True)
 
 

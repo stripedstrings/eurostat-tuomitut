@@ -185,3 +185,17 @@ Taulut: `m4_media_vs_k1.csv`, `m4_varoitukset.csv`.
 
 Ei uutta hakua. Avaimet `media/codebook_uhkakehys_v1.md`. Taulut:
 `uhkakehys_otsikko.csv`, `uhkakehys_osuus.csv`. Kaavio `05_uhkakehys.png`.
+
+---
+
+## TUTKIVA HTML-tihennys IL+Yle (2026-11-03)
+
+Ei uusia medioita. Jakso edelleen 2015–2025. CDX sama kuin vaihe 2.
+Haettu puuttuvia `statuscode=200` -snapshotteja; prioriteetti 2017–2022
+ja 2024–2025 vuorotellen vuosittain. Peitto media×vuosi:
+`coverage_media_vuosi.csv`. Ei täyttöä. RSS ei täytä historiaa.
+
+HTML-yhteenveto tihennyksen jälkeen (ks. `tietueet_yhteenveto.csv`):
+Iltalehti n_tiedosto=913, n_otsikkoa=61914; Yle n_tiedosto=933,
+n_otsikkoa=15944. Yle 2016 edelleen n_html=0. CDX-200-päiviä jää
+hakematta (~3500+).

@@ -33,6 +33,15 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (TUTKIVA, HTML-tihennys). Iltalehti + Yle Wayback-HTML:n
+  tihentäminen jaksolle 2015–2025 (ei uusia medioita, ei 2000–2014).
+  Prioriteetti: vuodet 2017–2022 ja 2024–2025. Haku vuorottelee näitä
+  vuosia (tasainen peitto), ei poista päiviä tuloksen perusteella.
+  Puuttuva päivä ei täyty nollaksi. Kuukausi- ja vuosikaaviot sekä peitto
+  media×vuosi merkitään tutkiviksi. Perustelu: esirekisteröity peitto
+  jätti HTML-aukkoja; aikasarjahypoteeseja (esim. Putin 2019–2021) ei voi
+  arvioida ilman havaittuja otsikoita.
+
 - 2026-11-03 (TUTKIVA, uhkakehys). Uusi koodikirja terveysuhka vs. uhkakehys
   merkkijono-osumina kaikille havaituille otsikoille. Ei korvaa H4:ää eikä
   koodaus-v1:tä. Avaimet lukittu `codebook_uhkakehys_v1.md`:ään ennen

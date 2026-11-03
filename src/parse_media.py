@@ -16,6 +16,10 @@ from src.fetch_media import TABLES, USER_AGENT, _kirjaa_manifest
 
 RAW_SNAP = ROOT / "media" / "data" / "raw" / "snapshots"
 COVERAGE = TABLES / "coverage_media_paiva.csv"
+# TUTKIVA: aikasarjahypoteesit (esim. Putin 2019–2021) tarvitsevat nämä ensin.
+PRIORITEETTI_VUODET = frozenset(
+    {"2017", "2018", "2019", "2020", "2021", "2022", "2024", "2025"}
+)
 
 # M1-esimerkit MEDIA_README.md:stä; osuma otsikkotekstissä, ei ihmiskoodaus.
 ENTITEETTI_AVAIMET = (
@@ -270,15 +274,46 @@ def hae_yksi(rivi: dict[str, str]) -> tuple[str, str, int]:
     return media, paiva, koodi
 
 
+def _tasainen_jarjestys(rivit: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Vuorovaroittain vuosi kerrallaan, jotta aikasarjapeitto kasvaa tasaisemmin."""
+    from collections import defaultdict
+
+    bucketit: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for r in rivit:
+        bucketit[r["paiva"][:4]].append(r)
+    for vuosi in bucketit:
+        bucketit[vuosi].sort(key=lambda r: (r["paiva"], r["media"]))
+    prio = sorted(y for y in bucketit if y in PRIORITEETTI_VUODET)
+    muut = sorted(y for y in bucketit if y not in PRIORITEETTI_VUODET)
+    out: list[dict[str, str]] = []
+    for ryhmä in (prio, muut):
+        idx = {y: 0 for y in ryhmä}
+        while True:
+            edistyi = False
+            for y in ryhmä:
+                i = idx[y]
+                if i < len(bucketit[y]):
+                    out.append(bucketit[y][i])
+                    idx[y] = i + 1
+                    edistyi = True
+            if not edistyi:
+                break
+    return out
+
+
 def hae_snapshotit(
     max_tyot: int = 1,
     vuosi: str | None = None,
     max_uusia: int | None = None,
+    vain_prioriteetti: bool = False,
 ) -> None:
     rivit = [r for r in _lue_coverage() if (r.get("snapshot_url") or "").strip()]
+    rivit = [r for r in rivit if (r.get("on_cdx_200") or "").lower() == "true"]
     if vuosi:
         rivit = [r for r in rivit if r["paiva"].startswith(vuosi)]
-    rivit.sort(key=lambda r: (0 if r["paiva"].startswith("2023") else 1, r["paiva"], r["media"]))
+    if vain_prioriteetti:
+        rivit = [r for r in rivit if r["paiva"][:4] in PRIORITEETTI_VUODET]
+    rivit = _tasainen_jarjestys(rivit)
     puuttuvat: list[dict[str, str]] = []
     ok = 0
     for r in rivit:
@@ -430,6 +465,56 @@ def rakenna_tietueet() -> None:
                     "n_ilman_otsikkoa": str(len(tied) - len(with_o)),
                 }
             )
+    kirjoita_peitto_vuosi(coverage, etu_rivit)
+
+
+def kirjoita_peitto_vuosi(
+    coverage: list[dict[str, str]], etu_rivit: list[dict[str, str]]
+) -> None:
+    """Peitto media × vuosi. Tyhjät vuodet mukana; ei täyttöä osuuksilla."""
+    etu_map = {(r["media"], r["paiva"]): r for r in etu_rivit}
+    mediat = sorted({r["media"] for r in coverage})
+    vuodet = [str(y) for y in range(2015, 2026)]
+    rivit: list[dict[str, str]] = []
+    for media in mediat:
+        for vuosi in vuodet:
+            osat = [r for r in coverage if r["media"] == media and r["paiva"].startswith(vuosi)]
+            n_paivaa = len(osat)
+            n_cdx = sum(1 for r in osat if (r.get("on_cdx") or "").lower() == "true")
+            n_cdx_200 = sum(1 for r in osat if (r.get("on_cdx_200") or "").lower() == "true")
+            n_html = 0
+            n_otsikko_paiva = 0
+            n_otsikkoa = 0
+            for r in osat:
+                e = etu_map.get((media, r["paiva"]))
+                if not e or not (e.get("http_tiedosto") or "").strip():
+                    continue
+                n_html += 1
+                try:
+                    no = int(e.get("n_otsikkoa") or "0")
+                except ValueError:
+                    no = 0
+                if no > 0:
+                    n_otsikko_paiva += 1
+                    n_otsikkoa += no
+            rivit.append(
+                {
+                    "media": media,
+                    "vuosi": vuosi,
+                    "n_paivaa": str(n_paivaa),
+                    "n_cdx": str(n_cdx),
+                    "n_cdx_200": str(n_cdx_200),
+                    "n_html": str(n_html),
+                    "n_otsikko_paiva": str(n_otsikko_paiva),
+                    "n_otsikkoa": str(n_otsikkoa),
+                    "huom": "TUTKIVA (ei esirekisteröity); puuttuva ei nolla",
+                }
+            )
+    with (TABLES / "coverage_media_vuosi.csv").open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rivit[0].keys()))
+        w.writeheader()
+        w.writerows(rivit)
+    print("kirjoitettu", TABLES / "coverage_media_vuosi.csv", flush=True)
 
 
 def aja(
@@ -437,9 +522,15 @@ def aja(
     max_tyot: int = 1,
     vuosi: str | None = None,
     max_uusia: int | None = None,
+    vain_prioriteetti: bool = False,
 ) -> None:
     if hae:
-        hae_snapshotit(max_tyot=max_tyot, vuosi=vuosi, max_uusia=max_uusia)
+        hae_snapshotit(
+            max_tyot=max_tyot,
+            vuosi=vuosi,
+            max_uusia=max_uusia,
+            vain_prioriteetti=vain_prioriteetti,
+        )
     rakenna_tietueet()
     print("kirjoitettu", TABLES / "tietueet_etusivu.csv", flush=True)
 
@@ -452,10 +543,12 @@ if __name__ == "__main__":
     parser.add_argument("--tyot", type=int, default=1)
     parser.add_argument("--vuosi", default=None)
     parser.add_argument("--max-uusia", type=int, default=None)
+    parser.add_argument("--prioriteetti", action="store_true")
     args = parser.parse_args()
     aja(
         hae=not args.vain_parse,
         max_tyot=args.tyot,
         vuosi=args.vuosi,
         max_uusia=args.max_uusia,
+        vain_prioriteetti=args.prioriteetti,
     )
