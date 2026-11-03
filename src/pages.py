@@ -333,6 +333,10 @@ def kirjoita_aihesivut() -> None:
             shutil.copy2(src, kohde)
     for csv_polku in (ROOT / "media" / "output" / "tables").glob("*.csv"):
         shutil.copy2(csv_polku, DOCS_DIR / "media" / csv_polku.name)
+    kuvat = DOCS_DIR / "media" / "figures"
+    kuvat.mkdir(parents=True, exist_ok=True)
+    for png in (ROOT / "media" / "output" / "figures").glob("*.png"):
+        shutil.copy2(png, kuvat / png.name)
     for koodikirja_nimi in ("codebook_esikasittely_v1.md", "codebook_koodaus_v1.md"):
         koodikirja = ROOT / "media" / koodikirja_nimi
         if koodikirja.exists():
@@ -418,6 +422,64 @@ def kirjoita_aihesivut() -> None:
         '<a href="koodaus_f1.csv">F1</a>, '
         '<a href="codebook_koodaus_v1.md">codebook</a>.',
     )
+    p1h_fi, p1h_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "p1_entiteetti_osuus_havaittu.csv",
+        "P1 entiteettiosuudet (havaittu HTML)",
+        "Wilson 95 %. Nimittäjä ≠ kalenteripäivät. "
+        '<a href="p1_entiteetti_osuus_havaittu.csv">havaittu</a>, '
+        '<a href="p1_entiteetti_osuus.csv">myös vuosittain</a>.',
+        "P1 entity shares (observed HTML)",
+        "Wilson 95%. Denominator ≠ calendar days. "
+        '<a href="p1_entiteetti_osuus_havaittu.csv">observed</a>, '
+        '<a href="p1_entiteetti_osuus.csv">by year too</a>.',
+    )
+    h_fi, h_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "h1_h7.csv",
+        "H1–H7",
+        "Ei testattavat merkitty. "
+        '<a href="h1_h7.csv">taulu</a>, '
+        '<a href="p3_p5_tila.csv">P3/P5</a>, '
+        '<a href="h7_entropia_tutkiva.csv">H7 TUTKIVA</a>, '
+        '<a href="p2_aihe_otos.csv">P2 TUTKIVA</a>.',
+        "H1–H7",
+        "Untestable hypotheses marked. "
+        '<a href="h1_h7.csv">table</a>, '
+        '<a href="p3_p5_tila.csv">P3/P5</a>, '
+        '<a href="h7_entropia_tutkiva.csv">H7 EXPLORATORY</a>, '
+        '<a href="p2_aihe_otos.csv">P2 EXPLORATORY</a>.',
+    )
+    p4t_fi, p4t_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "p4_mediavertailu.csv",
+        "P4 mediavertailu",
+        "Pearson-r kuuden entiteettiosuuden välillä (kaksi mediaa).",
+        "P4 outlet comparison",
+        "Pearson r across six entity shares (two outlets).",
+    )
+    ana_fi = p1h_fi + h_fi + p4t_fi
+    ana_en = p1h_en + h_en + p4t_en
+    kuvat_fi = ""
+    kuvat_en = ""
+    if (ROOT / "media" / "output" / "figures" / "01_entiteetti_osuus.png").exists():
+        kuvat_fi = """
+      <h2>Kaaviot (vaihe 5)</h2>
+      <figure><img src="figures/01_entiteetti_osuus.png" alt="P1 entiteettiosuudet"><figcaption>P1: entiteettiosuudet, Wilson 95 %.</figcaption></figure>
+      <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 vuosittain"><figcaption>P1: osuudet vuosittain. Katkos = ei HTML:ää.</figcaption></figure>
+      <figure><img src="figures/03_h1_h2.png" alt="H1 ja H2"><figcaption>H1 Iltalehti 2023 Putin; H2 presidentti, Putin, Zelenskyi.</figcaption></figure>
+"""
+        kuvat_en = """
+      <h2>Figures (phase 5)</h2>
+      <figure><img src="figures/01_entiteetti_osuus.png" alt="P1 entity shares"><figcaption>P1: entity shares, Wilson 95%.</figcaption></figure>
+      <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 by year"><figcaption>P1: shares by year. Gap = no HTML.</figcaption></figure>
+      <figure><img src="figures/03_h1_h2.png" alt="H1 and H2"><figcaption>H1 Iltalehti 2023 Putin; H2 president, Putin, Zelenskyi.</figcaption></figure>
+"""
+    tulk_fi = """
+      <h2>Tulkinta ja rajat</h2>
+      <p>Luvut ovat osuuksia havaituissa Wayback-snapshotissa, eivät kaikkien kalenteripäivien osuuksia. Puuttuvaa HTML:ää ei ole täytetty nollaksi. Entiteetti on merkkijono-osuma, ei ihmiskoodaus. H3, H4, H6, H7 (pää), P2 (pää), P3 ja P5 on merkitty ei testattaviksi. M4 ei tässä vaiheessa. Pearson-r perustuu kahteen mediaan. Ei motiiveja, ei lukijavaikutusta, ei propaganda-väitettä.</p>
+"""
+    tulk_en = """
+      <h2>Interpretation and limits</h2>
+      <p>Shares are among observed Wayback snapshots, not among all calendar days. Missing HTML is not filled with zero. Entity flags are string matches, not human codes. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 is not in this phase. Pearson r uses two outlets. No motives, audience effects, or propaganda claims.</p>
+"""
     esik_fi, esik_en = _media_taulu_osio(
         ROOT / "media" / "output" / "tables" / "tietueet_yhteenveto.csv",
         "Esikäsittely (vaihe 3, 2026-11-02)",
@@ -439,7 +501,7 @@ def kirjoita_aihesivut() -> None:
     media = f"""
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 2–3: CDX ja otsikot. Vaihe 4: otos 500, ihmiskoodaus puuttuu, sääntö-α tutkiva. P1–P5 = vaihe 5.</p>
+      <p><strong>Vaihe 5 ajettu 2026-11-03.</strong> Esirekisteröinti: 2026-11-01. P1 entiteettiosuudet Wilson-väleineen. P2/P3/P5 ja H3/H4/H6/H7 (pää) = ei testattavissa. M4 = vaihe 7. Ihmiskoodaus puuttuu.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -462,10 +524,13 @@ def kirjoita_aihesivut() -> None:
       {peitto_fi}
       {esik_fi}
       {kood_fi}
+      {ana_fi}
+      {kuvat_fi}
+      {tulk_fi}
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phases 2–3: CDX and headlines. Phase 4: sample of 500, human coding missing, rule α exploratory. P1–P5 = phase 5.</p>
+      <p><strong>Phase 5 run 2026-11-03.</strong> Preregistration: 2026-11-01. P1 entity shares with Wilson intervals. P2/P3/P5 and H3/H4/H6/H7 (main) = not testable. M4 = phase 7. Human coding missing.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -488,6 +553,9 @@ def kirjoita_aihesivut() -> None:
       {peitto_en}
       {esik_en}
       {kood_en}
+      {ana_en}
+      {kuvat_en}
+      {tulk_en}
     </div>
 """
     (DOCS_DIR / "media" / "index.html").write_text(

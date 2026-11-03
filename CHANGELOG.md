@@ -33,6 +33,11 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (vaihe 5, ennen S1–S7). P1 käyttää vaihe 3 -entiteettiosumia,
+  ei ihmiskoodausta. Nimittäjä = havaittu HTML, ei kalenteri. H3/H4/H6 ja
+  H7-pää, P2-pää, P3, P5 merkitty ei testattaviksi aineiston vuoksi, ei
+  tuloksen vuoksi. M4 ei. Perustelu: METHODS ennen ajoa.
+
 - 2026-11-03 (vaihe 4, ennen P1–P5). Esirekisteröinti vaatii ihmiskoodauksen
   (≥500, kaksoiskoodaus, Krippendorff α). **Poikkeama:** kahta ihmiskoodaajaa
   ei ole. Otos 500 (siemen 20261103) koodattiin kahdella lukitulla säännöllä;

@@ -152,3 +152,10 @@ HTML-kattavuus << CDX. Jatko: `python -m src.parse_media --tyot 1`. GDELT/Media 
 Otos `koodaus_otos.csv`: 500 otsikkoa vaihe 3 -taulusta, siemen 20261103,
 250 IL + 250 Yle. Ei uutta HTML-hakua. Ihmiskoodit tyhjiä.
 Yhteenveto: `koodaus_yhteenveto.csv`. F1 (sääntö vs. sääntö): `koodaus_f1.csv`.
+
+---
+
+## Vaihe 5 (analyysi, 2026-11-03)
+
+Ei uutta hakua. Taulut: `p1_entiteetti_osuus.csv`, `h1_h7.csv`,
+`p4_mediavertailu.csv`, `p3_p5_tila.csv`. Ulkoisia indikaattoreita ei.

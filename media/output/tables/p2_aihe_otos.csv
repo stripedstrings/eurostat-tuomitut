@@ -1,0 +1,13 @@
+n,x,osuus,wilson_ala,wilson_yla,d_lt_10,analyysi,yksikko,media,ryhma,jakso,huom
+250,1,0.004000,0.000706,0.022306,1,P2,otsikko_otos,iltalehti_etusivu,maahanmuutto,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,241,0.964000,0.933010,0.980947,0,P2,otsikko_otos,iltalehti_etusivu,muu,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,5,0.020000,0.008572,0.045956,1,P2,otsikko_otos,iltalehti_etusivu,putin,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,3,0.012000,0.004089,0.034681,1,P2,otsikko_otos,iltalehti_etusivu,rikollisuus,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,0,0.000000,0.000000,0.015133,1,P2,otsikko_otos,iltalehti_etusivu,terveys,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,0,0.000000,0.000000,0.015133,1,P2,otsikko_otos,iltalehti_etusivu,zelenskyi,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,1,0.004000,0.000706,0.022306,1,P2,otsikko_otos,yle_uutiset,maahanmuutto,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,241,0.964000,0.933010,0.980947,0,P2,otsikko_otos,yle_uutiset,muu,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,2,0.008000,0.002197,0.028695,1,P2,otsikko_otos,yle_uutiset,putin,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,3,0.012000,0.004089,0.034681,1,P2,otsikko_otos,yle_uutiset,rikollisuus,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,1,0.004000,0.000706,0.022306,1,P2,otsikko_otos,yle_uutiset,terveys,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
+250,2,0.008000,0.002197,0.028695,1,P2,otsikko_otos,yle_uutiset,zelenskyi,otos_500,TUTKIVA (ei esirekisteröity); ei ihmisaihetta
