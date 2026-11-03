@@ -1,0 +1,25 @@
+tunnus,arvo,huom
+siemen,20261103,
+n_otos,500,tasakiintiö medioittain
+n_kaksoiskoodattu_saanto,500,saanto-v1 vs saanto-v1b
+n_ihminen,0,ihmiskentät tyhjiä
+alpha_aihe_saanto,1.000000,TUTKIVA; ei ihmis-α
+alpha_savy_saanto,1.000000,vain parit joissa molemmilla luokka; tyhjä pois
+n_savy_paria_molemmat,7,α-sävyn otos
+n_savy_vain_v1b,3,"v1 tyhjä, v1b luokka; ei α-parissa"
+alpha_aihe_ihminen,,ei kahta ihmiskoodaajaa
+alpha_savy_ihminen,,ei kahta ihmiskoodaajaa
+koodakirja_versio,koodaus-v1,
+n_iltalehti_etusivu,250,
+n_yle_uutiset,250,
+n_aihe_v1_putin,7,saanto-v1
+n_aihe_v1_zelenskyi,2,saanto-v1
+n_aihe_v1_presidentti,0,saanto-v1
+n_aihe_v1_maahanmuutto,2,saanto-v1
+n_aihe_v1_rikollisuus,6,saanto-v1
+n_aihe_v1_terveys,1,saanto-v1
+n_aihe_v1_muu,482,saanto-v1
+n_savy_v1_uhka,5,saanto-v1; tyhjä ei neutraali
+n_savy_v1_pelko,2,saanto-v1; tyhjä ei neutraali
+n_savy_v1_viha,0,saanto-v1; tyhjä ei neutraali
+n_savy_v1_tyhja,493,ei merkkiosumaa

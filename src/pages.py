@@ -333,9 +333,10 @@ def kirjoita_aihesivut() -> None:
             shutil.copy2(src, kohde)
     for csv_polku in (ROOT / "media" / "output" / "tables").glob("*.csv"):
         shutil.copy2(csv_polku, DOCS_DIR / "media" / csv_polku.name)
-    koodikirja = ROOT / "media" / "codebook_esikasittely_v1.md"
-    if koodikirja.exists():
-        shutil.copy2(koodikirja, DOCS_DIR / "media" / koodikirja.name)
+    for koodikirja_nimi in ("codebook_esikasittely_v1.md", "codebook_koodaus_v1.md"):
+        koodikirja = ROOT / "media" / koodikirja_nimi
+        if koodikirja.exists():
+            shutil.copy2(koodikirja, DOCS_DIR / "media" / koodikirja.name)
 
     lahteet = """
     <div class="kieli-fi">
@@ -400,18 +401,35 @@ def kirjoita_aihesivut() -> None:
         '<a href="coverage_media_yhteenveto.csv">summary</a>, '
         '<a href="coverage_media_paiva.csv">by day</a>.',
     )
+    kood_fi, kood_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "koodaus_yhteenveto.csv",
+        "Koodaus (vaihe 4, 2026-11-03)",
+        "Otos 500, siemen 20261103. Ihmiskoodit tyhjiä. Sääntö-α/F1 = "
+        "TUTKIVA (ei esirekisteröity). "
+        '<a href="koodaus_yhteenveto.csv">yhteenveto</a>, '
+        '<a href="koodaus_otos.csv">otos</a>, '
+        '<a href="koodaus_f1.csv">F1</a>, '
+        '<a href="codebook_koodaus_v1.md">koodikirja</a>.',
+        "Coding (phase 4, 2026-11-03)",
+        "Sample of 500, seed 20261103. Human codes empty. Rule α/F1 = "
+        "EXPLORATORY (not preregistered). "
+        '<a href="koodaus_yhteenveto.csv">summary</a>, '
+        '<a href="koodaus_otos.csv">sample</a>, '
+        '<a href="koodaus_f1.csv">F1</a>, '
+        '<a href="codebook_koodaus_v1.md">codebook</a>.',
+    )
     esik_fi, esik_en = _media_taulu_osio(
         ROOT / "media" / "output" / "tables" / "tietueet_yhteenveto.csv",
         "Esikäsittely (vaihe 3, 2026-11-02)",
         "Otsikot Wayback-HTML:stä. Puuttuva snapshot = tyhjä rivi, ei täyttöä. "
-        "aihe ja sävy tyhjiä (vaihe 4). "
+        "Koko ruudukon aihe ja sävy tyhjiä. "
         '<a href="tietueet_yhteenveto.csv">yhteenveto</a>, '
         '<a href="tietueet_etusivu.csv">etusivu</a>, '
         '<a href="tietueet_otsikko.csv">otsikot</a>, '
         '<a href="codebook_esikasittely_v1.md">koodikirja</a>.',
         "Preprocessing (phase 3, 2026-11-02)",
         "Headlines from Wayback HTML. Missing snapshot = empty row, no fill. "
-        "topic and tone empty (phase 4). "
+        "Topic and tone empty on the full grid. "
         '<a href="tietueet_yhteenveto.csv">summary</a>, '
         '<a href="tietueet_etusivu.csv">front page</a>, '
         '<a href="tietueet_otsikko.csv">headlines</a>, '
@@ -421,7 +439,7 @@ def kirjoita_aihesivut() -> None:
     media = f"""
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 2: CDX 2026-11-02. Vaihe 3: otsikot olemassa olevista snapshotista; puuttuva päivä tyhjä. Ihmiskoodaus = vaihe 4.</p>
+      <p><strong>Analyysiä ei ole ajettu.</strong> Esirekisteröinti: 2026-11-01. Vaihe 2–3: CDX ja otsikot. Vaihe 4: otos 500, ihmiskoodaus puuttuu, sääntö-α tutkiva. P1–P5 = vaihe 5.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -443,10 +461,11 @@ def kirjoita_aihesivut() -> None:
       </table></div>
       {peitto_fi}
       {esik_fi}
+      {kood_fi}
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phase 2: CDX 2026-11-02. Phase 3: headlines from available snapshots; missing days empty. Human coding = phase 4.</p>
+      <p><strong>No analysis has been run.</strong> Preregistration: 2026-11-01. Phases 2–3: CDX and headlines. Phase 4: sample of 500, human coding missing, rule α exploratory. P1–P5 = phase 5.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -468,6 +487,7 @@ def kirjoita_aihesivut() -> None:
       </table></div>
       {peitto_en}
       {esik_en}
+      {kood_en}
     </div>
 """
     (DOCS_DIR / "media" / "index.html").write_text(

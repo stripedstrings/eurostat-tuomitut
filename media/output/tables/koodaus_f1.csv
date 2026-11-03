@@ -1,0 +1,11 @@
+luokka,n_viite,n_ennuste,tp,tarkkuus,saanti,f1,viite,ennuste,huom
+putin,7,7,7,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+zelenskyi,2,2,2,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+presidentti,0,0,0,,,,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+maahanmuutto,2,2,2,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+rikollisuus,6,6,6,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+terveys,1,1,1,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+muu,482,482,482,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+savy:uhka,5,5,5,1.000000,1.000000,1.000000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+savy:pelko,2,3,2,0.666667,1.000000,0.800000,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia
+savy:viha,0,2,0,0.000000,,,saanto-v1,saanto-v1b,TUTKIVA (ei esirekisteröity); ei ihmisvalidointia

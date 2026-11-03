@@ -33,6 +33,13 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (vaihe 4, ennen P1–P5). Esirekisteröinti vaatii ihmiskoodauksen
+  (≥500, kaksoiskoodaus, Krippendorff α). **Poikkeama:** kahta ihmiskoodaajaa
+  ei ole. Otos 500 (siemen 20261103) koodattiin kahdella lukitulla säännöllä;
+  ihmiskentät tyhjiä; ihmis-α tyhjä. Sääntö-α/F1 merkitään tutkiviksi.
+  Perustelu: koodeja ei keksitä ihmisen nimissä. Automaatiota ei validoida
+  ilman ihmisviitettä.
+
 - 2026-11-02 (vaihe 3, ennen ihmiskoodausta). Wayback-HTML haettu osittain;
   Internet Archive katkaisi rinnakkaiset yhteydet. Puuttuvat päivät jätettiin
   tyhjiksi. Otsikot konepoiminnalla; `aihe`/`savy` tyhjiä. Perustelu:

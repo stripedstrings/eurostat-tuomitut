@@ -1,7 +1,7 @@
 # Mediahaaran menetelmät
 
 Vaihe 1 (saatavuus) 2026-11-01. Vaihe 2 (CDX-indeksi) 2026-11-02.
-Vaihe 3 (HTML-otsikot) 2026-11-02.
+Vaihe 3 (HTML-otsikot) 2026-11-02. Vaihe 4 (koodausotos) 2026-11-03.
 Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 
 ## Yksikkö ja jakso (vaihe 2)
@@ -26,9 +26,20 @@ Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
   Luokat luettu snapshotista.
 - Kuvateksti: ensimmäinen `figcaption`. Kuva: `og:image`.
 - Entiteetti: merkkijono-osuma M1-avaimista; ei ihmiskoodaus.
-- `aihe`, `savy`, ihmis-`koodaaja` tyhjiä.
+- `aihe`, `savy`, ihmis-`koodaaja` tyhjiä vaiheessa 3.
 - Puuttuva HTML tai tyhjä poiminta = tyhjä, ei interpolointia.
 - IA-rajoitus: HTML-kattavuus < CDX-kattavuus; katkos = puuttuva.
+
+## Koodaus (vaihe 4, 2026-11-03)
+
+- Koodikirja: `media/codebook_koodaus_v1.md`. Siemen `20261103`.
+- Otos: 500 otsikkoa, 250 / media, vain ei-tyhjät otsikot.
+- Sääntökoodaus `saanto-v1` ja `saanto-v1b` koko otokselle.
+- Ihmiskoodaus: kentät tyhjiä (kaksi ihmistä puuttuu).
+- Krippendorffin nominaali-α: `src/krippendorff.py`. Ihmis-α tyhjä.
+- Sääntöjen välinen α ja F1 merkitään tutkiviksi; ei ihmisvalidointia.
+- Sävy ilman merkkiosumaa = tyhjä, ei `neutraali`.
+- Automaattista koodausta ei viedä koko aineistoon ennen ihmisotosta.
 
 ## Koodikirjan kentät (esikäsittely-v1)
 
@@ -44,14 +55,25 @@ Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 | koodaaja | tunniste |
 | koodikirja_versio | versio |
 
-Koodaussäännöt ja ihmisotos (≥500, kaksoiskoodaus, Krippendorff α)
-vaiheessa 4. Automaattinen koodaus vain, jos se validoidaan otosta vasten
-(tarkkuus/saanti/F1 luokittain).
+Koodaussäännöt: `media/codebook_koodaus_v1.md`. Ihmisotos (≥500) odottaa
+kahta koodaajaa. Automaattinen koodaus ei ole validoitu ihmistä vasten.
 
 ## P1–P5 ja H1–H7
 
 Analyysi vaiheessa 5. Ei testattavat (esim. H3 ilman analytiikkaa)
-merkitään. S1–S7 taulukko vaiheessa 6; määritellään ennen vaihetta 5.
+merkitään.
+
+## Herkkyydet S1–S7 (lukittu ennen vaihetta 5)
+
+Taulukko vaiheessa 6. Määritelmät eivät riipu P1–P5-luvuista.
+
+- **S1:** otsikkoyksikkö (pää) vs. etusivupäivä (≥1 koodattu otsikko).
+- **S2:** IL ja Yle erikseen (pääanalyysi pitää molemmat).
+- **S3:** saatavilla oleva jakso vs. vain 2023.
+- **S4:** vaihe 3 -entiteettiosuma vs. koodattu `aihe`.
+- **S5:** sävy vain merkitty vs. tutkiva täyttö tyhjä→`neutraali` (ei pää).
+- **S6:** otsikon pituus ≥ 18 (pää, poiminta) vs. ≥ 40.
+- **S7:** Wilson 95 % vs. Clopper–Pearson 95 %.
 
 ## M4
 

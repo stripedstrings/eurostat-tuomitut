@@ -144,3 +144,11 @@ tyhjät otsikkokentät. `aihe` ja `savy` tyhjiä.
 | yle_uutiset | 4018 | 81 | 81 | 3526 | 0 |
 
 HTML-kattavuus << CDX. Jatko: `python -m src.parse_media --tyot 1`. GDELT/Media Cloud/Yle-artikkeli-API ei. RSS ei täytä historiaa.
+
+---
+
+## Vaihe 4 (koodaus, 2026-11-03)
+
+Otos `koodaus_otos.csv`: 500 otsikkoa vaihe 3 -taulusta, siemen 20261103,
+250 IL + 250 Yle. Ei uutta HTML-hakua. Ihmiskoodit tyhjiä.
+Yhteenveto: `koodaus_yhteenveto.csv`. F1 (sääntö vs. sääntö): `koodaus_f1.csv`.
