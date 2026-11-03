@@ -29,6 +29,8 @@ def test_wilson_nolla_osuma():
     lo, hi = wilson_ci(0, 20)
     assert lo >= 0
     assert hi > lo
+    assert lo == 0.0 or lo > 0.0
+    assert hi <= 1.0
 
 
 def test_clopper_pearson_nolla():

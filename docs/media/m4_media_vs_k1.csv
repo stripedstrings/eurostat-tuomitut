@@ -1,0 +1,8 @@
+lahde,yksikko,media,vuodet,n_NAT,n_FOR,n,osuus_FOR,wilson_ala,wilson_yla,d_lt_10,huom
+K1_FI,tuomitut,,"2015,2016,2023",365920,49940,415860,0.120088,,,0,"ilmoitetut lukumäärät, ei otanta-CI; ei EU-aggregaatti"
+media,rikosotsikko,molemmat,"2015,2016,2023",0,0,87,0.000000,0.000000,0.042288,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus
+media,rikosotsikko_ehdollinen,molemmat,"2015,2016,2023",0,0,0,,,,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus
+media,rikosotsikko,iltalehti_etusivu,"2015,2016,2023",0,0,66,0.000000,0.000000,0.055003,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus
+media,rikosotsikko,yle_uutiset,"2015,2016,2023",0,0,21,0.000000,0.000000,0.154639,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus
+media,rikosotsikko_ehdollinen,iltalehti_etusivu,"2015,2016,2023",0,0,0,,,,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus
+media,rikosotsikko_ehdollinen,yle_uutiset,"2015,2016,2023",0,0,0,,,,1,uutiskynnys; avain ≠ oikeudellinen kansalaisuus

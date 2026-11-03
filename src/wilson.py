@@ -21,7 +21,9 @@ def wilson_ci(x: int | float, n: int | float, z: float = Z_95) -> tuple[float, f
     den = 1.0 + z2 / nn
     keski = (p + z2 / (2.0 * nn)) / den
     puoli = z * math.sqrt(p * (1.0 - p) / nn + z2 / (4.0 * nn * nn)) / den
-    return keski - puoli, keski + puoli
+    ala = max(0.0, keski - puoli)
+    yla = min(1.0, keski + puoli)
+    return ala, yla
 
 
 def clopper_pearson_ci(

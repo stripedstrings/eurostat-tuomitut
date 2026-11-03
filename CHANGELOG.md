@@ -33,6 +33,10 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   eikä täyttö. Perustelu: Poisson/osuuslaskenta tulee päiväyksikölle;
   puuttuva päivä jää tyhjäksi. HTML:ää ei ladattu (vaihe 3).
 
+- 2026-11-03 (vaihe 7). M4: rikosotsikon NAT/FOR-avaimet vs. K1 FI tuomitut
+  yhteisillä vuosilla. Demonyymejä ei keksitty. Maahanmuuttaja-avainta ei
+  käytetty (tausta ≠ kansalaisuus). EU-aggregaattia ei yhdistetty. Ei syytä.
+
 - 2026-11-03 (vaihe 6). S1–S7 kuten METHODS ennen vaihetta 5. S4 vain
   otoksessa 500 (ruudukon `aihe` tyhjä). S5-täyttö merkitty tutkivaksi.
   Ei M4. Perustelu: määritelmät lukittu ennen P1-lukuja.

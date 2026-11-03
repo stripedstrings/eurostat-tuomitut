@@ -173,11 +173,50 @@ def kaavio_h1_h2(p1: pd.DataFrame, polku: Path) -> None:
     _tallenna(fig, polku)
 
 
+def kaavio_m4(m4: pd.DataFrame, polku: Path) -> None:
+    jarj = [
+        ("K1_FI", "tuomitut", "K1 FI tuomitut FOR"),
+        ("media", "rikosotsikko", "Rikosotsikko, FOR-avain"),
+        ("media", "rikosotsikko_ehdollinen", "Rikosotsikko, ehdollinen"),
+    ]
+    nimet, y, lo_e, hi_e, liput = [], [], [], [], []
+    d = m4[m4["media"].fillna("").isin(["", "molemmat"])]
+    for lahde, yksikko, nimi in jarj:
+        r = d[(d["lahde"] == lahde) & (d["yksikko"] == yksikko)]
+        if r.empty:
+            continue
+        row = r.iloc[0]
+        nimet.append(nimi)
+        yy = pd.to_numeric(row["osuus_FOR"], errors="coerce")
+        y.append(float(yy) * 100 if pd.notna(yy) else float("nan"))
+        if row["lahde"] == "K1_FI" or not str(row.get("wilson_ala", "")):
+            lo_e.append(0.0)
+            hi_e.append(0.0)
+        else:
+            lo_e.append(y[-1] - float(row["wilson_ala"]) * 100)
+            hi_e.append(float(row["wilson_yla"]) * 100 - y[-1])
+        liput.append(str(row.get("d_lt_10", "0")))
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    ax.bar(range(len(nimet)), y, yerr=[lo_e, hi_e], capsize=4, color=["#2c5aa0", "#c45c26", "#b45309"][: len(nimet)])
+    ax.set_xticks(range(len(nimet)))
+    ax.set_xticklabels(nimet, rotation=18, ha="right")
+    ax.set_ylabel("FOR-osuus (%)")
+    ax.set_title("M4: K1 Suomi vs. rikosotsikon kansalaisuusmaininta")
+    for i, (yy, lip) in enumerate(zip(y, liput)):
+        if lip == "1" and pd.notna(yy):
+            ax.text(i, yy + 0.5, "D<10", ha="center", fontsize=8)
+    ax.grid(True, axis="y", alpha=0.3)
+    _tallenna(fig, polku)
+
+
 def aja() -> None:
     p1 = pd.read_csv(TABLES / "p1_entiteetti_osuus.csv", dtype=str)
     kaavio_p1_palkki(p1, FIG / "01_entiteetti_osuus.png")
     kaavio_vuosi(p1, FIG / "02_entiteetti_vuosi.png")
     kaavio_h1_h2(p1, FIG / "03_h1_h2.png")
+    m4p = TABLES / "m4_media_vs_k1.csv"
+    if m4p.exists():
+        kaavio_m4(pd.read_csv(m4p, dtype=str), FIG / "04_m4_media_vs_k1.png")
     print("kirjoitettu", FIG / "01_entiteetti_osuus.png", flush=True)
 
 

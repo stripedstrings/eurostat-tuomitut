@@ -6,7 +6,7 @@ n,x,osuus,wilson_ala,wilson_yla,d_lt_10,analyysi,yksikko,media,ryhma,jakso
 165,45,0.272727,0.210522,0.345274,0,P1,etusivu,iltalehti_etusivu,rikollisuus,havaittu
 165,5,0.030303,0.013012,0.068967,1,P1,etusivu,iltalehti_etusivu,terveys,havaittu
 41,21,0.512195,0.364845,0.657456,0,P1,etusivu,iltalehti_etusivu,putin,2015
-41,0,0.000000,-0.000000,0.085668,1,P1,etusivu,iltalehti_etusivu,zelenskyi,2015
+41,0,0.000000,0.000000,0.085668,1,P1,etusivu,iltalehti_etusivu,zelenskyi,2015
 41,1,0.024390,0.004319,0.125951,1,P1,etusivu,iltalehti_etusivu,presidentti,2015
 41,21,0.512195,0.364845,0.657456,0,P1,etusivu,iltalehti_etusivu,maahanmuutto,2015
 41,14,0.341463,0.215588,0.494502,0,P1,etusivu,iltalehti_etusivu,rikollisuus,2015
@@ -19,7 +19,7 @@ n,x,osuus,wilson_ala,wilson_yla,d_lt_10,analyysi,yksikko,media,ryhma,jakso
 40,2,0.050000,0.013821,0.165039,1,P1,etusivu,iltalehti_etusivu,terveys,2016
 84,47,0.559524,0.453071,0.660770,0,P1,etusivu,iltalehti_etusivu,putin,2023
 84,15,0.178571,0.111312,0.273944,0,P1,etusivu,iltalehti_etusivu,zelenskyi,2023
-84,0,0.000000,-0.000000,0.043732,1,P1,etusivu,iltalehti_etusivu,presidentti,2023
+84,0,0.000000,0.000000,0.043732,1,P1,etusivu,iltalehti_etusivu,presidentti,2023
 84,2,0.023810,0.006554,0.082714,1,P1,etusivu,iltalehti_etusivu,maahanmuutto,2023
 84,9,0.107143,0.057400,0.191246,1,P1,etusivu,iltalehti_etusivu,rikollisuus,2023
 84,1,0.011905,0.002105,0.064395,1,P1,etusivu,iltalehti_etusivu,terveys,2023

@@ -165,3 +165,10 @@ Ei uutta hakua. Taulut: `p1_entiteetti_osuus.csv`, `h1_h7.csv`,
 ## Vaihe 6 (herkkyys, 2026-11-03)
 
 Ei uutta hakua. `herkkyys_media_S1_S7.csv`, `herkkyys_media_yhteenveto.csv`.
+
+---
+
+## Vaihe 7 (M4, 2026-11-03)
+
+Ei uutta mediahakua. K1: `output/tables/asteet.csv` geo=FI (haettu 2026-11-01).
+Taulut: `m4_media_vs_k1.csv`, `m4_varoitukset.csv`.

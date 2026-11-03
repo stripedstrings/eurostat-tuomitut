@@ -337,7 +337,11 @@ def kirjoita_aihesivut() -> None:
     kuvat.mkdir(parents=True, exist_ok=True)
     for png in (ROOT / "media" / "output" / "figures").glob("*.png"):
         shutil.copy2(png, kuvat / png.name)
-    for koodikirja_nimi in ("codebook_esikasittely_v1.md", "codebook_koodaus_v1.md"):
+    for koodikirja_nimi in (
+        "codebook_esikasittely_v1.md",
+        "codebook_koodaus_v1.md",
+        "codebook_m4_v1.md",
+    ):
         koodikirja = ROOT / "media" / koodikirja_nimi
         if koodikirja.exists():
             shutil.copy2(koodikirja, DOCS_DIR / "media" / koodikirja.name)
@@ -466,8 +470,23 @@ def kirjoita_aihesivut() -> None:
         '<a href="herkkyys_media_yhteenveto.csv">summary</a>, '
         '<a href="herkkyys_media_S1_S7.csv">all rows</a>.',
     )
-    ana_fi = p1h_fi + h_fi + p4t_fi + s_fi
-    ana_en = p1h_en + h_en + p4t_en + s_en
+    m4_fi, m4_en = _media_taulu_osio(
+        ROOT / "media" / "output" / "tables" / "m4_media_vs_k1.csv",
+        "M4 media vs. K1 (vaihe 7)",
+        "Suomi (FI) tuomitut vs. rikosotsikon NAT/FOR-avaimet. Yksiköt eivät täsmää. "
+        "Ei syy-yhteyttä. "
+        '<a href="m4_media_vs_k1.csv">taulu</a>, '
+        '<a href="m4_varoitukset.csv">varoitukset</a>, '
+        '<a href="codebook_m4_v1.md">koodikirja</a>.',
+        "M4 media vs K1 (phase 7)",
+        "Finland (FI) convictions vs NAT/FOR strings in crime headlines. Units differ. "
+        "No causal claim. "
+        '<a href="m4_media_vs_k1.csv">table</a>, '
+        '<a href="m4_varoitukset.csv">warnings</a>, '
+        '<a href="codebook_m4_v1.md">codebook</a>.',
+    )
+    ana_fi = p1h_fi + h_fi + p4t_fi + s_fi + m4_fi
+    ana_en = p1h_en + h_en + p4t_en + s_en + m4_en
     kuvat_fi = ""
     kuvat_en = ""
     if (ROOT / "media" / "output" / "figures" / "01_entiteetti_osuus.png").exists():
@@ -476,20 +495,22 @@ def kirjoita_aihesivut() -> None:
       <figure><img src="figures/01_entiteetti_osuus.png" alt="P1 entiteettiosuudet"><figcaption>P1: entiteettiosuudet, Wilson 95 %.</figcaption></figure>
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 vuosittain"><figcaption>P1: osuudet vuosittain. Katkos = ei HTML:ää.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 ja H2"><figcaption>H1 Iltalehti 2023 Putin; H2 presidentti, Putin, Zelenskyi.</figcaption></figure>
+      <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs. rikosotsikon kansalaisuusmaininta. Yksiköt eivät täsmää.</figcaption></figure>
 """
         kuvat_en = """
       <h2>Figures (phase 5)</h2>
       <figure><img src="figures/01_entiteetti_osuus.png" alt="P1 entity shares"><figcaption>P1: entity shares, Wilson 95%.</figcaption></figure>
       <figure><img src="figures/02_entiteetti_vuosi.png" alt="P1 by year"><figcaption>P1: shares by year. Gap = no HTML.</figcaption></figure>
       <figure><img src="figures/03_h1_h2.png" alt="H1 and H2"><figcaption>H1 Iltalehti 2023 Putin; H2 president, Putin, Zelenskyi.</figcaption></figure>
+      <figure><img src="figures/04_m4_media_vs_k1.png" alt="M4"><figcaption>M4: K1 FI vs citizenship strings in crime headlines. Units differ.</figcaption></figure>
 """
     tulk_fi = """
       <h2>Tulkinta ja rajat</h2>
-      <p>Luvut ovat osuuksia havaituissa Wayback-snapshotissa, eivät kaikkien kalenteripäivien osuuksia. Puuttuvaa HTML:ää ei ole täytetty nollaksi. Entiteetti on merkkijono-osuma, ei ihmiskoodaus. H3, H4, H6, H7 (pää), P2 (pää), P3 ja P5 on merkitty ei testattaviksi. M4 ei tässä vaiheessa. Pearson-r perustuu kahteen mediaan. Ei motiiveja, ei lukijavaikutusta, ei propaganda-väitettä.</p>
+      <p>Luvut ovat osuuksia havaituissa Wayback-snapshotissa, eivät kaikkien kalenteripäivien osuuksia. Puuttuvaa HTML:ää ei ole täytetty nollaksi. Entiteetti on merkkijono-osuma, ei ihmiskoodaus. H3, H4, H6, H7 (pää), P2 (pää), P3 ja P5 on merkitty ei testattaviksi. M4 vertaa eri yksiköitä (tuomio vs. otsikko); se ei osoita vinoumaa eikä syytä. Pearson-r perustuu kahteen mediaan. Ei motiiveja, ei lukijavaikutusta, ei propaganda-väitettä.</p>
 """
     tulk_en = """
       <h2>Interpretation and limits</h2>
-      <p>Shares are among observed Wayback snapshots, not among all calendar days. Missing HTML is not filled with zero. Entity flags are string matches, not human codes. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 is not in this phase. Pearson r uses two outlets. No motives, audience effects, or propaganda claims.</p>
+      <p>Shares are among observed Wayback snapshots, not among all calendar days. Missing HTML is not filled with zero. Entity flags are string matches, not human codes. H3, H4, H6, H7 (main), P2 (main), P3 and P5 are not testable. M4 compares different units (conviction vs headline); it does not show bias or cause. Pearson r uses two outlets. No motives, audience effects, or propaganda claims.</p>
 """
     esik_fi, esik_en = _media_taulu_osio(
         ROOT / "media" / "output" / "tables" / "tietueet_yhteenveto.csv",
@@ -512,7 +533,7 @@ def kirjoita_aihesivut() -> None:
     media = f"""
     <div class="kieli-fi">
       <h1>Media</h1>
-      <p><strong>Vaiheet 5–6 ajettu 2026-11-03.</strong> Esirekisteröinti: 2026-11-01. P1 Wilson-väleineen. S1–S7 vs. pää (otsikko). P2/P3/P5 ja H3/H4/H6/H7 (pää) = ei testattavissa. M4 = vaihe 7.</p>
+      <p><strong>Vaiheet 5–7 ajettu 2026-11-03.</strong> Esirekisteröinti: 2026-11-01. P1 Wilson. S1–S7. M4: FI-tuomitut vs. rikosotsikon kansalaisuusmaininta (yksiköt eivät täsmää). Vaihe 8 = raportti.</p>
       <p>Kysymykset M1–M5 (näkyvyys, suhteutus tapahtumiin, sävy, media vs. tilasto, vertailu). M4 ei ennen vaihetta 7. H3 ilman julkaisijan analytiikkaa = ei testattavissa.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>
@@ -541,7 +562,7 @@ def kirjoita_aihesivut() -> None:
     </div>
     <div class="kieli-en" hidden>
       <h1>Media</h1>
-      <p><strong>Phases 5–6 run 2026-11-03.</strong> Preregistration: 2026-11-01. P1 with Wilson intervals. S1–S7 vs main (headline). P2/P3/P5 and H3/H4/H6/H7 (main) = not testable. M4 = phase 7.</p>
+      <p><strong>Phases 5–7 run 2026-11-03.</strong> Preregistration: 2026-11-01. P1 Wilson. S1–S7. M4: FI convictions vs citizenship strings in crime headlines (units differ). Phase 8 = report.</p>
       <p>Questions M1–M5 (visibility, alignment with events, tone, media vs statistics, comparison). M4 not before phase 7. H3 without publisher analytics = not testable.</p>
       <ul>
         <li><a href="MEDIA_PREREGISTRATION.md">MEDIA_PREREGISTRATION.md</a></li>

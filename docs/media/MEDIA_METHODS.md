@@ -2,7 +2,7 @@
 
 Vaihe 1 (saatavuus) 2026-11-01. Vaihe 2 (CDX-indeksi) 2026-11-02.
 Vaihe 3 (HTML-otsikot) 2026-11-02. Vaihe 4 (koodausotos) 2026-11-03.
-Vaihe 5 (P1–P5, H1–H7) 2026-11-03. Vaihe 6 (S1–S7) 2026-11-03.
+Vaihe 5 (P1–P5, H1–H7) 2026-11-03. Vaihe 6 (S1–S7) 2026-11-03. Vaihe 7 (M4) 2026-11-03.
 Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 
 ## Yksikkö ja jakso (vaihe 2)
@@ -100,7 +100,14 @@ Päävertailu = P1 otsikko, jakso havaittu, Wilson, molemmat mediat.
 - **S6:** otsikon pituus ≥ 18 (pää, poiminta) vs. ≥ 40.
 - **S7:** Wilson 95 % vs. Clopper–Pearson 95 %.
 
-## M4
+## M4 (vaihe 7, 2026-11-03)
 
-Vasta vaihe 7. Uutiskynnys, tilaston laskentayksikkö ja otoskoko
-varoitusina. Ei syy-yhteyttä.
+Suomen media vs. K1 **FI** tuomitut. EU-aggregaatti erillään.
+Koodikirja: `media/codebook_m4_v1.md`.
+
+- Rikosotsikko = vaihe 3 -entiteetti `rikollisuus`.
+- NAT-avain: `suomalais`, `suomen kansal`. FOR-avain: `ulkomaalais`,
+  `vierasmaalais`. Ei demonyymejä, ei `maahanmuuttaja`.
+- K1-osuus: `FOR/(NAT+FOR)` yhteisillä vuosilla (`kelpoinen_aste`, HTML).
+  Ei otanta-CI. Uutinen: Wilson. D<10 merkitään.
+- Varoitukset: uutiskynnys, laskentayksikkö, otoskoko. Ei syy-yhteyttä.
