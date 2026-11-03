@@ -7,6 +7,11 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
   kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
 
+- 2026-11-03. Media peittoaukot `coverage_media_vuosi_aukot.csv` /
+  `COVERAGE_AUKOT.md` (ei täyttöä). `CODEBOOK.md` + ihmislomakkeet A/B
+  (kentät tyhjiä). LLM-vs-ihminen F1 estetty ilman konsensusta.
+  H3/H4/H6 = `ei_testattavissa` `h1_h7.csv`:ssä.
+
 - 2026-11-03. Sivustolle `docs/tutkimus/`-hubi ja yhtenäinen navigaatio
   (Tutkimus | K1 | FI | Media) sekä ristiviittauslaatikot. Haaroja ei yhdistetä
   analyysissä; media pysyy agendan mittauksena. Ei menetelmämuutosta.

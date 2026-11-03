@@ -153,6 +153,12 @@ Otos `koodaus_otos.csv`: 500 otsikkoa vaihe 3 -taulusta, siemen 20261103,
 250 IL + 250 Yle. Ei uutta HTML-hakua. Ihmiskoodit tyhjiä.
 Yhteenveto: `koodaus_yhteenveto.csv`. F1 (sääntö vs. sääntö): `koodaus_f1.csv`.
 
+Päivitys (protokolla lukittu ennen täyttöä, commit `MEDIA_PREREGISTRATION`
+2026-11-03): `CODEBOOK.md`; lomakkeet `koodaus_lomake_ihminen_a.csv` /
+`koodaus_lomake_ihminen_b.csv`; tila `koodaus_ihminen_tila.csv`.
+Peittoaukot: `coverage_media_vuosi_aukot.csv`, `COVERAGE_AUKOT.md`.
+H3/H4/H6 = ei testattavissa. HS/MTV ei vielä haettu.
+
 ---
 
 ## Vaihe 5 (analyysi, 2026-11-03)

@@ -1,7 +1,8 @@
 # Koodikirja koodaus-v1 (vaihe 4)
 
-Lukittu ennen otoksen koodausta. Ei ihmiskoodausta tässä ajossa
-(`CHANGELOG.md`). Yksikkö: yksi etusivuotsikko (`tietueet_otsikko.csv`).
+Lukittu ennen otoksen koodausta. Ihmiskoodaus: `media/CODEBOOK.md`
+(lomakkeet, α, H4/H6). Tämä tiedosto = sääntöavaimet saanto-v1/v1b.
+Yksikkö: yksi etusivuotsikko (`tietueet_otsikko.csv`).
 
 ## Otos
 

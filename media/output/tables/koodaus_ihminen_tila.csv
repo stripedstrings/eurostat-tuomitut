@@ -1,0 +1,9 @@
+tunnus,arvo,huom
+n_otos,500,siemen 20261103; CODEBOOK.md
+n_kaksoiskoodaus_tavoite,500,100 %
+n_aihe_ihminen_a_taytetty,0,tyhjä = odottaa ihmistä
+n_aihe_ihminen_b_taytetty,0,tyhjä = odottaa ihmistä
+llm_validointi,ei,kielletty ennen ihmis-α + F1 per luokka
+H3,ei_testattavissa,ei julkaisijan analytiikkaa
+H4,ei_testattavissa,odottaa ihmis-sävyn kaksoiskoodausta
+H6,ei_testattavissa,ei tuho/tuhoutuminen-luokkia + odottaa koodausta

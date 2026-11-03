@@ -56,8 +56,13 @@ Tätä ei muuteta tuloksen perusteella; poikkeamat `CHANGELOG.md`:hen.
 | koodaaja | tunniste |
 | koodikirja_versio | versio |
 
-Koodaussäännöt: `media/codebook_koodaus_v1.md`. Ihmisotos (≥500) odottaa
-kahta koodaajaa. Automaattinen koodaus ei ole validoitu ihmistä vasten.
+Koodaussäännöt: `media/CODEBOOK.md` + `media/codebook_koodaus_v1.md`.
+Ihmisotos N=500 (siemen 20261103), kaksoiskoodaus 100 %, koodaajat
+`ihminen-A` / `ihminen-B` (nimetään ennen täyttöä). Lomakkeet:
+`koodaus_lomake_ihminen_a.csv`, `koodaus_lomake_ihminen_b.csv`.
+α-kynnykset: MEDIA_PREREGISTRATION 2026-11-03. LLM/sääntö koko aineistoon
+vain ihmisvalidoinnin (tarkkuus/saanti/F1 per luokka) jälkeen.
+H3/H4/H6 = `ei_testattavissa` kunnes ehdot täyttyvät.
 
 ## P1–P5 ja H1–H7 (vaihe 5, lukittu ennen ajoa)
 

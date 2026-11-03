@@ -2,7 +2,7 @@ tunnus,arvo,huom
 siemen,20261103,
 n_otos,500,tasakiintiö medioittain
 n_kaksoiskoodattu_saanto,500,saanto-v1 vs saanto-v1b
-n_ihminen,0,ihmiskentät tyhjiä
+n_ihminen,0,ihmiskentät tyhjiä; lomakkeet valmiina
 alpha_aihe_saanto,1.000000,TUTKIVA; ei ihmis-α
 alpha_savy_saanto,1.000000,vain parit joissa molemmilla luokka; tyhjä pois
 n_savy_paria_molemmat,7,α-sävyn otos
