@@ -1,0 +1,11 @@
+analyysi,kuvaus,n_maata,n_maa_vuotta,aste_NAT,aste_FOR,RR,RR_lo,RR_hi,huomautus,paa_RR,ero_paa
+paa,"Pääanalyysi: tuomitut, kelpoiset maa–vuodet 2020–2024, poolattu RR",18,77,504.8149470590104,1575.2478400778182,3.1204461144722786,3.115504000458732,3.12539606814545,Kaikki kelpoiset maa–vuodet; D<10 merkitty ei poistettu,3.1204461144722786,0.0
+S1,"Vain maat, joilla kelpoinen aste kaikkina vuosina 2020–2024",8,40,524.4914089694453,1292.9146137123873,2.4650825382493675,2.459213086711192,2.47096599852129,"maat=BG,ES,FR,HR,HU,LU,LV,PT",3.1204461144722786,-0.6553635762229111
+S2,EU-sisäiset vs. kolmansien maiden kansalaiset,0,0,,,,,,"crim_just_ctz.citizen unique = FOR, NAT, TOTAL. EU-sisäisiä ja kolmansien maiden kansalaisia ei voi erottaa rikososoittajasta. citizen=FOR,NAT,TOTAL",3.1204461144722786,
+S3,"Epäillyt (PER_SUSP), sama kelpoisuussääntö 2020–2024",20,92,1473.6464962062694,5520.227341142861,3.745964419115467,3.7429929626184424,3.74893823456796,Ei sama henkilöjoukko kuin tuomituissa; ei syyllisyysosuus,3.1204461144722786,0.6255183046431885
+S4,"Vain maat, joiden laskentayksikkö on henkilö",0,0,,,,,,"crim_just_ctz.unit unique = NR, P_HTHAB. Laskentayksikköä henkilö vs. tapaus ei ole dimensiossa; maakohtaista listaa ei arvata. unit=NR,P_HTHAB",3.1204461144722786,
+S5_mukana,Pienet luvut (D<10) mukana (kuten pääanalyysi),18,77,504.8149470590104,1575.2478400778182,3.1204461144722786,3.115504000458732,3.12539606814545,epaluotettavia_riveja=0,3.1204461144722786,0.0
+S5_pois,Pienet luvut (D<10) pois kelpoisista riveistä,18,77,504.8149470590104,1575.2478400778182,3.1204461144722786,3.115504000458732,3.12539606814545,Poisto vain D<10-merkitty; ei tuloksen perusteella,3.1204461144722786,0.0
+S6_painotettu,Väestöllä painotettu EU-RR (poolaus = pääanalyysi),18,77,504.8149470590104,1575.2478400778182,3.1204461144722786,3.115504000458732,3.12539606814545,Painotus: summa osoittajista ja nimittäjistä,3.1204461144722786,0.0
+S6_painottamaton,Painottamaton keskiarvo maiden poolatuista RR-luvuista 2020–2024,18,0,,,2.9690610761151053,,,n_maata=18; ei Poisson-CI (keskiarvo suhdeluvuista),3.1204461144722786,-0.15138503835717332
+S7,Naturalisoituneet laskettu ulkomaalaisiin,0,0,,,,,,Rikosaineistossa ei ole naturalisaatiota tai entistä kansalaisuutta. Tuomittuja ei voi siirtää NAT→FOR ilman oletusta; S7 jätetään rajoitteeksi.,3.1204461144722786,

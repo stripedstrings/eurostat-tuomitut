@@ -27,7 +27,9 @@ ikä- ja sukupuolirakenteella?
 
 **K2 (valinnainen laajennus, raportoidaan erikseen):**
 Mitä aineisto kertoo työllisyydestä, koulutuksesta ja oleskeluluvan perusteesta
-kansalaisuusryhmittäin?
+kansalaisuusryhmittäin? Kuvaileva sivu: [`docs/k2/`](https://stripedstrings.github.io/eurostat-tuomitut/k2/).
+S2/S7 (ei dataa): `output/tables/s2_s7_tila.csv`. Brå (SE, syntymämaa ≠ kansalaisuus):
+[`docs/national/bra.html`](https://stripedstrings.github.io/eurostat-tuomitut/national/bra.html).
 
 **Mitä projekti EI väitä ratkaisevansa:** onko EU:n turvapaikka-, pakolais- tai
 kiintiöpolitiikka perusteltua. Se on normatiivinen ja monitekijäinen kysymys

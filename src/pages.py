@@ -190,7 +190,10 @@ def _sivu_html(sisalto_fi: str, sisalto_en: str) -> str:
       <h1 data-i18n="raportti_h1">Tuomitut kansalaisuuden mukaan, EU-27</h1>
       <p class="lead" data-i18n="raportti_lead"></p>
       <div class="valitsin">{_valikko("RAPORTTI", True)}</div>
-      <p class="navi"><a href="lahteet.html">Lähteet</a></p>
+      <p class="navi"><a href="lahteet.html">Lähteet</a> ·
+        <a href="k2/index.html">K2 (kuvaileva)</a> ·
+        <a href="national/bra.html">Brå (SE)</a> ·
+        <a href="k2/s2_s7_tila.csv">S2/S7 ei dataa</a></p>
     </div>
   </header>
   <main class="wrap">
@@ -407,7 +410,10 @@ def kirjoita_aihesivut() -> None:
         </tbody>
       </table></div>
     </div>
-    <p class="alaviite"><a href="index.html">K1</a> · <a href="media/index.html">Media</a></p>
+    <p class="alaviite"><a href="index.html">K1</a> ·
+      <a href="k2/index.html">K2</a> ·
+      <a href="national/bra.html">Brå</a> ·
+      <a href="media/index.html">Media</a></p>
 """
     (DOCS_DIR / "lahteet.html").write_text(
         _kehys(
@@ -714,6 +720,11 @@ def kirjoita() -> None:
     lisaa_aihe_palkki()
     kirjoita_aihesivut()
     kirjoita_tutkimus_hub()
+    from src.k2_pages import aja as kirjoita_k2
+    from src.national.bra_pages import aja as kirjoita_bra
+
+    kirjoita_k2()
+    kirjoita_bra()
 
 
 if __name__ == "__main__":

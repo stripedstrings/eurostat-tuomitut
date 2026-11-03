@@ -1,0 +1,3 @@
+analyysi,tila,syy,citizen_unique,unit_unique,viite
+S2,ei_dataa,"crim_just_ctz.citizen unique = FOR, NAT, TOTAL. EU-sisäisiä ja kolmansien maiden kansalaisia ei voi erottaa rikososoittajasta.","FOR,NAT,TOTAL","NR,P_HTHAB",PREREGISTRATION S2; eu_vs_kolmas_rajoite.csv; herkkyys_S1_S7.csv
+S7,ei_dataa,Rikosaineistossa ei ole naturalisaatiota tai entistä kansalaisuutta. Tuomittuja ei voi siirtää NAT→FOR ilman oletusta; S7 jätetään rajoitteeksi.,"FOR,NAT,TOTAL","NR,P_HTHAB",PREREGISTRATION S7; herkkyys_S1_S7.csv

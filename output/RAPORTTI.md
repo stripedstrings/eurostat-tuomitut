@@ -124,14 +124,14 @@ Metrinen: poolattu RR 2020–2024, ellei toisin. Lähde: `herkkyys_S1_S7.csv`. K
 |---|---:|---:|---:|---|
 | paa | 18 | 77 | 3,120 | 3,116–3,125 |
 | S1 täysi 2020–2024 | 8 | 40 | 2,465 | 2,459–2,471 |
-| S2 EU vs. kolmas maa | — | — | ei laskettu | — |
+| S2 EU vs. kolmas maa | — | — | ei_dataa | — |
 | S3 epäillyt | 20 | 92 | 3,746 | 3,743–3,749 |
 | S4 laskentayksikkö henkilö | — | — | ei laskettu | — |
 | S5 D<10 mukana | 18 | 77 | 3,120 | sama kuin paa |
 | S5 D<10 pois | 18 | 77 | 3,120 | sama kuin paa |
 | S6 painotettu | 18 | 77 | 3,120 | sama kuin paa |
 | S6 painottamaton | 18 | — | 2,969 | ei Poisson-CI |
-| S7 naturalisaatio | — | — | ei laskettu | — |
+| S7 naturalisaatio | — | — | ei_dataa | — |
 
 S1-maat: BG, ES, FR, HR, HU, LU, LV, PT.  
 S2: `citizen` = FOR, NAT, TOTAL.  

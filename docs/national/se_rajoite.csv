@@ -1,0 +1,2 @@
+rajoite,tiedosto,maaritelma
+"Brå-moduuli: määritelmä = syntymämaa / bakgrund, ei kansalaisuus. Julkista API:a tuomituille × kansalaisuus ei ole. Brån 2021-tyyppinen raportointi koskee epäiltyjä ja inrikes/utrikes bakgrund. Sijoita käsin ladattu CSV/XLSX: data/national/se_bra.csv. PDF-lukuja ei kopioida. Ei EU-aggregaattiin, ei K1-selittäjäksi.",,syntymämaa / inrikes–utrikes bakgrund (vanhempien syntymämaa mukaan lukien); ei kansalaisuus (NAT/FOR)

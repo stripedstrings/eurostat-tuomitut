@@ -7,6 +7,10 @@ tehtiinkö ennen vai jälkeen tulosten näkemisen.
   Commit **ennen** ihmiskoodauksen täyttöä. H4/H6 merkitty ei testattaviksi
   kunnes kaksoiskoodaus valmis. Aineistoa on haettu aiemmin (ei sokko).
 
+- 2026-11-03. K1: K2 kuvaileva sivu `docs/k2/`; S2/S7 dokumentoitu
+  `s2_s7_tila.csv` (tila=ei_dataa + syy); Brå erilliseksi moduuliksi
+  (`src/national/bra.py`, määritelmä syntymämaa/bakgrund ≠ kansalaisuus).
+
 - 2026-11-03. FI-paneeli: peittomatriisi indikaattori × vuosi
   (`fi_migr_peitto_matriisi.csv`), myös tyhjät indikaattorit; kiintiömeta
   asettaja + hakupäivä (`paatos_pvm` tyhjä jos ei lähteessä); monivertailuvaroitus

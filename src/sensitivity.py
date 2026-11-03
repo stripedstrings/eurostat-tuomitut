@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
@@ -222,6 +224,36 @@ def kaavio_herkkyys(taulu: pd.DataFrame, polku) -> None:
     _tallenna(fig, polku)
 
 
+def kirjoita_s2_s7_tila(citizen: list[str] | None = None, unit: list[str] | None = None) -> Path:
+    """S2/S7: tila = ei_dataa + syy (ei arvata ulottuvuuksia)."""
+    if citizen is None:
+        citizen = crime_unique("citizen")
+    if unit is None:
+        unit = crime_unique("unit")
+    polku = TABLES_DIR / "s2_s7_tila.csv"
+    pd.DataFrame(
+        [
+            {
+                "analyysi": "S2",
+                "tila": "ei_dataa",
+                "syy": S2_RAJOITE,
+                "citizen_unique": ",".join(citizen),
+                "unit_unique": ",".join(unit),
+                "viite": "PREREGISTRATION S2; eu_vs_kolmas_rajoite.csv; herkkyys_S1_S7.csv",
+            },
+            {
+                "analyysi": "S7",
+                "tila": "ei_dataa",
+                "syy": S7_RAJOITE,
+                "citizen_unique": ",".join(citizen),
+                "unit_unique": ",".join(unit),
+                "viite": "PREREGISTRATION S7; herkkyys_S1_S7.csv",
+            },
+        ]
+    ).to_csv(polku, index=False)
+    return polku
+
+
 def aja() -> pd.DataFrame:
     import matplotlib.pyplot as plt
 
@@ -229,9 +261,11 @@ def aja() -> pd.DataFrame:
     taulu = taulu_s1_s7()
     TABLES_DIR.mkdir(parents=True, exist_ok=True)
     taulu.to_csv(HERKKYYS_PATH, index=False)
+    tila = kirjoita_s2_s7_tila()
     kaavio_herkkyys(taulu, FIGURES_DIR / "06_herkkyys.png")
     print(taulu[["analyysi", "n_maata", "n_maa_vuotta", "RR", "RR_lo", "RR_hi"]].to_string(index=False))
     print(f"Kirjoitettu {HERKKYYS_PATH}")
+    print(f"Kirjoitettu {tila}")
     return taulu
 
 

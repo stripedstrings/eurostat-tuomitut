@@ -36,6 +36,20 @@ kvartiilit (merkitse selvästi).
 Maatason kuvailevia muuttujia. Esitä rinnakkain, älä käytä selittäjinä
 yksilötason rikollisuudelle. Käytä EU-LFS:n kansalaisuus- tai
 syntymämaaluokkia ja kirjaa luokittelun ero rikostilastoon nähden.
+Erillinen sivu: `docs/k2/` — ei yhdistetä K1-asteisiin.
+
+## 6b. Herkkyys S2 ja S7 (ei dataa)
+Dokumentoitu `output/tables/s2_s7_tila.csv` (`tila=ei_dataa`):
+
+- **S2** (EU-sisäiset vs. kolmas maa): `crim_just_ctz.citizen` unique =
+  FOR, NAT, TOTAL. Osoittajaa ei voi jakaa; väestökoodit EU/NEU eivät
+  korvaa osoittajaa.
+- **S7** (naturalisaatio): rikosaineistossa ei entistä kansalaisuutta;
+  NAT→FOR -siirtoa ei tehdä oletuksella.
+
+## 6c. Brå (Ruotsi), erillinen moduuli
+`src/national/bra.py`. Määritelmä: **syntymämaa / inrikes–utrikes bakgrund**,
+ei kansalaisuus (NAT/FOR). Ei EU-aggregaattiin. Sivu: `docs/national/bra.html`.
 
 ## 7. Mahdollinen myöhempi malli (vain jos mikrodata tai riittävän tarkka data)
 Poisson- tai negatiivinen binomi-regressio, offset = log(väestö),

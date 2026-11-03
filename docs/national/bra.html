@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brå-moduuli (Ruotsi)</title>
+  <link rel="stylesheet" href="../tyyli.css">
+</head>
+<body class="raportti">
+  <header>
+    <div class="wrap">
+      <nav class="aiheet" aria-label="Aiheet">
+  <a href="../tutkimus/index.html">Tutkimus</a>
+  <a href="../index.html" class="aktiivinen" data-i18n="nav_maahanmuutto">Maahanmuutto</a>
+  <a href="../maahanmuutto-fi/index.html">Maahanmuutto FI (TUTKIVA)</a>
+  <a href="../media/index.html" data-i18n="nav_media">Media</a>
+</nav>
+
+      <h1>Brå-moduuli (Ruotsi)</h1>
+      <p class="lead">Kansallinen aineisto erillään EU-aggregaatista ja K1:stä.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <aside class="kortti">
+      <p><strong>Määritelmä:</strong> syntymämaa / inrikes–utrikes bakgrund (vanhempien syntymämaa mukaan lukien); ei kansalaisuus (NAT/FOR).</p>
+      <p>Tämä <em>ei</em> ole Eurostatin kansalaisuus (NAT/FOR). Lukuja ei yhdistetä
+      K1-tuomioasteisiin eikä EU-aggregaattiin.</p>
+      <p>Lähde: Brå (Brottsförebyggande rådet).
+      <a href="https://bra.se/om-bra/om-webbplatsen/data-fran-bra">https://bra.se/om-bra/om-webbplatsen/data-fran-bra</a></p>
+      <p>Brå-moduuli: määritelmä = syntymämaa / bakgrund, ei kansalaisuus. Julkista API:a tuomituille × kansalaisuus ei ole. Brån 2021-tyyppinen raportointi koskee epäiltyjä ja inrikes/utrikes bakgrund. Sijoita käsin ladattu CSV/XLSX: data/national/se_bra.csv. PDF-lukuja ei kopioida. Ei EU-aggregaattiin, ei K1-selittäjäksi.</p>
+      <p><a href="../k2/index.html">K2 (kuvaileva)</a> ·
+      <a href="../index.html">K1</a></p>
+    </aside>
+    <h2>Meta</h2>
+    <table class="dataframe taulu">
+  <thead>
+    <tr style="text-align: right;">
+      <th>moduuli</th>
+      <th>maa</th>
+      <th>lahde</th>
+      <th>url</th>
+      <th>maaritelma</th>
+      <th>yksikko</th>
+      <th>tiedosto</th>
+      <th>saatavuus</th>
+      <th>eu_aggregaattiin</th>
+      <th>k1_selittaja</th>
+      <th>huom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bra</td>
+      <td>SE</td>
+      <td>Brå (Brottsförebyggande rådet)</td>
+      <td>https://bra.se/om-bra/om-webbplatsen/data-fran-bra</td>
+      <td>syntymämaa / inrikes–utrikes bakgrund (vanhempien syntymämaa mukaan lukien); ei kansalaisuus (NAT/FOR)</td>
+      <td>epäillyt (jos raportti); tuomitut×kansalaisuus ei saatavilla CSV:nä</td>
+      <td>NaN</td>
+      <td>ei</td>
+      <td>ei</td>
+      <td>ei</td>
+      <td>Brå-moduuli: määritelmä = syntymämaa / bakgrund, ei kansalaisuus. Julkista API:a tuomituille × kansalaisuus ei ole. Brån 2021-tyyppinen raportointi koskee epäiltyjä ja inrikes/utrikes bakgrund. Sijoita käsin ladattu CSV/XLSX: data/national/se_bra.csv. PDF-lukuja ei kopioida. Ei EU-aggregaattiin, ei K1-selittäjäksi.</td>
+    </tr>
+  </tbody>
+</table>
+    <figure><img src="09_se_rajoite.png" alt="Brå rajoite" style="max-width:100%"><figcaption>Brå: CSV puuttuu tai rajoite. Ei EU-aggregaattiin.</figcaption></figure>
+    <p>Käsintaulu (jos saatavilla): <code>data/national/se_bra.csv</code>.
+    README: <code>data/national/BRA_README.md</code>.</p>
+    <aside class="ristiviittaukset kortti" aria-label="Ristiviittaukset">
+  <h2>Muut tutkimushaarat</h2>
+  <ul>
+    <li><a href="../tutkimus/index.html"><strong>Tutkimus-hubi</strong></a> — Kolme haaraa samalla kartalla.</li><li><a href="../maahanmuutto-fi/index.html"><strong>Maahanmuutto FI (TUTKIVA)</strong></a> — Tulot, kiintiöt, työllisyys ym. vain Suomi. Ei yhdistetty K1:een.</li><li><a href="../media/index.html"><strong>Media-agenda (TUTKIVA / esirek.)</strong></a> — Näkyvyys ja kehykset; ei motiivi- tai kontrolliväitettä. M4 ≠ K1-yksikkö.</li>
+  </ul>
+  <p>Haarat ovat erillisiä. FI-paneelia ei yhdistetä K1:een. Media ei ole K1:n
+  selittäjä; M4 vertaa eri yksiköitä. Motiiveja tai “agendan kontrollia” ei päätellä datasta.</p>
+</aside>
+
+  </main>
+  <script src="../sivu.js"></script>
+</body>
+</html>
